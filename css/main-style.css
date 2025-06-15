@@ -44,14 +44,14 @@
       background: #f8faff;
     }
     
-    /* ─────────── HEADLINE & TABS ─────────── */
+    /* ─────────── HEADLINE & TAB ─────────── */
     .headline {
       text-align: center;
       margin: 100px 0 40px;
     }
     .headline p {
       font-size: 20px;
-      color: var(--main-blue);
+      color: var(--main-blue, #1c59ff);
       font-weight: 600;
       margin: 0;
     }
@@ -80,16 +80,16 @@
     .tab-btn {
       padding: 10px 28px;
       border-radius: 26px;
-      border: 1.5px solid var(--main-blue);
+      border: 1.5px solid var(--main-blue, #1c59ff);
       background: #fff;
-      color: var(--main-blue);
+      color: var(--main-blue, #1c59ff);
       font-size: 17px;
       font-weight: 700;
       cursor: pointer;
       transition: 0.25s;
     }
     .tab-btn.active {
-      background: var(--main-blue);
+      background: var(--main-blue, #1c59ff);
       color: #fff;
     }
     
@@ -104,6 +104,11 @@
       gap: 28px;
       animation: fade 0.4s;
     }
+    @media screen and (max-width: 1190px) {
+      .card-set {
+        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+      }
+    }
     .card-set.show {
       display: grid;
     }
@@ -117,19 +122,15 @@
         transform: translateY(0);
       }
     }
-    @media screen and (max-width: 1190px) {
-      .card-set {
-        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
-      }
-    }
     
     /* ─────────── CARD ─────────── */
     .card {
       background: #fff;
       border-radius: 24px;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      min-height: 350px;
       perspective: 1200px;
-      overflow: visible;
+      overflow: hidden;
       position: relative;
       transition: box-shadow 0.22s;
       cursor: pointer;
@@ -142,37 +143,30 @@
       position: relative;
       min-height: 470px;
     }
-    
-    /* ─────────── FLIP 적용 ─────────── */
-    .card:hover .card-inner,
-    .card.flipped .card-inner {
-      transform: rotateY(180deg);
-    }
-    
-    /* ─────────── 공통 페이스 ─────────── */
     .card-face {
       position: absolute;
-      width: 100%;
-      height: 100%;
       top: 0;
       left: 0;
+      width: 100%;
+      height: 100%;
       border-radius: inherit;
       backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
       display: flex;
       flex-direction: column;
+      text-align: center;
+      overflow: hidden;
       align-items: center;
       justify-content: center;
-      text-align: center;
       padding: 34px 8px 18px 8px;
       box-sizing: border-box;
-      overflow: hidden;
+      opacity: 1;
+      visibility: visible;
+      transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
     }
-    
-    /* ─────────── FRONT ─────────── */
     .card-front {
       background: #fff;
-      z-index: 2;
+      z-index: 3;
+      align-items: center;
       justify-content: flex-start;
     }
     .card-front .text-wrap {
@@ -184,7 +178,7 @@
     }
     .card-front h3 {
       font-size: 17px;
-      color: var(--main-blue);
+      color: var(--main-blue, #1c59ff);
       font-weight: 700;
       margin-bottom: 10px;
     }
@@ -208,12 +202,30 @@
       object-fit: contain;
     }
     
-    /* ─────────── BACK ─────────── */
+    /* ─────────── CARD-BACK 개선됨 ─────────── */
     .card-back {
       background: linear-gradient(160deg, #1c59ff 0%, #3d7bff 100%);
       color: #fff;
       transform: rotateY(180deg);
-      z-index: 3;
+      z-index: 4;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      will-change: transform, opacity, visibility;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 38px 8px 24px 8px;
+      box-sizing: border-box;
+      text-align: center;
     }
     .card-back h4 {
       font-size: clamp(19px, 4.8vw, 22px);
@@ -249,16 +261,40 @@
       transform: translateY(-2px);
     }
     
-    /* ─────────── 모바일 호환성 개선 ─────────── */
+    /* ─────────── CARD FLIP ─────────── */
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card.flipped .card-inner {
+      transform: rotateY(180deg);
+    }
+    .card.flipped .card-back {
+      opacity: 1;
+      visibility: visible;
+    }
+    .card.flipped .card-front {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    /* ✅ PC hover 시에도 card-back 보이도록 보완 */
+    .card:hover .card-back {
+      opacity: 1;
+      visibility: visible;
+    }
+    .card:hover .card-front {
+      opacity: 0;
+      visibility: hidden;
+    }
+    
+    /* ─────────── MOBILE TOUCH 개선 (수정하지 않음) ─────────── */
     @media (hover: none) and (pointer: coarse) {
       .card {
         touch-action: manipulation;
       }
-      .card-inner {
-        transition: transform 0.4s ease-out;
-      }
-      .card-face {
-        transition: none !important;
+      .card-back,
+      .card-front {
+        transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
       }
     }
     
@@ -292,7 +328,6 @@
         padding: 9px 14px;
       }
     }
-    
     
     
     body { margin: 0; padding: 0; }
