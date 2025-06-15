@@ -44,7 +44,7 @@
       background: #f8faff;
     }
     
-    /* ─────────── HEADLINE & TAB ─────────── */
+    /* ─────────── HEADLINE & TABS ─────────── */
     .headline {
       text-align: center;
       margin: 100px 0 40px;
@@ -93,7 +93,7 @@
       color: #fff;
     }
     
-    /* ─────────── SLIDER ─────────── */
+    /* ─────────── SLIDER & GRID ─────────── */
     .slider {
       margin: 0 auto;
       padding: 0 12px;
@@ -104,13 +104,13 @@
       gap: 28px;
       animation: fade 0.4s;
     }
+    .card-set.show {
+      display: grid;
+    }
     @media screen and (max-width: 1190px) {
       .card-set {
         grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
       }
-    }
-    .card-set.show {
-      display: grid;
     }
     @keyframes fade {
       from {
@@ -143,6 +143,8 @@
       position: relative;
       min-height: 470px;
     }
+    
+    /* ─────────── CARD FACE ─────────── */
     .card-face {
       position: absolute;
       top: 0;
@@ -153,20 +155,15 @@
       backface-visibility: hidden;
       display: flex;
       flex-direction: column;
-      text-align: center;
-      overflow: hidden;
       align-items: center;
       justify-content: center;
+      text-align: center;
       padding: 34px 8px 18px 8px;
       box-sizing: border-box;
-      opacity: 1;
-      visibility: visible;
-      transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
     }
     .card-front {
       background: #fff;
       z-index: 3;
-      align-items: center;
       justify-content: flex-start;
     }
     .card-front .text-wrap {
@@ -202,7 +199,7 @@
       object-fit: contain;
     }
     
-    /* ─────────── CARD-BACK 개선됨 ─────────── */
+    /* ─────────── CARD-BACK (Always Visible, Hidden by Rotation) ─────────── */
     .card-back {
       background: linear-gradient(160deg, #1c59ff 0%, #3d7bff 100%);
       color: #fff;
@@ -215,10 +212,7 @@
       height: 100%;
       -webkit-backface-visibility: hidden;
       backface-visibility: hidden;
-      will-change: transform, opacity, visibility;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.15s ease-in-out, visibility 0.15s ease-in-out;
+      will-change: transform;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -261,30 +255,16 @@
       transform: translateY(-2px);
     }
     
-    /* ─────────── CARD FLIP ─────────── */
-    .card:hover .card-inner {
-      transform: rotateY(180deg);
-    }
+    /* ─────────── FLIP CONTROL ─────────── */
+    .card:hover .card-inner,
     .card.flipped .card-inner {
       transform: rotateY(180deg);
     }
-    .card.flipped .card-back {
-      opacity: 1;
-      visibility: visible;
-    }
-    .card.flipped .card-front {
-      opacity: 0;
-      visibility: hidden;
-    }
     
-    /* ─────────── MOBILE TOUCH 개선 ─────────── */
+    /* ─────────── MOBILE 개선 ─────────── */
     @media (hover: none) and (pointer: coarse) {
       .card {
         touch-action: manipulation;
-      }
-      .card-back,
-      .card-front {
-        transition: opacity 0.1s ease-out, visibility 0.1s ease-out;
       }
     }
     
@@ -318,6 +298,7 @@
         padding: 9px 14px;
       }
     }
+    
     
     body { margin: 0; padding: 0; }
 
