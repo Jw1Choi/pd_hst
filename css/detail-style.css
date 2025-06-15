@@ -1,0 +1,561 @@
+ 
+
+/* reset.css */
+.subCont html {font-size: 20px; height:100%; /* 200428 height 추가 */}
+.subCont,
+.subCont html,
+.subCont body,
+.subCont div,
+.subCont span,
+.subCont section,
+.subCont article,
+.subCont aside,
+.subCont header,
+.subCont footer,
+.subCont nav,
+.subCont main,
+.subCont h1, .subCont h2, .subCont h3, .subCont h4, .subCont h5, .subCont h6,
+.subCont p,
+.subCont a,
+.subCont ul, .subCont ol, .subCont li,
+.subCont dl, .subCont dt, .subCont dd,
+.subCont table, .subCont th, .subCont td,
+.subCont form, .subCont fieldset, .subCont legend, .subCont label,
+.subCont input, .subCont select, .subCont textarea, .subCont button,
+.subCont img, .subCont figure, .subCont figcaption,
+.subCont strong, .subCont em, .subCont b, .subCont i,
+.subCont blockquote, .subCont pre, .subCont code,
+.subCont video, .subCont audio, .subCont canvas, .subCont iframe {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.subCont div::before, .subCont div::after,
+.subCont section::before, .subCont section::after,
+.subCont article::before, .subCont article::after,
+.subCont aside::before, .subCont aside::after,
+.subCont header::before, .subCont header::after,
+.subCont footer::before, .subCont footer::after,
+.subCont nav::before, .subCont nav::after,
+.subCont main::before, .subCont main::after,
+.subCont p::before, .subCont p::after,
+.subCont ul::before, .subCont ul::after,
+.subCont ol::before, .subCont ol::after,
+.subCont li::before, .subCont li::after,
+.subCont dl::before, .subCont dl::after,
+.subCont dt::before, .subCont dt::after,
+.subCont dd::before, .subCont dd::after,
+.subCont table::before, .subCont table::after,
+.subCont th::before, .subCont th::after,
+.subCont td::before, .subCont td::after,
+.subCont form::before, .subCont form::after,
+.subCont fieldset::before, .subCont fieldset::after,
+.subCont legend::before, .subCont legend::after,
+.subCont label::before, .subCont label::after,
+.subCont input::before, .subCont input::after,
+.subCont select::before, .subCont select::after,
+.subCont textarea::before, .subCont textarea::after,
+.subCont button::before, .subCont button::after,
+.subCont img::before, .subCont img::after,
+.subCont figure::before, .subCont figure::after,
+.subCont figcaption::before, .subCont figcaption::after,
+.subCont strong::before, .subCont strong::after,
+.subCont em::before, .subCont em::after,
+.subCont b::before, .subCont b::after,
+.subCont i::before, .subCont i::after,
+.subCont blockquote::before, .subCont blockquote::after,
+.subCont pre::before, .subCont pre::after,
+.subCont code::before, .subCont code::after {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+
+.subCont ul, .subCont ol, .subCont li,
+.subCont dl, .subCont dt, .subCont dd {margin: 0; padding: 0; list-style: none;}
+.subCont h1, .subCont h2, .subCont h3, .subCont h4, .subCont h5, .subCont h6 {margin: 0; padding: 0;}
+
+
+/* box_st5 */
+.subCont .box_st5 {
+    position: relative;
+    padding: 2rem;
+    border: 2px dashed #ddd;
+    background: #fff;
+    border-top: 4px solid #006fba;
+}
+.subCont .box_st5 .box_st_ico {
+    position: relative;
+    min-height: 100px;
+    padding: 10px 0 0 125px;
+}
+.subCont .box_st5 .box_st_ico .ico_boxImg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* box_st6 */
+.subCont .box_st6 {
+    position: relative;
+    padding: 2rem;
+    border: 1px solid #ddd;
+    background: #fff;
+    border-top: 4px solid #09aed6;
+}
+.subCont .box_st6:before {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: -1px;
+    width: 145px;
+    height: 4px;
+    background: #d9a428
+}
+.subCont .box_st6:after {
+    content: '';
+    position: absolute;
+    top: -4px;
+    left: 144px;
+    width: 145px;
+    height: 4px;
+    background: #1358a6
+}
+.subCont .box_st6 .box_st_ico {
+    position: relative;
+    min-height: 100px;
+    padding: 10px 0 0 125px;
+}
+.subCont .box_st6 .box_st_ico .ico_boxImg {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+/* -------------------------------------------- */
+/* 2) 이미 .subCont를 지칭하는 부분은 그대로 둠 */
+/* -------------------------------------------- */
+
+/* 컨테이너 자체 */
+.subCont {
+    position: relative;
+    width: 100%;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+.subCont:after {
+    content: "";
+    display: block;
+    clear: both;
+}
+
+/* -------------------------------------------- */
+/* 3) 나머지 전역 클래스를 .subCont 내부로 제한  */
+/* -------------------------------------------- */
+
+/* plusTag */
+.subCont .plusTag {
+    position: relative;
+    margin-bottom: 4rem;
+    padding: 1rem;
+}
+.subCont .plusTag:before {
+    position: absolute;
+    top: 2rem;
+    left: 0;
+    width: 100%;
+    height: calc(100% - 1rem);
+    background: #f7f7f7;
+    content: "";
+}
+.subCont .plusTag .tag {
+    position: absolute;
+    top: -1rem;
+    z-index: 1;
+    right: 1rem;
+    padding-top: 0.5rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    text-align: center;
+    color: #fff;
+    /* 그라디언트 */
+    background: rgb(0,111,186);
+    background: -moz-linear-gradient(top, rgba(0,111,186,1) 0%, rgba(23,167,219,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(0,111,186,1) 0%, rgba(23,167,219,1) 100%);
+    background: linear-gradient(to bottom, rgba(0,111,186,1) 0%, rgba(23,167,219,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#006fba', endColorstr='#17a7db', GradientType=0 );
+}
+.subCont .plusTag .tag:before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-top: none;
+    border-left: 35px solid transparent;
+    border-right: 35px solid transparent;
+    border-bottom: 20px solid #fff;
+}
+.subCont .plusTag .box_st6 {
+    padding: 3rem 3rem 1.5rem;
+}
+
+/* explanation */
+.subCont .explanation {
+    position: relative;
+    line-height: 2rem;
+}
+.subCont .explanation h3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-block;
+    padding-right: 1rem;
+    font-weight: 400;
+    font-size: 1.4rem;
+    color: #777;
+}
+.subCont .explanation h3:after {
+    position: absolute;
+    top: 0.4rem;
+    right: 0;
+    width: 2px;
+    height: 1.2rem;
+    background: #a9a9a9;
+    content: "";
+}
+.subCont .explanation p {
+    padding: 0 2rem 0 10rem;
+    font-size: 1.5rem;
+    word-break: keep-all;
+}
+.subCont .explanation p strong {
+    color: #1276a0;
+    font-weight: 400;
+}
+
+/* explandata */
+.subCont .explandata {
+    height: auto;
+    overflow: hidden;
+    margin-top: 3rem;
+}
+.subCont .explandata li {
+    position: relative;
+    width: 31%;
+    float: left;
+    margin-right: 3.5%;
+    padding: 0 2rem 0 4.2rem;
+    font-size: 1rem;
+    line-height: 1.3;
+    letter-spacing: -0.5px;
+    word-break: break-all;
+}
+
+@media screen and (min-width:1241px) {
+    .subCont .explandata li {
+   margin-bottom:40px;
+}
+
+}
+
+.subCont .explandata li:last-child {
+    margin-right: 0;
+}
+.subCont .explandata li:before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 1px;
+    height: 300px;
+    border-left: 1px dotted #b2b2b2;
+}
+.subCont .explandata li:last-child:before {
+    display: none;
+}
+.subCont .explandata li .pictogram {
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+.subCont .explandata li strong {
+    display: block;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #777;
+    margin-bottom: 0.5rem;
+}
+
+/* 기타 박스 */
+.subCont .plusTag .loanbox {
+    border-bottom: none;
+}
+.subCont .box_atte {
+    position: relative;
+    width: 100%;
+    height: auto;
+    padding: 1.5rem 3rem;
+    background: #f1f8fb;
+    border: 1px solid #ddd;
+    border-top: none;
+    word-break: keep-all;
+}
+.subCont .box_atte .bu_atteT {
+    font-size: 1.2rem;
+    background-position: left 8px;
+}
+.subCont .explan_st2 {
+    min-height: 80px;
+}
+.subCont .explan_st2 p {
+    padding: 0 3rem 0 15rem;
+}
+.subCont .explan_st2 h3 {
+    padding-right: 1.5rem;
+    word-break: keep-all;
+}
+.subCont .explan_st2 h3:after {
+    top: 0;
+    height: 100%;
+}
+.subCont .explan_st2 h3 span {
+    display: none;
+}
+
+/* -------------------------------------------- */
+/* 4) 미디어 쿼리도 .subCont 내부로 제한        */
+/* -------------------------------------------- */
+
+@media screen and (max-width: 1440px) {
+    /* 이미 .subCont로 되어 있으므로 그대로 둠 */
+    .subCont {
+        width: 96%;
+        padding: 20px 0;
+    }
+    /* 전역 클래스 → .subCont 추가 */
+    .subCont .explandata li p.bu_atte2_line,
+    .subCont .info_list li p.bu_atte2_line {
+        line-height: 1.8;
+    }
+}
+
+@media screen and (max-width: 1240px) {
+    .subCont .explandata li {
+        padding: 4.5rem 1.5rem 0 0;
+    }
+    .subCont .explandata li .pictogram {
+        left: 50%;
+        transform: translateX(-50%);
+        -webkit-transform: translateX(-50%);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .subCont .explan_st2 h3 {
+        position: relative;
+    }
+    .subCont .explan_st2 h3:after {
+        display: none;
+    }
+    .subCont .explan_st2 h3 span {
+        display: inline-block;
+        padding: 0 10px;
+    }
+    .subCont .explan_st2 h3 br {
+        display: none;
+    }
+    .subCont .explan_st2 p {
+        padding: 0;
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+}
+
+@media screen and (max-width: 800px) {
+    .subCont .explandata li {
+        width: 100%;
+        margin-right: 0;
+        padding: 0 0 3rem 5rem;
+    }
+    .subCont .explandata li:last-child {
+        padding-bottom: 0;
+    }
+    .subCont .explandata li:before {
+        top: auto;
+        bottom: 1.5rem;
+        width: 100%;
+        height: 1px;
+        border-bottom: 1px dotted #b2b2b2;
+    }
+    .subCont .explandata li .pictogram {
+        left: 0;
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+    }
+}
+
+@media screen and (max-width: 640px) {
+    .subCont .explanation h3 {
+        position: relative;
+    }
+    .subCont .explanation p {
+        padding: 0;
+        font-size: 1.2rem;
+        line-height: 1.5;
+    }
+}
+
+
+#boxDetail {
+    padding: 0px 0 120px;
+    background: #fff;
+    width:100%;
+    text-align: -webkit-center;
+  }
+  #boxDetail .contain {
+    padding: 0 50px;
+    width:100%;
+    max-width:1500px;
+  }
+  #boxDetail .contain .tit {
+    color: #004592;
+    font-weight: 500;
+    font-size: 24px;
+    margin-bottom: 2rem;
+  }
+  #boxDetail .contain .tit span {
+    display: inline-block;
+    width: 5px;
+    height: 20px;
+  }
+  #boxDetail .contain .con {
+    background: #f9f9f9;
+    margin-bottom: 2rem;
+    padding: 2rem;
+  }
+  #boxDetail .table {
+    display: table;
+    border-top: 3px solid #004592;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+  }
+  #boxDetail .table dl {
+    display: table-row;
+    border-bottom: 1px solid #ccc;
+  }
+  #boxDetail .table dl dt {
+    display: table-cell;
+    background: #f2faff;
+    color: #004592;
+    padding: 1.5rem 2rem;
+    text-align: left;
+    line-height: 160%;
+    width: 180px;
+  }
+  #boxDetail .table dl dd {
+    display: table-cell;
+    padding: 1.5rem;
+    text-align: left;
+    color: #444;
+    line-height: 160%;
+  }
+  #boxDetail .table dl dd span.red {
+    color: #ff0000;
+  }
+  #boxDetail .table dl dd span.blue {
+    color: #0000ff;
+  }
+  
+  #boxCommon dl {
+    display: block;
+    border-bottom: 1px solid #ccc;
+  }
+  #boxCommon dl dt {
+    display: block;
+    color: #004592;
+    font-weight: 500;
+    font-size: 24px;
+    padding: 1.5rem 2rem;
+    text-align: left;
+    line-height: 44px;
+    cursor: pointer;
+  }
+  #boxCommon dl dt i {
+    float: right;
+    line-height: 44px;
+    color: #004592;
+  }
+  #boxCommon dl dt i.fa-chevron-down {
+    color: #444;
+  }
+  #boxCommon dl dd {
+    display: none;
+    color: #444;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0 2rem 1.5rem 2rem;
+    text-align: left;
+    line-height: 160%;
+  }
+  #boxCommon dl dd.on {
+    display: block;
+  }
+  #boxCommon dl dd div {
+    margin-bottom: 1rem;
+  }
+  
+  /* ====== 모바일 대응 스타일 ====== */
+  @media (max-width: 768px) {
+    /* 전체 패딩, 폰트 크기 축소 등 */
+    #boxDetail {
+      padding: 0 0 60px;
+    }
+    #boxDetail .contain {
+      padding: 0 20px;
+    }
+    #boxDetail .contain .tit {
+      font-size: 20px;
+      margin-bottom: 1.5rem;
+    }
+  
+    /* 테이블 구조를 세로로 쌓이게 변경 */
+    #boxDetail .table {
+      display: block;           /* 표 전체를 block으로 전환 */
+      overflow-x: auto;         /* 내용이 넘치면 가로 스크롤 */
+      -webkit-overflow-scrolling: touch;
+    }
+    #boxDetail .table dl {
+      display: block;           /* 각 행을 블록으로 처리 */
+      margin-bottom: 1rem;      /* 행 간 간격 */
+    }
+    #boxDetail .table dl dt,
+    #boxDetail .table dl dd {
+      display: block;           /* 셀을 블록으로 전환해 세로 배치 */
+      width: 91%;              /* 화면 폭에 맞게 늘림 */
+      box-sizing: border-box;
+    }
+    #boxDetail .table dl dt {
+      margin-bottom: 0.5rem;    /* 제목(Heading)과 내용(Content) 간격 */
+      padding: 1rem;
+      width: auto;              /* width 고정값 제거 */
+    }
+    #boxDetail .table dl dd {
+      padding: 1rem;
+      margin-left:20px;
+    }
+  
+    /* FAQ 형태(#boxCommon) 영역 폰트 사이즈, 간격 축소 */
+    #boxCommon dl dt {
+      font-size: 20px;
+      padding: 1rem;
+      line-height: 1.4;
+    }
+    #boxCommon dl dd {
+      font-size: 14px;
+      padding: 0 1rem 1rem;
+      line-height: 1.4;
+    }
+  }

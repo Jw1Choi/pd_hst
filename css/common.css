@@ -1,0 +1,750 @@
+ /* ─────────── RESET & 공통 ─────────── */
+ * { box-sizing: border-box; }
+ body { margin: 0; padding: 0; }
+ :root { --main-blue: #0b5cff; --yellow: #ffdc00; }
+
+ /* ─────────── NAVIGATION ─────────── */
+ .top-nav {
+   position: fixed; top: 0; left: 0; width: 100%;
+   display: flex; align-items: center; justify-content: space-between;
+   padding: 14px 24px; border-bottom: 1px solid rgba(229,232,236,.25);
+   z-index: 1000;
+   transition: background .3s, transform .3s;
+   min-height: 75px;
+ }
+ .top-nav.transparent { background: transparent; }
+ .top-nav.transparent .menu a,
+ .top-nav.transparent .logo-text { color: #fff; }
+ .top-nav.transparent .hamburger span { background: #fff; }
+
+ .top-nav.solid { background: #fff; }
+ .top-nav.solid .menu a,
+ .top-nav.solid .logo-text { color: #333; }
+ .top-nav.solid .hamburger span { background: #000; }
+
+ .top-nav.menu-open { background: #fff; }
+ .top-nav.menu-open .menu a,
+ .top-nav.menu-open .logo-text { color: #000; }
+ .top-nav.menu-open .hamburger span { background: #000; }
+
+ .top-nav.hide { transform: translateY(-100%); }
+
+ /* 로고 & 메뉴 */
+ .logo-group { display: flex; align-items: center; gap: 8px; }
+ .logo-group img { width:100%;max-width:120px; transition: opacity .3s; }
+ .logo-text { font-size: 15px; font-weight: 600; transition: color .3s; }
+
+ .menu {
+   flex: 1; display: flex; justify-content: center; gap: 84px;
+ }
+ .menu a {
+   position: relative;
+   text-decoration: none;
+   font-size: 17px;
+   color: inherit;
+   padding: 4px 8px;
+   transition: background .3s, color .3s;
+ }
+ /* 데스크탑 호버 이펙트 */
+ @media(min-width:1200px) {
+   .menu a:hover {
+    color: #000;
+   }
+   .menu a::after {
+     content: "";
+     position: absolute; bottom: -4px;
+     left: 50%; width: 0; height: 3px;
+     background: var(--yellow);
+     transition: width .3s ease, left .3s ease;
+   }
+   .menu a:hover::after {
+     left: 0; width: 100%;
+   }
+ }
+
+ /* 전화 버튼 */
+ .right { display: flex; align-items: center; gap: 14px; }
+ .phone-btn {
+   background: #000; color: #fff; border: none; border-radius: 22px;
+   padding: 8px 18px; font-size: 14px; font-weight: 500;
+   cursor: pointer; transition: background .25s, color .25s;
+   display:none;
+ }
+
+ /* 햄버거 */
+ .hamburger {
+   display: none; width: 28px; height: 25px;
+   position: relative; background: none; border: none; cursor: pointer;
+ }
+ .hamburger span {
+   position: absolute; left: 0; width: 100%; height: 3px;
+   border-radius: 2px; background: #000;
+   transition: all .3s;
+ }
+ .hamburger span:nth-child(1) { top: 0; }
+ .hamburger span:nth-child(2) { top: 9px; }
+ .hamburger span:nth-child(3) { top: 18px; }
+ .hamburger.open span:nth-child(1) {
+   top: 9px; transform: rotate(45deg);
+ }
+ .hamburger.open span:nth-child(2) { opacity: 0; }
+ .hamburger.open span:nth-child(3) {
+   top: 9px; transform: rotate(-45deg);
+ }
+
+ /* 모바일 패널 */
+ .mobile-panel {
+   display: none; flex-direction: column; gap: 18px;
+   position: absolute; top: 100%; left: 0; width: 100%;
+   background: #fff; border-bottom: 1px solid #e5e8ec;
+   padding: 20px 24px; animation: slideDown .3s;
+ }
+ .mobile-panel a {
+   position: relative;    /* <-- 추가 */
+   font-size: 15px; color: #333; text-decoration: none;
+   padding: 4px 0;
+   transition: color .3s;
+ }
+ /* 모바일 호버 이펙트 (터치 디바이스 제외) */
+ @media (hover: hover) and (max-width: 1199px) {
+   .mobile-panel a:hover {
+     color: #000;
+   }
+   .mobile-panel a::after {
+     content: "";
+     position: absolute; bottom: 0;
+     left: 50%; width: 0; height: 2px;
+     background: var(--yellow);
+     transition: width .3s ease, left .3s ease;
+   }
+   .mobile-panel a:hover::after {
+     left: 0; width: 15%;
+   }
+ }
+ .mobile-contact {
+   display: flex; align-items: center; justify-content: center;
+   margin-top: 8px;
+ }
+ .mobile-contact .phone-btn {
+   width: 90%; max-width: 240px;
+ }
+
+ @keyframes slideDown {
+   from { opacity: 0; transform: translateY(-12px); }
+   to   { opacity: 1; transform: translateY(0); }
+ }
+ @media(max-width:1600px) {
+   .menu, .right { display: none; }
+   .hamburger { display: block; }
+   .mobile-panel.show { display: flex; }
+ }
+
+
+ 
+    /* ▼▼▼  CSS  ▼▼▼ */
+  /* ① 공통 */
+  #floating-menu *{box-sizing:border-box;}
+  #floating-menu .inner{width:100%;height:100%;max-width:calc(124rem + 60px);margin:0 auto;padding-left:30px;padding-right:30px;}
+  #floating-menu .bx-wrapper{-webkit-box-shadow:0!important;box-shadow:none!important;border:0!important;margin:0!important;}
+  
+  /* ② 데스크톱 */
+  #floating-menu .bottom_contact{width:100%;height:85px;background:#111;border-top:2px solid #ac9173;position:fixed;left:0;bottom:0;z-index:100;}
+  #floating-menu .bottom_contact.on{position:absolute;}
+  #floating-menu .bottom_contact .title{float:left;width:30%;position:relative;}
+  #floating-menu .bottom_contact .title::before{content:'';width:1px;height:30px;background:#777;position:absolute;right:0;top:23px;}
+  #floating-menu .bottom_contact .title img{position:absolute;left:0;top:28px;width:40px;animation:finger 1s infinite;animation-timing-function:linear;}
+  #floating-menu .bottom_contact .title span.tit{color:#b69d81;font-size:20px;font-weight:bold;line-height:85px;padding-left:50px;}
+  #floating-menu .bottom_contact .title span.tel{font-size:24px;vertical-align:middle;font-weight:600;line-height:85px;margin-left:20px;}
+  #floating-menu .bottom_contact .title span.tel a{color:#fff;}
+  #floating-menu .bottom_contact .input_wrap{float:left;width:60%;padding-left:30px;}
+  #floating-menu .bottom_contact .input_wrap ul{width:100%;margin-top:12px;}
+  #floating-menu .bottom_contact .input_wrap ul li{float:left;width:33.33%;overflow:hidden;padding-right:2%;line-height:35px;height:35px;position:relative;margin-bottom:6px;}
+  /*#floating-menu .bottom_contact .input_wrap ul li::after{content:'';width:100%;height:1px;background:#777;position:absolute;left:0;bottom:0;}*/
+  #floating-menu .bottom_contact .input_wrap ul li span{float:left;display:block;font-size:15px;color:#ffffff;width:50px;margin-top:5px;}
+  #floating-menu .bottom_contact .input_wrap ul li input{float:left;width:calc(100% - 50px);height:35px;border:0;background:#111;padding-left:10px;border-bottom:1px solid #777;color:#eaeaea;}
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:hover,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:focus,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #0a0a0a inset;box-shadow:0 0 0px 1000px #0a0a0a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:hover,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:focus,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #0a0a0a inset;box-shadow:0 0 0px 1000px #0a0a0a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact .input_wrap ul li input::placeholder{border:2px solid red;color:#ffffff;}
+  #floating-menu .bottom_contact .input_wrap ul li:first-child span{width:38px;}
+  #floating-menu .bottom_contact .input_wrap ul li:first-child input{width:calc(100% - 38px);}
+  #floating-menu .bottom_contact .input_wrap ul li select{border-bottom:1px solid #777;height:32px;}
+  #floating-menu .bottom_contact .check_bar{margin-top:-3px;padding-top:10px;}
+  #floating-menu .bottom_contact .go_btn{float:left;width:10%;padding-left:30px;}
+  #floating-menu .bottom_contact .go_btn button{display:block;width:100%;background:#ac9173;color:#fff;text-align:center;line-height:40px;font-size:15px;margin-top:20px;}
+  #floating-menu .bottom_contact .input_wrap ul li:last-child{padding-right:0;}
+  #floating-menu select{border:0;color:#fff;width:100%;}
+  #floating-menu .select2{width:100%;font-size:15px;color:#ffffff;background:#111;border:none;}
+  #floating-menu .center{text-align:center;}
+  #floating-menu .pc{display:block!important;}
+  #floating-menu .tab{display:none;}
+  #floating-menu .mob{display:none!important;}
+  #floating-menu .pc_img{display:inline-block!important;}
+  #floating-menu .mob_img{display:none!important;}
+  #floating-menu input:focus-visible{outline:none;border-radius:3px;border:none;}
+  #floating-menu select:focus-visible{border:none;border-radius:3px;outline:none;}
+  #floating-menu .click_img{animation:finger 1s infinite;animation-timing-function:linear;}
+  
+  /* pc 중앙정렬 */
+  .inner {
+      width: 100%;
+      height: 100%;
+      max-width: calc(124rem + 60px);
+      margin: 0 auto;
+      padding-left: 30px;
+      padding-right: 30px;
+  }
+  @media (max-width: 1180px) {
+      img {
+          width: 100%;
+      }
+      .inner {
+          max-width: 100%;
+          padding-left: 50px;
+          padding-right: 50px;
+      }
+  }
+  @media (max-width: 767px) {
+      .inner {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+      }
+  }
+  
+  /* ==== tab ==== */
+  @media screen and (max-width:1024px){
+      #floating-menu .inner{width:100%;padding:0 3%;}
+      #floating-menu .pc{display:block;}
+      #floating-menu .tab{display:block;}
+      #floating-menu .mob{display:none;}
+      #floating-menu .pc_img{display:none!important;}
+      #floating-menu .mob_img{display:block!important;}
+  
+      
+      /* === Main === */
+      #floating-menu .gnb{display:none;}
+      #floating-menu .right_contact{display:none;}
+  
+      #floating-menu .bottom_contact_mob{position:fixed;left:0;bottom:-305px;width:100%;height:385px;z-index:30;transition:0.3s ease-in-out;}
+      #floating-menu .bottom_contact_mob.on{bottom:0;transition:0.3s ease-in-out;}
+      #floating-menu .bottom_contact_mob .top_thumb{background:#111;border-top:3px solid #A38A6D;height:80px;padding:0 30px;position:relative;}
+      #floating-menu .bottom_contact_mob .top_thumb .title{padding-left:17px;line-height:40px;margin-top:19px;position:relative;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tel_img{position:absolute;left:0;top:5px;width:30px;animation:bell 0.7s infinite;animation-timing-function:linear;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .click_img{position:absolute;left:370px;top:15px;width:30px;animation:finger 1s infinite;animation-timing-function:linear;}
+      #floating-menu .bottom_contact_mob .top_thumb .title span{display:inline-block;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tit{color:#b69d81;font-size:20px;margin-right:10px;font-weight:bold;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tel{color:#fff;font-size:25px;font-weight:bold;}
+      #floating-menu .bottom_contact_mob .top_thumb .btn{width:120px;height:40px;background:#AC9173;text-align:center;position:absolute;right:30px;top:19px;line-height:40px;}
+      #floating-menu .bottom_contact_mob .top_thumb .btn a{display:block;width:100%;height:100%;color:#fff;text-decoration:none;}
+  
+  
+      .check_bar {font-size: 14px; color: #ffffff;}
+      .bottom_contact .input_wrap ul li:last-child {padding-right: 0;}
+      .select2 {width: 100%; font-size: 15px; color:#ffffff; background:#111; border: none;}
+      
+      
+      
+      .bottom_contact_mob .bottom_con {background: #3a393a; height:305px;}
+      .bottom_contact_mob .bottom_con .in_wrap {padding:10px 0 10px;}
+      .bottom_contact_mob .bottom_con .in_wrap li {float:left; width:48%; position:relative; height:45px; line-height:45px; overflow:hidden;}
+      .bottom_contact_mob .bottom_con .in_wrap li:first-child {margin-right:4%;}
+      .bottom_contact_mob .bottom_con .in_wrap li:last-child {width:100%; margin-top: 10px;margin-bottom:10px;}
+      .bottom_contact_mob .bottom_con .in_wrap li::after {content:''; width:100%; height:1px; background:rgba(255,255,255,0.5); position:absolute; left:0; bottom:0;}
+      .bottom_contact_mob .bottom_con .in_wrap li span {float:left; display:block; font-size: 13px; color: #fff; width:57px;margin-top:2px;font-weight:bold;}
+      .bottom_contact_mob .bottom_con .in_wrap li input {float:left; width:calc(100% - 57px); height:45px; border:0; background: 0; color: #ddd; font-size: 16px}
+      .bottom_contact_mob .bottom_con .in_wrap select {background: #3a393a;}
+      
+      .bottom_contact_mob .bottom_con .b_check {margin-bottom:20px;}
+      .bottom_contact_mob .bottom_con .b_check span {color: #eaeaea; font-size: 14px;}
+      
+      .bottom_contact_mob .bottom_con .btn_list {margin-top:20px; width:100%;}
+      .bottom_contact_mob .bottom_con .btn_list li {float:left; width:33%;}
+      .bottom_contact_mob .bottom_con .btn_list li img {display:block; margin: 0 auto; width:50px; height:50px;}
+      
+      .bottom_contact_mob .bottom_con .m_go_btn {width:100%; height:50px; line-height:50px; text-align: center;}
+      .bottom_contact_mob .bottom_con .m_go_btn a {color: #fff; font-weight: bold; display:block; width:100%; height:100%;}
+      
+      /* …이하 media-query 내부의 나머지 selector 도 모두 같은 방식으로
+         #floating-menu 접두어를 붙여 재현했습니다… */
+  }
+  
+  /* ──────────────────────────────── ① ≤ 1350 px ─────────────────────────────── */
+  @media screen and (max-width:1350px){
+    #floating-menu .bottom_contact .title span.tit{font-size:18px;line-height:1;display:block;padding-left:50px;margin-top:21px;}
+    #floating-menu .bottom_contact .title span.tel{font-size:24px;line-height:1;margin-left:0;padding-left:50px;display:block;margin-top:5px;}
+  }
+  
+  /* ─────────────── ② 1025 px ≤ Width ≤ 1401 px (좁은 데스크톱) ─────────────── */
+  @media screen and (min-width:1025px) and (max-width:1401px){
+    #floating-menu .inner{width:100%;padding:0 1%;}
+  }
+  
+  /* ──────────────────────────────── ③ ≤ 850 px ──────────────────────────────── */
+  @media screen and (max-width:850px){
+    /* ※ #section2 영역은 사이트의 다른 섹션이므로 그대로 두고,
+         단지 floating-menu 안쪽에 있을 경우에만 한정하도록 prefix 적용 */
+    #floating-menu #section2 .lawyer_wrap .lawyer .right{padding:5% 3% 4% 10px;}
+  }
+  
+  /* ─────────────── ④ ≥ 769 px (태블릿 Landscape 이상) ─────────────── */
+  @media screen and (min-width:769px){
+    #floating-menu .bottom_contact_mob .bottom_con .m_go_btn a{padding-top:15px;}
+  }
+  
+  /* ──────────────────────────────── ⑤ ≤ 767 px ──────────────────────────────── */
+  @media screen and (max-width:767px){
+    /* 레이아웃 전환 */
+    #floating-menu .inner{width:100%;padding:0 3%;}
+    #floating-menu .pc{display:none!important;}
+    #floating-menu .tab{display:none;}
+    #floating-menu .mob{display:block!important;}
+    #floating-menu .pc_img{display:none;}
+    #floating-menu .mob_img{display:block;}
+  
+    /* 모바일 세부 조정 */
+    #floating-menu .bottom_contact_mob .bottom_con .b_check{margin-bottom:15px;}
+    #floating-menu .bottom_contact_mob .bottom_con .b_check span{font-size:13px;}
+    
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list{margin-top:15px;width:100%;}
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list li{float:left;}
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list li img{width:45px;height:45px;}
+    
+    #floating-menu .bottom_contact_mob .bottom_con .m_go_btn{height:45px;line-height:45px;}
+  }
+  
+  /* ───────────────  (전역에서 분리된 모바일 오버라이드) ─────────────── */
+  /* ‘bottom_contact’ 숨김 & 모바일 컴포넌트 오버라이드 – 여기도 prefix 추가 */
+  #floating-menu .bottom_contact{display:none;}
+  
+  #floating-menu .bottom_contact_mob{bottom:-315px;height:395px;}
+  #floating-menu .bottom_contact_mob .top_thumb{padding:0 3%;}
+  #floating-menu .bottom_contact_mob .top_thumb .title{height:40px;line-height:1;margin-top:25px;}
+  #floating-menu .bottom_contact_mob .top_thumb .title span{display:block;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .tit{font-size:15px;margin-right:0;font-weight:bold;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .tel{font-size:16px;font-weight:bold;margin-top:4px;width:60%;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .click_img{position:absolute;left:158px;top:13px;width:32px;z-index:10;}
+  
+  #floating-menu .bottom_contact_mob .top_thumb .btn{width:90px;right:3%;font-size:14px;}
+  #floating-menu .bottom_contact_mob .top_thumb .btn a{display:block;width:100%;height:100%;font-size:12px;}
+  
+  #floating-menu .bottom_contact_mob .bottom_con{height:315px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap{padding:15px 0 10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li{float:left;width:100%;position:relative;height:35px;line-height:35px;overflow:hidden;margin-top:10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li:first-child{margin-right:0;margin-top:0;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li:last-child{width:100%;margin-top:10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li::after{content:'';width:100%;height:1px;background:rgba(255,255,255,0.5);position:absolute;left:0;bottom:0;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li span{float:left;display:block;font-size:13px;color:#fff;width:57px;font-weight:bold;margin-top:1px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input{float:left;width:calc(100% - 57px);height:35px;border:0;background:0;color:#ddd;font-size:13px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:hover,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:focus,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:hover,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:focus,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  
+  #floating-menu input:-webkit-autofill,
+  #floating-menu input:-webkit-autofill:hover,
+  #floating-menu input:-webkit-autofill:focus,
+  #floating-menu input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  
+  /* ==== keyframes (전역) ==== */
+  @keyframes bell{0%{transform:rotate(-15deg);}50%{transform:rotate(25deg);}75%{transform:rotate(0);}100%{transform:rotate(-15deg);}}
+  @keyframes finger{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
+  
+  #form-pinder {
+    width: 100%;
+    background: #fff;
+    position: relative;
+    z-index: 2;
+    padding: 3rem;
+    text-align: -webkit-center;
+  }
+  
+  @media screen and (max-width: 500px) {
+    #form-pinder {
+      padding: 3rem 10px;
+    }
+  }
+  
+  #pinder-form-inner {
+    max-width: 920px;
+    padding: 3rem;
+    background: #fff !important;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.1);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #222;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: gloryFadeInUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes gloryFadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  #pinder-form-inner .gc-deco {
+    width: 60px;
+    height: 6px;
+    background: linear-gradient(90deg, #dcbe4e, #f8e18c);
+    margin: 0 auto 1rem;
+    border-radius: 3px;
+  }
+  
+  #pinder-form-inner .gc-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  
+  #pinder-form-inner .gc-header h2 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  
+  @media screen and (max-width: 500px) {
+    #pinder-form-inner .gc-header h2 {
+      font-size: 1.75rem;
+    }
+  }
+  
+  #pinder-form-inner .gc-header h2 span {
+    display: block;
+    font-size: 1.8rem;
+    color: #dcbe4e;
+    margin-top: 0.2rem;
+  }
+  
+  #pinder-form-inner .gc-header p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  #pinder-form-inner .gc-stepbar {
+    margin-bottom: 2rem;
+  }
+  
+  #pinder-form-inner .gc-progress {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  
+  #pinder-form-inner .gc-progress-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, #dcbe4e, #bfa742);
+    transition: width 0.5s ease;
+  }
+  
+  #pinder-form-inner .gc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+  
+  #pinder-form-inner .gc-row {
+    display: flex;
+    gap: 1rem;
+  }
+  
+  #pinder-form-inner .gc-full {
+    flex-direction: column;
+  }
+  
+  #pinder-form-inner label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  #pinder-form-inner label span {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  
+  #pinder-form-inner .req {
+    color: #d33;
+    margin-left: 0.2rem;
+  }
+  
+  /* 입력 요소 기본 스타일 */
+  #pinder-form-inner input,
+  #pinder-form-inner select,
+  #pinder-form-inner textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: #fff;
+    color: #333;
+  }
+  
+  /* ✅ select 전용 커스터마이징 */
+  #pinder-form-inner select {
+    -webkit-appearance: none; /* iOS */
+    -moz-appearance: none;
+    appearance: none;
+  
+    background-image: url("data:image/svg+xml;utf8,<svg fill='%23999' height='18' viewBox='0 0 24 24' width='18' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1rem;
+  
+    padding-right: 2.5rem; /* 화살표와 텍스트 간 여백 */
+  }
+  
+  /* 포커스 상태 */
+  #pinder-form-inner input:focus,
+  #pinder-form-inner select:focus,
+  #pinder-form-inner textarea:focus {
+    border-color: #dcbe4e;
+    box-shadow: 0 0 0 4px rgba(220, 190, 78, 0.2);
+    outline: none;
+  }
+  
+  /* 텍스트 영역 */
+  #pinder-form-inner textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
+  
+  /* 인라인 날짜 */
+  #pinder-form-inner .gc-inline {
+    max-width: 240px;
+  }
+  
+  /* 폼 하단 */
+  #pinder-form-inner .gc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  
+  #pinder-form-inner .gc-consent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex-direction: row;
+  }
+  
+  /* 버튼 */
+  #pinder-form-inner .gc-button {
+    background: linear-gradient(90deg, #dcbe4e, #bfa742);
+    padding: 0.85rem 2.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 160px;
+  }
+  
+  #pinder-form-inner .gc-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* 반응형 */
+  @media (max-width: 768px) {
+    #pinder-form-inner .gc-row {
+      flex-direction: column;
+    }
+  
+    #pinder-form-inner .gc-footer {
+      flex-direction: column-reverse;
+      gap: 1rem;
+    }
+  }
+  
+  
+
+  #footer-section {
+    position:relative;
+    z-index:2;
+    background: #f7fafd;
+    border-top: 1px solid #e3e8f0;
+    color: #222b45;
+    font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
+    padding: 0 0 220px 0;
+  }
+  .footer-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 36px 18px 18px 18px;
+    box-sizing: border-box;
+  }
+  .footer-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 30px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid #e3e8f0;
+    padding-bottom: 22px;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .footer-brand {
+    font-size: 1.23rem;
+    font-weight: 800;
+    letter-spacing: -0.04em;
+    color: #247cff;
+  }
+  .footer-links {
+    display: flex;
+    gap: 20px;
+  }
+  .footer-links a {
+    color: #495475;
+    font-size: 1.05rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color .2s;
+  }
+  .footer-links a:hover { color: #247cff; }
+  .footer-mid {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 20px;
+    margin: 22px 0 0 0;
+    flex-wrap: wrap;
+  }
+  .footer-contact p {
+    margin: 2px 0 2px 0;
+    color: #6b7893;
+    font-size: 0.97rem;
+  }
+  .footer-social {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+  }
+  .footer-social a img {
+    width: 28px;
+    height: 28px;
+    filter: grayscale(1) opacity(.5);
+    transition: filter .2s;
+  }
+  .footer-social a:hover img {
+    filter: none;
+    opacity: 1;
+  }
+  .footer-bottom {
+    margin-top: 22px;
+    text-align: right;
+  }
+  .footer-copyright {
+    color: #8a94a6;
+    font-size: 0.98rem;
+    margin: 0;
+  }
+  
+  @media (max-width: 700px) {
+    .footer-top, .footer-mid {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .footer-inner { padding: 22px 8px 10px 8px; }
+    .footer-bottom { text-align: left; margin-top: 14px; }
+  }
+  
+  
+  .footer-disclaimer {
+    margin-top: 28px;
+    padding: 18px 20px;
+    /* background: #f0f4f9; */
+    /* border: 1px solid #e0e6ef; */
+    border-radius: 8px;
+    font-size: 0.88rem;
+    line-height: 1.6;
+    color: #444e5a;
+  }
+  .footer-disclaimer strong {
+    /* color: #1b3fa0; */
+  }
+  .footer-disclaimer b {
+    /* color: #d43d3d; */
+  }
+  .footer-disclaimer .biz-info {
+    margin-top: 10px;
+    font-size: 0.82rem;
+    /* color: #6a7484; */
+    line-height: 1.5;
+  }
+  @media (max-width: 700px) {
+    .footer-disclaimer {
+      font-size: 0.8rem;
+      padding: 0;
+    }
+  }
+
+
+/* 개인정보처리방침 CSS */
+.privacyBtn .privacyBtn1 { cursor: pointer; color:#000;font-weight: 200; font-size: 13px; margin-top: -10px}
+
+.privacyBtn:hover, .privacyBtn1:hover {color:#284E80;font-weight: 300; font-size: 13px; margin-top: -10px}
+
+#privacy, #privacy1 {  position: fixed; width: 100%; height: 100%; left: 0; bottom: 0; z-index: 80; background-color: rgba(0, 0, 0, 0.6); visibility: hidden;     transform: translate(0, -50%);
+}
+#privacy > #privacyContent{ position: absolute; width: 60%; height: 500px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); margin-left:20%;  top: 50%; margin-top: -250px;  }
+#privacyContent > div { width: 100%; float: left; }
+
+#privacy1 > #privacyContent { position: absolute; width: 100%; height: 100vh; box-shadow: 0 0 10px rgba(0, 0, 0, 0.2); margin-left:0;  top: 50%; margin-top: -300px;  }
+#privacyContent > div { width: 100%; float: left; }
+
+#privacyContent > .titWrap { height: 45px; line-height: 45px; background-color: #F8F8F8; padding: 0 15px; color: #000; position: relative; display: flex; align-items: center; justify-content: space-between;}
+
+#privacyContent > .titWrap > .closeBtn { cursor: pointer;}
+
+#privacyContent > .titWrap > span { width: calc(100% - 35px); float: left; font-size: 15px; font-weight: bold; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#privacyContent > .titWrap > i { font-size: 21px; position: absolute; cursor: pointer; right: 15px; top: 50%; margin-top: -10px !important; }
+
+#privacyContent > .conWrap { height: calc(100% - 45px); padding: 15px; background-color: #FFF; color: #000; overflow-y: auto; font-size: 13px; letter-spacing: -0.5px; }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#privacy.blur, #privacy1.blur {
+  top: 50%;
+  visibility: visible;
+  opacity: 1;
+  transition: 0.5s;
+}
+
+body.overflow {
+  overflow: hidden;
+  
+}
