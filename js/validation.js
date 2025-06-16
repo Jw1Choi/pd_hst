@@ -180,7 +180,7 @@
   
   
   $(function(){
-  $('#name,#phone,#intro_select,#message,#agree11').bind("keyup click change",form_c);
+  $('#name,#phone,#intro_select,#message,#agree11').on("keyup click change",form_c);
   //  $('#name,#phone,#intro_select,#car_type,#car,#message,#agree11,#now-wg,#hope-wg,#height').bind("keyup click change",form_check1);
   //  $('#license').bind("keyup click change",lic_pick);
   })

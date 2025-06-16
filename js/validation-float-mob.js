@@ -246,7 +246,7 @@ function hoa(){
   
 
 $(function(){
- $('#mob_name,#agree13,#mob_phone,#mob_select').bind("keyup click change",form_check2);
+ $('#mob_name,#agree13,#mob_phone,#mob_select').on("keyup click change",form_check2);
 //  $('#name,#phone,#position,#id-number,#message,#license').bind("keyup click change",form_check1);
 //  $('#license').bind("keyup click change",lic_pick);
 })

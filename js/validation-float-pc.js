@@ -22,14 +22,14 @@ $(function () {
         
 
 
-         // Form field validation
-         if(!regex1.test(name) || name.length<0 ){
-            var error = true;
-            $('#pc_name').addClass("error_input");
-           alert("이름 입력을 확인하세요.");
-        }else{
-            $('#pc_name').removeClass("error_input");
-        }
+        //  // Form field validation
+        //  if(!regex1.test(name) || name.length<0 ){
+        //     var error = true;
+        //     $('#pc_name').addClass("error_input");
+        //    alert("이름 입력을 확인하세요.");
+        // }else{
+        //     $('#pc_name').removeClass("error_input");
+        // }
 
         if (agree == false){
             var error = true;
@@ -246,7 +246,7 @@ function hoa2(){
   
 
 $(function(){
- $('#pc_name,#agree12,#pc_phone,#pc_select').bind("keyup click change",form_check1);
+ $('#pc_name,#agree12,#pc_phone,#pc_select').on("keyup click change",form_check1);
 //  $('#name,#phone,#position,#id-number,#message,#license').bind("keyup click change",form_check1);
 //  $('#license').bind("keyup click change",lic_pick);
 })
