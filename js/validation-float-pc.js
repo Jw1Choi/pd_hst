@@ -63,12 +63,12 @@ $('#pc_name, #pc_phone, #pc_select, #agree12')
 
 
 function dll2(){
-     window.karrotPixel.track('SubmitApplication');
-    alert("무료 상담 신청을 해주셔서 감사합니다. 빠른 안내 진행드리겠습니다");
+//      window.karrotPixel.track('SubmitApplication');
+//     alert("무료 상담 신청을 해주셔서 감사합니다. 빠른 안내 진행드리겠습니다");
 
-    $('#pc_btn').text('신청완료');
-    $('#pc_alert').text("신청이 완료 되었습니다.");
-   hoa2();
+//     $('#pc_btn').text('신청완료');
+//     $('#pc_alert').text("신청이 완료 되었습니다.");
+//    hoa2();
 }
  
 function maxLengthCheck(object){

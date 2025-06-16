@@ -67,10 +67,10 @@ $(function () {
 
 
 function dll3(){
-    window.karrotPixel.track('SubmitApplication');
-    alert("무료 상담 신청이 완료되었습니다.");
-    $('.m_go_btn, #mob_btn').prop("disabled", true);
-   hoa();
+//     window.karrotPixel.track('SubmitApplication');
+//     alert("무료 상담 신청이 완료되었습니다.");
+//     $('.m_go_btn, #mob_btn').prop("disabled", true);
+//    hoa();
 }
  
 function maxLengthCheck(object){

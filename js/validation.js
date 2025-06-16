@@ -38,8 +38,8 @@
     // var f = document.fm;
     // f.submit();
     // $('[name="fm"],[name="fm1"]').submit();
-       window.karrotPixel.track('SubmitApplication');
-    alert("빠른 안내를 통해 도움 드리겠습니다.\n신청해주셔서 감사합니다.");
+      //  window.karrotPixel.track('SubmitApplication');
+    // alert("빠른 안내를 통해 도움 드리겠습니다.\n신청해주셔서 감사합니다.");
   
   }
   
