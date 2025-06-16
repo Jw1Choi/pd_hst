@@ -16,9 +16,11 @@ $(function () {
       var message  = $('#message').val();
       var agree    = $('#agree12').is(':checked');
       
-      $('#pc_name, #pc_phone, #pc_select, #agree12').click(function () {
-        $(this).removeClass('error_input');
-      });
+// PC 상담-폼 입력 요소
+$('#pc_name, #pc_phone, #pc_select, #agree12')
+  .on('click', function () {
+    $(this).removeClass('error_input');
+  });
         
 
 

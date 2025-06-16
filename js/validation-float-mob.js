@@ -18,8 +18,9 @@ $(function () {
         var agree = $('#agree13').is(":checked");
         
         
-        $('#mob_name, #mob_phone,#position2,#agree13').click(function(){
-            $(this).removeClass("error_input");
+        $('#mob_name, #mob_phone, #position2, #agree13')
+        .on('click', function () {
+          $(this).removeClass('error_input');
         });
         
 
