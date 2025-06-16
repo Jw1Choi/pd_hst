@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="robots" content="index,follow" />
-  <meta name="content-language" content="ko">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="robots" content="index,follow" />
 <title>대출 비교 플랫폼 | Pinder</title>
 <meta name="description" content="Pinder는 차량·주택·직장인·사업자·생활비·채무통합·주담대 갈아타기·신용카드소지자 대출까지 8가지 상품의 금리와 한도를 실시간으로 비교해 최저금리와 최대한도를 찾아주는 대출 비교 플랫폼입니다. 클릭 한 번으로 승인율을 높이고 월 이자 부담을 평균 120만 원까지 절감해 보세요.">
 
@@ -19,8 +18,11 @@
 <meta property="og:description"   content="차량·주택·직장인·사업자 등 8가지 대출상품의 금리·한도를 비교하고, 나에게 맞는 최저금리를 찾아보세요." />
 <meta property="og:url"           content="https://pinder.co.kr/" />
 <meta property="og:image" content="./img/sc3-1.jpg"/>
-<link rel="shortcut icon" href="./img/logo-pinder.jpg" type="image/x-icon">
-
+<link rel="apple-touch-icon" href="./img/logo-pinder.jpg" sizes="180x180"/>
+    <link rel="icon" href="./img/logo-pinder.jpg" sizes="16x16"/>
+    <link rel="icon" href="./img/logo-pinder.jpg" sizes="32x32"/>
+    <link rel="icon" href="./img/logo-pinder.jpg" sizes="192x192"/>
+    <link rel="icon" href="./img/logo-pinder.jpg" type="image/svg+xml"/>
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder">
   <meta name="twitter:site" content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder">
@@ -455,6 +457,74 @@
   </div>
 </section>
 
+<script>
+  function switchTab(id){
+    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.card-set').forEach(s=>s.classList.remove('show'));
+    document.getElementById(id).classList.add('show');
+    document.getElementById(id+'Btn').classList.add('active');
+  }
+  document.addEventListener('DOMContentLoaded',()=>switchTab('mortgage'));
+
+  function animateCount(el,dur=1200){
+    const end=parseFloat(el.dataset.end);
+    const dec=+el.dataset.decimals||0;
+    const fmt=el.dataset.format==='currency'
+      ?v=>v.toLocaleString('ko-KR',{maximumFractionDigits:dec})
+      :v=>v.toFixed(dec);
+    let start=null;
+    function step(ts){
+      if(!start)start=ts;
+      const p=Math.min((ts-start)/dur,1);
+      el.textContent=fmt(end*p);
+      if(p<1)requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  // PC hover에서 숫자 카운트
+  document.addEventListener('DOMContentLoaded',()=>{
+    document.querySelectorAll('.card').forEach(card=>{
+      card.addEventListener('mouseenter',()=>{
+        card.querySelectorAll('.count').forEach(el=>{
+          const dec=+el.dataset.decimals||0;
+          el.textContent=el.dataset.format==='currency'
+            ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
+            :(0).toFixed(dec);
+          animateCount(el);
+        });
+      });
+    });
+  });
+  // 모바일 터치에서 카드 flip+카운트 지원
+  document.addEventListener('DOMContentLoaded', function() {
+    function isMobile() {
+      return window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    }
+    if (isMobile()) {
+      document.querySelectorAll('.card').forEach(card => {
+        card.addEventListener('touchstart', function(e) {
+          document.querySelectorAll('.card.flipped').forEach(c=>c.classList.remove('flipped'));
+          if (!card.classList.contains('flipped')) {
+            card.classList.add('flipped');
+            card.querySelectorAll('.count').forEach(el=>{
+              const dec=+el.dataset.decimals||0;
+              el.textContent=el.dataset.format==='currency'
+                ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
+                :(0).toFixed(dec);
+              animateCount(el);
+            });
+          } else {
+            card.classList.remove('flipped');
+          }
+          e.stopPropagation();
+        });
+        document.body.addEventListener('touchstart', function(e){
+          if(!card.contains(e.target)) card.classList.remove('flipped');
+        });
+      });
+    }
+  });
+</script>
 
 
 
@@ -1034,8 +1104,24 @@
 
 </style>
 
+<!-- ─────────────  JS (초경량)  ───────────── -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const cards = document.querySelectorAll('#section-supercards .supercard');
+  const io = new IntersectionObserver((entries,obs)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');   // 1) 보이면 애니메이션
+        obs.unobserve(e.target);          // 2) 1회만 실행 → 부하 ZERO
+      }
+    });
+  },{threshold:0.25});
+  cards.forEach(c=>io.observe(c));
+});
+</script>
 
 <script src="./js/jquery-1.8.3.min.js"></script>
+ 
 
   
 <section id="floating-menu">
@@ -1047,7 +1133,7 @@
             <span class="tel"><a>무료 한도 조회</a><img src="./img/click_icon.png" alt="" class="click_img"></span>
         </div><!-- // title -->
         <div class="input_wrap">
-            <form id="form_e12" name="frm_phonecall_web" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe12" onsubmit="dll2(); submitted2=true;">
+            <form id="form_e12" name="frm_phonecall_web" action="" method="post" target="hidden_iframe12" onsubmit="dll2(); submitted2=true;">
                 <input type="hidden" name="entry.1351654586"  value="pc 플로팅 메뉴 신청">
 
                 <ul class="clfix">
@@ -1106,7 +1192,7 @@
     </div><!-- // top_thumb -->
     <div class="bottom_con" style="margin-top:-16px;">
         <div class="inner">
-            <form name="frm_phonecall_mob" id="form_e13" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe13" onsubmit="dll3(); submitted3=true;">
+            <form name="frm_phonecall_mob" id="form_e13" method="post" target="hidden_iframe13" onsubmit="dll3(); submitted3=true;">
               <input type="hidden" name="entry.1351654586"  value="mobile 신청">
                 <ul class="in_wrap clfix">
                     <li>
@@ -1163,7 +1249,7 @@
       <div class="gc-progress"><div class="gc-progress-fill"></div></div>
     </div>
   
-    <form id="form_e11" name="frm_phonecall_web" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe11" onsubmit="dll(); submitted=true;"  class="gc-form" novalidate>
+    <form id="form_e11" name="frm_phonecall_web" action="" method="post" target="hidden_iframe11" onsubmit="dll(); submitted=true;"  class="gc-form" novalidate>
       <input type="hidden" name="entry.1351654586" value="본문 신청폼">  
       <input type="hidden" name="entry.1333144875" value="구글">  
       <div class="gc-row">
@@ -1226,9 +1312,8 @@
 <iframe name="hidden_iframe13" id="hidden_iframe13" style="display:none;" onload=""></iframe>
 
   <div id="footer_template"></div>
-  
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./js/jquery-1.8.3.min.js"></script>
+  <script src="./js/jquery-1.8.3.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./js/menu.js"></script>
 <script src="./js/main.js"></script>
 <script src="./js/personal.js"></script>
@@ -1237,94 +1322,6 @@
 <script src="./js/validation-float-pc.js"></script>
 <script src="./js/validation-float-mob.js"></script>
 
-<script src="./js/footer.js" ></script>
-
-
-<script>
-  function switchTab(id){
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    document.querySelectorAll('.card-set').forEach(s=>s.classList.remove('show'));
-    document.getElementById(id).classList.add('show');
-    document.getElementById(id+'Btn').classList.add('active');
-  }
-  document.addEventListener('DOMContentLoaded',()=>switchTab('mortgage'));
-
-  function animateCount(el,dur=1200){
-    const end=parseFloat(el.dataset.end);
-    const dec=+el.dataset.decimals||0;
-    const fmt=el.dataset.format==='currency'
-      ?v=>v.toLocaleString('ko-KR',{maximumFractionDigits:dec})
-      :v=>v.toFixed(dec);
-    let start=null;
-    function step(ts){
-      if(!start)start=ts;
-      const p=Math.min((ts-start)/dur,1);
-      el.textContent=fmt(end*p);
-      if(p<1)requestAnimationFrame(step);
-    }
-    requestAnimationFrame(step);
-  }
-  // PC hover에서 숫자 카운트
-  document.addEventListener('DOMContentLoaded',()=>{
-    document.querySelectorAll('.card').forEach(card=>{
-      card.addEventListener('mouseenter',()=>{
-        card.querySelectorAll('.count').forEach(el=>{
-          const dec=+el.dataset.decimals||0;
-          el.textContent=el.dataset.format==='currency'
-            ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
-            :(0).toFixed(dec);
-          animateCount(el);
-        });
-      });
-    });
-  });
-  // 모바일 터치에서 카드 flip+카운트 지원
-  document.addEventListener('DOMContentLoaded', function() {
-    function isMobile() {
-      return window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    }
-    if (isMobile()) {
-      document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('touchstart', function(e) {
-          document.querySelectorAll('.card.flipped').forEach(c=>c.classList.remove('flipped'));
-          if (!card.classList.contains('flipped')) {
-            card.classList.add('flipped');
-            card.querySelectorAll('.count').forEach(el=>{
-              const dec=+el.dataset.decimals||0;
-              el.textContent=el.dataset.format==='currency'
-                ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
-                :(0).toFixed(dec);
-              animateCount(el);
-            });
-          } else {
-            card.classList.remove('flipped');
-          }
-          e.stopPropagation();
-        });
-        document.body.addEventListener('touchstart', function(e){
-          if(!card.contains(e.target)) card.classList.remove('flipped');
-        });
-      });
-    }
-  });
-</script>
-
-
-<!-- ─────────────  JS (초경량)  ───────────── -->
-<script>
-  document.addEventListener('DOMContentLoaded',()=>{
-    const cards = document.querySelectorAll('#section-supercards .supercard');
-    const io = new IntersectionObserver((entries,obs)=>{
-      entries.forEach(e=>{
-        if(e.isIntersecting){
-          e.target.classList.add('show');   // 1) 보이면 애니메이션
-          obs.unobserve(e.target);          // 2) 1회만 실행 → 부하 ZERO
-        }
-      });
-    },{threshold:0.25});
-    cards.forEach(c=>io.observe(c));
-  });
-  </script>
-  
+<script src="./js/footer.js" defer></script>
 </body>
 </html>
