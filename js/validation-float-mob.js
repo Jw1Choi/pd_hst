@@ -24,14 +24,14 @@ $(function () {
         
 
 
-         // Form field validation
-         if(!regex1.test(name) || name.length<0 ){
-            var error = true;
-            $('#mob_name').addClass("error_input");
-           alert("이름 입력을 확인하세요.");
-        }else{
-            $('#mob_name').removeClass("error_input");
-        }
+        //  // Form field validation
+        //  if(!regex1.test(name) || name.length<0 ){
+        //     var error = true;
+        //     $('#mob_name').addClass("error_input");
+        //    alert("이름 입력을 확인하세요.");
+        // }else{
+        //     $('#mob_name').removeClass("error_input");
+        // }
 
         if (agree == false){
             var error = true;

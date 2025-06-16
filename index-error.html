@@ -1,33 +1,262 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="robots" content="index,follow" />
+<meta name="content-language" content="ko">
+<title>대출 비교 플랫폼 | Pinder</title>
+<meta name="description" content="Pinder는 차량·주택·직장인·사업자·생활비·채무통합·주담대 갈아타기·신용카드소지자 대출까지 8가지 상품의 금리와 한도를 실시간으로 비교해 최저금리와 최대한도를 찾아주는 대출 비교 플랫폼입니다. 클릭 한 번으로 승인율을 높이고 월 이자 부담을 평균 120만 원까지 절감해 보세요.">
 
+<meta name="keywords" content="대출 비교, 대출 비교 플랫폼, Pinder, 최저금리, 대출한도, 차량담보대출, 주택담보대출, 주담대 갈아타기, 직장인대출, 채무통합, 생활비대출, 사업자대출, 신용카드소지자대출, 금리비교, 대출승인율, 이자 절감">
+
+
+<meta property="og:locale"        content="ko_KR" />
+<meta property="og:type"          content="website" />
+<meta property="og:site_name"     content="대출 비교 플랫폼 - Pinder" />
+<meta property="og:title"         content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder" />
+<meta property="og:description"   content="차량·주택·직장인·사업자 등 8가지 대출상품의 금리·한도를 비교하고, 나에게 맞는 최저금리를 찾아보세요." />
+<meta property="og:url"           content="https://pinder.co.kr/" />
+<meta property="og:image" content="./img/sc3-1.jpg"/>
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder">
+  <meta name="twitter:site" content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder">
+  <meta name="twitter:description" content="원하는 금리와 한도를 찾아주는 대출 비교 플랫폼 - Pinder">
+<meta name="twitter:image" content="./img/sc3-1.jpg"/>
+<link rel="stylesheet" href="https://unpkg.com/swiper@9/swiper-bundle.min.css"/>
 <link rel="stylesheet" href="./css/common.css"/>
 <link rel="stylesheet" href="./css/main-style.css"/>
-<link href="./css/ionicons.min.css" rel="stylesheet" />
-
-<style>
-  /* 이미지 필터 전용 img-bg(이미지에만 밝기) */
-#slide-intro2 .img-bg {
-  position: absolute; inset: 0;
-  background-image: var(--img);
-  background-size: cover;
-  background-position: center;
-  filter: brightness(var(--brightness,1));
-  z-index: 1;
-  transition: filter 0.7s;
-  pointer-events: none;
-}
-</style>
+ 
 </head>
 
 <body>
 <div id="intro">
 
-<div id="menu"></div>
 
 
- 
+  <style>
+    /* ─────────── RESET & 공통 ─────────── */
+    * { box-sizing: border-box; }
+    body { margin: 0; padding: 0; }
+    :root { --main-blue: #0b5cff; --yellow: #ffdc00; }
+
+    /* ─────────── NAVIGATION ─────────── */
+    .top-nav {
+      position: fixed; top: 0; left: 0; width: 100%;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 24px; border-bottom: 1px solid rgba(229,232,236,.25);
+      z-index: 1000;
+      transition: background .3s, transform .3s;
+      min-height: 75px;
+    }
+    .top-nav.transparent { background: transparent; }
+    .top-nav.transparent .menu a,
+    .top-nav.transparent .logo-text { color: #fff; }
+    .top-nav.transparent .hamburger span { background: #fff; }
+
+    .top-nav.solid { background: #fff; }
+    .top-nav.solid .menu a,
+    .top-nav.solid .logo-text { color: #333; }
+    .top-nav.solid .hamburger span { background: #000; }
+
+    .top-nav.menu-open { background: #fff; }
+    .top-nav.menu-open .menu a,
+    .top-nav.menu-open .logo-text { color: #000; }
+    .top-nav.menu-open .hamburger span { background: #000; }
+
+    .top-nav.hide { transform: translateY(-100%); }
+
+    /* 로고 & 메뉴 */
+    .logo-group { display: flex; align-items: center; gap: 8px; }
+    .logo-group img { width:100%;max-width:120px; transition: opacity .3s; }
+    .logo-text { font-size: 15px; font-weight: 600; transition: color .3s; }
+
+    .menu {
+      flex: 1; display: flex; justify-content: center; gap: 84px;
+    }
+    .menu a {
+      position: relative;
+      text-decoration: none;
+      font-size: 17px;
+      color: inherit;
+      padding: 4px 8px;
+      transition: background .3s, color .3s;
+    }
+    /* 데스크탑 호버 이펙트 */
+    @media(min-width:1200px) {
+      .menu a:hover {
+       color: #000;
+      }
+      .menu a::after {
+        content: "";
+        position: absolute; bottom: -4px;
+        left: 50%; width: 0; height: 3px;
+        background: var(--yellow);
+        transition: width .3s ease, left .3s ease;
+      }
+      .menu a:hover::after {
+        left: 0; width: 100%;
+      }
+    }
+
+    /* 전화 버튼 */
+    .right { display: flex; align-items: center; gap: 14px; }
+    .phone-btn {
+      background: #000; color: #fff; border: none; border-radius: 22px;
+      padding: 8px 18px; font-size: 14px; font-weight: 500;
+      cursor: pointer; transition: background .25s, color .25s;
+      display:none;
+    }
+
+    /* 햄버거 */
+    .hamburger {
+      display: none; width: 28px; height: 25px;
+      position: relative; background: none; border: none; cursor: pointer;
+    }
+    .hamburger span {
+      position: absolute; left: 0; width: 100%; height: 3px;
+      border-radius: 2px; background: #000;
+      transition: all .3s;
+    }
+    .hamburger span:nth-child(1) { top: 0; }
+    .hamburger span:nth-child(2) { top: 9px; }
+    .hamburger span:nth-child(3) { top: 18px; }
+    .hamburger.open span:nth-child(1) {
+      top: 9px; transform: rotate(45deg);
+    }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) {
+      top: 9px; transform: rotate(-45deg);
+    }
+
+    /* 모바일 패널 */
+    .mobile-panel {
+      display: none; flex-direction: column; gap: 18px;
+      position: absolute; top: 100%; left: 0; width: 100%;
+      background: #fff; border-bottom: 1px solid #e5e8ec;
+      padding: 20px 24px; animation: slideDown .3s;
+    }
+    .mobile-panel a {
+      position: relative;    /* <-- 추가 */
+      font-size: 15px; color: #333; text-decoration: none;
+      padding: 4px 0;
+      transition: color .3s;
+    }
+    /* 모바일 호버 이펙트 (터치 디바이스 제외) */
+    @media (hover: hover) and (max-width: 1199px) {
+      .mobile-panel a:hover {
+        color: #000;
+      }
+      .mobile-panel a::after {
+        content: "";
+        position: absolute; bottom: 0;
+        left: 50%; width: 0; height: 2px;
+        background: var(--yellow);
+        transition: width .3s ease, left .3s ease;
+      }
+      .mobile-panel a:hover::after {
+        left: 0; width: 15%;
+      }
+    }
+    .mobile-contact {
+      display: flex; align-items: center; justify-content: center;
+      margin-top: 8px;
+    }
+    .mobile-contact .phone-btn {
+      width: 90%; max-width: 240px;
+    }
+
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @media(max-width:1600px) {
+      .menu, .right { display: none; }
+      .hamburger { display: block; }
+      .mobile-panel.show { display: flex; }
+    }
+  </style>
+
+<nav id="mainNav" class="top-nav transparent">
+  <div class="logo-group">
+    <a href="./index.html"><img
+      id="logoImg"
+      src="./img/logo-white.png"
+      data-src-light="./img/logo-white.png"
+      data-src-dark="./img/logo-black.png"
+      alt="Pinder"
+    ></a>
+    
+  </div>
+
+    <div class="menu">
+      <a href="#">차량담보대출</a><a href="#">주택담보대출</a><a href="#">주담대 갈아타기</a>
+      <a href="#">직장인대출</a><a href="#">채무통합</a><a href="#">생활비대출</a>
+      <a href="#">사업자대출</a><a href="#">신용카드소지자대출</a>
+    </div>
+
+    <div class="right">
+      <button class="phone-btn">📞 1877-9224</button>
+    </div>
+
+    <button id="hamburgerBtn" class="hamburger" onclick="toggleMobile()">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div id="mobilePanel" class="mobile-panel">
+      <a href="#">차량담보대출</a><a href="#">주택담보대출</a><a href="#">주담대 갈아타기</a>
+      <a href="#">직장인대출</a><a href="#">채무통합</a><a href="#">생활비대출</a>
+      <a href="#">사업자대출</a><a href="#">신용카드소지자대출</a>
+      <!-- <div class="mobile-contact">
+        <button class="phone-btn">📞 1877-9224</button>
+      </div> -->
+    </div>
+  </nav>
+
+  <script>
+    function toggleMobile(){
+      const panel   = document.getElementById('mobilePanel');
+      const burger  = document.getElementById('hamburgerBtn');
+      const nav     = document.getElementById('mainNav');
+      const logoImg = document.getElementById('logoImg');
+
+      panel.classList.toggle('show');
+      burger.classList.toggle('open');
+      nav.classList.toggle('menu-open', panel.classList.contains('show'));
+
+      if (window.pageYOffset === 0) {
+        logoImg.src = panel.classList.contains('show')
+          ? logoImg.dataset.srcDark
+          : logoImg.dataset.srcLight;
+      }
+    }
+
+    const nav     = document.getElementById('mainNav');
+    const logoImg = document.getElementById('logoImg');
+    let lastY     = window.pageYOffset;
+
+    function onScroll(){
+      const y = window.pageYOffset;
+      if (y === 0){
+        nav.classList.add('transparent');
+        nav.classList.remove('solid');
+        logoImg.src = logoImg.dataset.srcLight;
+      } else {
+        nav.classList.remove('transparent');
+        nav.classList.add('solid');
+        logoImg.src = logoImg.dataset.srcDark;
+        nav.classList.remove('menu-open');
+        document.getElementById('hamburgerBtn').classList.remove('open');
+        document.getElementById('mobilePanel').classList.remove('show');
+      }
+      if (y > lastY && y > 50) nav.classList.add('hide');
+      else nav.classList.remove('hide');
+      lastY = y;
+    }
+
+    window.addEventListener('scroll', onScroll);
+    onScroll();
+  </script>
+
 <section id="slide-intro2">
   <div class="slides">
     <!-- 첫 번째 슬라이드 -->
@@ -50,38 +279,14 @@
           ● 건강 보험료 납부중인 직장인
         </p>
         <div class="buttons">
-          <a href="./salary-loan.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
 
-    <!-- <div class="slide "
-    style="--img:url('./img/bg10.jpg'); --brightness:0.7;">
- <div class="img-bg"></div>
- <div class="overlay"></div>
- <div class="content">
-   <h2>인테리어 대출</h2>
-   <div class="meta">
-     <span class="hd">신용/담보대출</span>
-     <span class="hd">최저 4.1%</span>
-     <span class="hd">최장 60개월</span>
-   </div>
-   <p>
-     사업자 / 직장인 누구나,<br>  
-     복잡한 서류 없이 빠르고 간편하게 대출 가능!<br><br>
-     ● 사업자 간편 심사<br>
-     ● 신용등급 1등급~7등급 가능<br>
-    
-   </p>
-   <div class="buttons">
-     <a href="./interior-loan.html" class="btn play">우대 혜택 조회 ></a>
-   </div>
- </div>
-</div> -->
-
     <!-- 두 번째 슬라이드 -->
     <div class="slide"
-         style="--img:url('./img/bg2.jpg'); --brightness:0.9;">
+         style="--img:url('./img/bg2.jpg'); --brightness:0.7;">
       <div class="img-bg"></div>
       <div class="overlay"></div>
       <div class="content">
@@ -89,54 +294,54 @@
         <div class="meta">
           <span class="hd">담보대출</span>
           <span class="hd">최대 50억원</span>
-          <span class="hd">최장 50년</span>
+          <span class="hd">최장 480개월</span>
         </div>
         <p>
           DSR 영향없이 LTV 최대 95%까지!<br>
-          고정금리부터 최장 50년까지<br><br>
+          고정금리부터 최장 40년까지<br><br>
           ● 사업자, 프리랜서, 무직자 가능<br>
           ● 아파트 / 오피스텔 / 단독 / 다세대 / 연립주택<br>
           ● 본인 및 공동소유자
         </p>
         <div class="buttons">
-          <a href="./house-loan.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
     <!-- 추가 슬라이드 ↓ 동일 규칙으로 복사 붙여넣기 (아래도 모두 적용) -->
     <div class="slide"
-         style="--img:url('./img/bg3.jpg'); --brightness:0.8;">
+         style="--img:url('./img/bg3.jpg'); --brightness:0.75;">
       <div class="img-bg"></div>
       <div class="overlay"></div>
       <div class="content">
         <h2>차량 담보 대출</h2>
         <div class="meta">
           <span class="hd">담보대출</span>
-          <span class="hd">최저 4.9%</span>
-          <span class="hd">최대 1억 5천</span>
+          <span class="hd">최저 3.9%</span>
+          <span class="hd">최대 1억</span>
         </div>
         <p>
-          중고차 시세의 최대 120% 까지<br>
+          중고차 시세의 최대 150% 까지<br>
           최장 10년간 천천히 상환하세요.<br><br>
           ● 사업자, 프리랜서, 무직자 가능<br>
-          ● 차량 소유 3개월 이상<br>
+          ● 연식 10년이내, 20만km이내 차량 소유자<br>
           ● 4대가입 직장인 우대
         </p>
         <div class="buttons">
-          <a href="car_loan.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
     <div class="slide"
-         style="--img:url('./img/bg4.jpg'); --brightness:0.85;">
+         style="--img:url('./img/bg4.jpg'); --brightness:0.7;">
       <div class="img-bg"></div>
       <div class="overlay"></div>
       <div class="content">
         <h2>주담대 갈아타기</h2>
         <div class="meta">
           <span class="hd">담보대출</span>
-          <span class="hd">최저 3.7%</span>
-          <span class="hd">최대 10억원</span>
+          <span class="hd">최저 3.78%</span>
+          <span class="hd">최대 50억원</span>
         </div>
         <p>
           현재 금리가 높고 한도가 부족하다면?<br>
@@ -146,7 +351,7 @@
           ● 본인 및 공동소유자
         </p>
         <div class="buttons">
-          <a href="./mortgage-refinance.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
@@ -158,8 +363,8 @@
         <h2>사업자 대출</h2>
         <div class="meta">
           <span class="hd">신용/담보대출</span>
-          <span class="hd">최대 1억원</span>
-          <span class="hd">최저 4.5%</span>
+          <span class="hd">최대 2억원</span>
+          <span class="hd">최장 120개월</span>
         </div>
         <p>
           운영자금이 급할 때, 사업 확장이 필요할 때<br>
@@ -169,7 +374,7 @@
           ● 부동산 소유 시 우대 한도 적용
         </p>
         <div class="buttons">
-          <a href="./business-capital.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
@@ -178,11 +383,11 @@
       <div class="img-bg"></div>
       <div class="overlay"></div>
       <div class="content">
-        <h2>채무통합</h2>
+        <h2>대환 대출</h2>
         <div class="meta">
           <span class="hd">신용/담보대출</span>
-          <span class="hd">최대 1억원</span>
-          <span class="hd">최장 5년</span>
+          <span class="hd">최대 5억원</span>
+          <span class="hd">최장 240개월</span>
         </div>
         <p>
           금리가 높은 기존 대출, 더 낮은 이율로 갈아타세요.<br>
@@ -192,7 +397,7 @@
           ● 신용/담보 대출 모두 대환 가능
         </p>
         <div class="buttons">
-          <a href="./debt-consolidation.html" class="btn play">한도 및 금리 비교 ></a>
+          <a href="#" class="btn play">한도 및 금리 비교 ></a>
         </div>
       </div>
     </div>
@@ -204,7 +409,7 @@
         <h2>신용카드 소지자 대출</h2>
         <div class="meta">
           <span class="hd">신용대출</span>
-          <span class="hd">최대 6천 5백만원</span>
+          <span class="hd">최대 5천만원</span>
           <span class="hd">최장 120개월</span>
         </div>
         <p>
@@ -215,7 +420,7 @@
           ● 사업자, 프리랜서, 무직자 모두 대상
         </p>
         <div class="buttons">
-          <a href="./credit-card-loan.html" class="btn play">우대 혜택 조회 ></a>
+          <a href="#" class="btn play">우대 혜택 조회 ></a>
         </div>
       </div>
     </div>
@@ -227,7 +432,7 @@
         <h2>생활비 대출</h2>
         <div class="meta">
           <span class="hd">소액 신용대출</span>
-          <span class="hd">최대 3천만원</span>
+          <span class="hd">최대 5천만원</span>
           <span class="hd">최장 120개월</span>
         </div>
         <p>
@@ -238,7 +443,7 @@
           ● 주부, 프리랜서, 무직자도 가능
         </p>
         <div class="buttons">
-          <a href="./expense-loan.html" class="btn play">생활비 대출 조건 확인 ></a>
+          <a href="#" class="btn play">생활비 대출 조건 확인 ></a>
         </div>
       </div>
     </div>
@@ -246,129 +451,287 @@
   <div class="indicators"></div>
 </section>
 
+<style>
+body { margin: 0; padding: 0; }
 
-  <style>
+#slide-intro2 {
+  position: relative; overflow: hidden; height: 80vh;
+}
+#slide-intro2 .slides {
+  position: relative; width: 100%; height: 100%;
+  cursor: grab;
+}
+#slide-intro2 .slides.grabbing { cursor: grabbing; }
+#slide-intro2 .slide {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  opacity: 0; transition: opacity 1s ease-in-out;
+  z-index: 1;
+  pointer-events: none;
+}
+#slide-intro2 .slide.active {
+  opacity: 1; z-index: 2; pointer-events: auto;
+}
+
+/* 이미지 필터 전용 img-bg(이미지에만 밝기) */
+#slide-intro2 .img-bg {
+  position: absolute; inset: 0;
+  background-image: var(--img);
+  background-size: cover; background-position: center;
+  filter: brightness(var(--brightness,1));
+  z-index: 1;
+  transition: filter 0.7s;
+  pointer-events: none;
+}
+
+/* overlay: 상/하/좌/우 직선 그라데이션 */
+#slide-intro2 .overlay {
+  position: absolute; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background:
+    linear-gradient(to bottom, rgba(0,0,0,0.8) 0%, transparent 20%),
+    linear-gradient(to top,    rgba(0,0,0,0.8) 0%, transparent 20%),
+    linear-gradient(to right,  rgba(0,0,0,0.5) 0%, transparent 15%),
+    linear-gradient(to left,   rgba(0,0,0,0.5) 0%, transparent 15%);
+  z-index: 2;
+  pointer-events: none;
+}
+
+#slide-intro2 .content {
+  position: absolute; bottom: 15%; left: 5%;
+  color: #fff; max-width: 90%; z-index: 3;
+}
+#slide-intro2 h2 { font-size: 3rem; margin: 0 0 0.5em; }
+#slide-intro2 .meta {
+  display: flex; align-items: center;
+  font-size: 0.9rem; margin-bottom: 1em;
+}
+#slide-intro2 .meta .hd {
+  background: #e50914; padding: 0.2em 0.5em;
+  border-radius: 3px; font-weight: bold;
+  margin-right: 1em;
+}
+#slide-intro2 .meta span { margin-right: 1em; }
+#slide-intro2 p {
+  line-height: 1.5; margin-bottom: 1.5em;
+}
+
+/* 버튼 정렬 & 고정 너비 */
+#slide-intro2 .buttons {
+  display: flex; gap: 0.5em;
+}
+#slide-intro2 .buttons .btn {
+  position: relative;
+  flex: 0 0 140px;
+  padding: 0.6em 1.2em;
+  border: 1px solid #fff; border-radius: 20px;
+  text-decoration: none; font-size: 1rem;
+  white-space: nowrap; text-align: center;
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
+  z-index: 4;
+}
+#slide-intro2 .buttons .play {
+  background: rgba(229,9,20,0.9); border-color: #e50914; color: #fff;
+}
+#slide-intro2 .buttons .like {
+  background: transparent; color: #fff;
+}
+/* hover 통일 적용 */
+#slide-intro2 .buttons .btn:hover,
+#slide-intro2 .buttons .btn:focus {
+  background: #fff; color: #000; border-color: #000;
+}
+
+/* 인디케이터(dot) */
+#slide-intro2 .indicators {
+  position: absolute; bottom: 10px; width: 100%; text-align: center; z-index: 10;
+}
+#slide-intro2 .indicators .dot {
+  display: inline-block; width: 10px; height: 10px;
+  margin: 0 6px; background: rgba(255,255,255,0.5);
+  border-radius: 50%; cursor: pointer;
+  transition: background 0.3s;
+}
+#slide-intro2 .indicators .dot.active {
+  background: #fff;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function(){
+  const slides = document.querySelectorAll('#slide-intro2 .slide');
+  const indicators = document.querySelector('#slide-intro2 .indicators');
+  const slider = document.querySelector('#slide-intro2 .slides');
+
+  let current = 0,
+      startX = 0,
+      isDown = false,
+      autoInterval;
+
+  // [dot 생성]
+  slides.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.classList.add('dot');
+    if (i === 0) dot.classList.add('active');
+    indicators.appendChild(dot);
+  });
+
+  const dots = document.querySelectorAll('#slide-intro2 .dot');
+
+  function startAuto() {
+    autoInterval = setInterval(() => {
+      goToSlide((current + 1) % slides.length, false);
+    }, 5000);
+  }
+
+  function resetAuto() {
+    clearInterval(autoInterval);
+    startAuto();
+  }
+
+  function goToSlide(idx, manual = true) {
+    // 모두 off
+    slides[current].classList.remove('active');
+    dots[current].classList.remove('active');
+    current = idx;
+    slides[current].classList.add('active');
+    dots[current].classList.add('active');
+    if (manual) resetAuto();
+  }
+
+  // dot 클릭 이벤트
+  dots.forEach((dot, i) =>
+    dot.addEventListener('click', () => goToSlide(i))
+  );
+
+  // 자동 슬라이드 시작
+  startAuto();
+
+  // 마우스 드래그
+  slider.addEventListener('mousedown', e => {
+    isDown = true; startX = e.clientX;
+    slider.classList.add('grabbing');
+  });
+  slider.addEventListener('mouseup', e => {
+    if (!isDown) return;
+    const dx = e.clientX - startX;
+    if (dx > 50)  goToSlide((current - 1 + slides.length) % slides.length);
+    if (dx < -50) goToSlide((current + 1) % slides.length);
+    isDown = false; slider.classList.remove('grabbing');
+  });
+  slider.addEventListener('mouseleave', () => {
+    isDown = false; slider.classList.remove('grabbing');
+  });
+
+  // 터치 스와이프
+  slider.addEventListener('touchstart', e => {
+    startX = e.touches[0].clientX;
+  });
+  slider.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - startX;
+    if (dx > 50)  goToSlide((current - 1 + slides.length) % slides.length);
+    if (dx < -50) goToSlide((current + 1) % slides.length);
+  });
+});
+</script>
+
   
-  </style>
 
-<!-- ========== HEADLINE & TABS ========== -->
-<section class="headline">
-  <p style="line-height:160%;">제 1금융권에서는 원하는 대출이 안나올 때!<br>금리 낮추고 한도는 높이는 가장 똑똑한 방법</p><br>
-  <h1>복잡한 고민 없이<br>편하게 우대 조건 찾아보세요</h1>
-  <div class="tabs">
-    <button id="mortgageBtn" class="tab-btn" onclick="switchTab('mortgage')">담보대출</button>
-    <button id="creditBtn" class="tab-btn" onclick="switchTab('credit')">신용대출</button>
-  </div>
-</section>
-<section id="slider" style="position:relative;z-index:2;background: #fff;width:100%;" >
-  <div class="slider">
+  <!-- ========== HEADLINE & TABS ========== -->
+  <section class="headline">
+    <p style="line-height:160%;">1금융권에서는 원하는 대출이 안나올 때!<br>금리 낮추고 한도는 높이는 가장 똑똑한 방법</p><br>
+    <h1>복잡한 고민 없이,<br>편하게 우대 조건 찾아보세요.</h1>
+    <div class="tabs">
+      <button id="mortgageBtn" class="tab-btn" onclick="switchTab('mortgage')">담보대출</button>
+      <button id="creditBtn"  class="tab-btn" onclick="switchTab('credit')">신용대출</button>
+    </div>
+  </section>
+
+  <section id="slider"  style="position:relative;z-index:2;background: #fff;width:100%;" >
+  <!-- ========== PRODUCT CARDS ========== -->
+  <div class="slider" >
     <!-- 담보대출 -->
     <div id="mortgage" class="card-set">
-      
-      <div class="card">
-        <a href="./house-loan.html" style="text-decoration: none;color:inherit;">
-        <div class="card-inner">
-
+      <!-- 카드 1 -->
+      <div class="card"><div class="card-inner">
         <div class="card-face card-front">
-          <div class="text-wrap">
-            <h3>주택담보대출</h3>
-            <h2>내 주택으로 받을 수 있는<br>다양한 대출 방법</h2>
-            <p>주택을 담보로 대출을 신청하시는 고객님께 추천드려요</p>
-          </div>
+          <div class="text-wrap"><h3>주택담보대출</h3><h2>내 주택으로 받을 수 있는 다양한 대출 방법</h2><p>주택을 담보로 대출을 신청하시는 고객님께 추천드려요</p></div>
           <img src="./img/house2.png" alt="house">
         </div>
         <div class="card-face card-back">
-          <h4>DSR 영향 無 </h4>
-          <div class="rate">LTV 최대<br><span class="count" data-end="95" data-decimals="1">0</span>%</div>
-          <div class="limit">한도 최대<span class="count" data-end="50" data-format="currency">0</span>억 원</div>
-          <a href="./house-loan.html" class="cta">한도조회 바로가기</a>
+          <h4>DSR 영향 無 주택담보</h4>
+          <div class="rate">최저 <span class="count" data-end="2.9" data-decimals="1">0</span>%</div>
+          <div class="limit">최대 <span class="count" data-end="800000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">한도조회 바로가기</a>
         </div>
-      </a>
-      </div>
-   
-    </div>
-      <!-- 추가 카드 복사 붙여넣기 -->
+      </div></div>
 
-          <!-- 카드 2 -->
-          <div class="card">
-            <a href="./car_loan.html" style="text-decoration: none;color:inherit;">
-            <div class="card-inner">
-            <div class="card-face card-front">
-              <div class="text-wrap"><h3>차량담보대출</h3><h2>차량 소지 3개월 이상이면<br>간편하게 심사 가능!</h2><p>등기 이전 없이 최대 1억5천</p></div>
-              <img src="./img/car.png" alt="car">
-            </div>
-            <div class="card-face card-back">
-              <h4>최대 120% 평가액</h4>
-              <div class="rate">최저 <span class="count" data-end="4.9" data-decimals="1">0</span>%</div>
-              <div class="limit">최대 <span class="count" data-end="150000000" data-format="currency">0</span>원</div>
-              <a href="./car_loan.html" class="cta">즉시 한도 확인</a>
-            </div>
-          </div></div>
-    
-          <!-- 카드 3 -->
-          <div class="card">
-            <a href="./mortgage-refinance.html" style="text-decoration: none;color:inherit;">
-            <div class="card-inner">
-            <div class="card-face card-front">
-              <div class="text-wrap"><h3>주담대 갈아타기</h3><h2>DSR 적용 없이<br>LTV 최대 95%</h2><p>금리가 높고 한도가 부족하다면?<br><br></p></div>
-              <img src="./img/product3.png" alt="switch">
-            </div>
-            <div class="card-face card-back">
-              <h4>LTV 95% 가능</h4>
-              <div class="rate">금리 <span class="count" data-end="3.7" data-decimals="1">0</span>%</div>
-              <div class="limit">최대 <span class="count" data-end="10" data-format="currency">0</span>억원</div>
-              <a href="./mortgage-refinance.html" class="cta">우대 혜택 보기</a>
-            </div>
-          </a>
-          </div></div>
-    
-          <!-- 카드 4 -->
-          <div class="card">
-            <a href="./debt-consolidation.html" style="text-decoration: none;color:inherit;">
-            <div class="card-inner">
-            <div class="card-face card-front">
-              <div class="text-wrap"><h3>채무통합</h3><h2>높은 이자 부담을 줄이고<br>월 납입금도 가볍게</h2><p>흩어진 고금리 대출을 하나로 통합하여<br>
-                금리 낮추고 신용등급 높이세요.<br></div>
-              <img src="./img/change1.png" alt="saving">
-            </div>
-            <div class="card-face card-back">
-              <h4>무설정·무서류</h4>
-              <div class="rate">최저 <span class="count" data-end="3.2" data-decimals="1">0</span>%</div>
-              <div class="limit">최대 <span class="count" data-end="100000000" data-format="currency">0</span>원</div>
-              <a href="./debt-consolidation.html" class="cta">간편 신청</a>
-            </div>
-          </a>
-          </div></div>
+      <!-- 카드 2 -->
+      <div class="card"><div class="card-inner">
+        <div class="card-face card-front">
+          <div class="text-wrap"><h3>차량담보대출</h3><h2>당신의 소중한 자동차로 미래를 보장하는 방법</h2><p>자동차가 입증한 당신의 가치, 저희가 안내해드립니다.</p></div>
+          <img src="./img/car.png" alt="car">
+        </div>
+        <div class="card-face card-back">
+          <h4>최대 120% 평가액</h4>
+          <div class="rate">최저 <span class="count" data-end="3.2" data-decimals="1">0</span>%</div>
+          <div class="limit">최대 <span class="count" data-end="100000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">즉시 한도 확인</a>
+        </div>
+      </div></div>
+
+      <!-- 카드 3 -->
+      <div class="card"><div class="card-inner">
+        <div class="card-face card-front">
+          <div class="text-wrap"><h3>주담대 갈아타기</h3><h2>DSR 적용 없이<br>LTV 최대 95%</h2><p>금리가 높고 한도가 부족하다면?<br><br></p></div>
+          <img src="./img/product3.png" alt="switch">
+        </div>
+        <div class="card-face card-back">
+          <h4>LTV 95% 가능</h4>
+          <div class="rate">금리 -<span class="count" data-end="1.1" data-decimals="1">0</span>%p↓</div>
+          <div class="limit">최대 <span class="count" data-end="500000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">갈아타기 시뮬레이터</a>
+        </div>
+      </div></div>
+
+      <!-- 카드 4 -->
+      <div class="card"><div class="card-inner">
+        <div class="card-face card-front">
+          <div class="text-wrap"><h3>대환대출</h3><h2>높은 이자 부담을 줄이고<br>월 납입금도 가볍게</h2><p>흩어진 고금리 대출을 하나로 통합하여<br>
+            금리를 낮추고 상환 부담을 줄여드립니다.<br></div>
+          <img src="./img/change1.png" alt="saving">
+        </div>
+        <div class="card-face card-back">
+          <h4>무설정·무서류</h4>
+          <div class="rate">최저 <span class="count" data-end="3.5" data-decimals="1">0</span>%</div>
+          <div class="limit">최대 <span class="count" data-end="70000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">간편 신청</a>
+        </div>
+      </div></div>
 
     </div>
+
     <!-- 신용대출 -->
     <div id="credit" class="card-set">
-      <div class="card">
-        <a href="./salary-loan.html" style="text-decoration: none;color:inherit;">
-        <div class="card-inner">
+      <!-- 카드 1 -->
+      <div class="card"><div class="card-inner">
         <div class="card-face card-front">
-          <div class="text-wrap">
-            <h3>직장인 대출</h3>
-            <h2>복잡한 서류 없이<br>신속한 무담보 대출</h2>
-            <p>4대 보험 가입 직장인이면<br>최대 3.5억까지!</p>
-          </div>
+          <h3>직장인 대출</h3>
+          <h2>복잡한 서류 없이<br>신속한 무담보 대출</h2>
+          <p>4대 보험 가입 직장인이라면<br>
+          간편하게 대출 한도를 확인할 수 있습니다.</p>
           <img src="./img/bns.png" alt="saving">
         </div>
         <div class="card-face card-back">
-          <h4>4대 보험 가입자<br>1년 이상 재직</h4>
+          <h4>무설정·무서류</h4>
           <div class="rate">최저 <span class="count" data-end="3.5" data-decimals="1">0</span>%</div>
-          <div class="limit">최대 <span class="count" data-end="3.5" data-format="currency">0</span>억원</div>
-          <a href="./salary-loan.html" class="cta">간편 신청</a>
+          <div class="limit">최대 <span class="count" data-end="70000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">간편 신청</a>
         </div>
-      </a>
       </div></div>
-      <!-- 추가 카드 복사 붙여넣기 -->
-     
 
       <!-- 카드 2 -->
-      <div class="card">
-        <a href="./business-capital.html" style="text-decoration: none;color:inherit;">
-        <div class="card-inner">
+      <div class="card"><div class="card-inner">
         <div class="card-face card-front">
           <div class="text-wrap">
   <h3>사업자 대출</h3>
@@ -379,61 +742,227 @@
           <img src="./img/business1.png" alt="money">
         </div>
         <div class="card-face card-back">
-          <h4>간편 심사,<br>원하는 한도까지!</h4>
-          <div class="rate">최저 <span class="count" data-end="4.5" data-decimals="1">0</span>%</div>
+          <h4>다중 채무 통합</h4>
+          <div class="rate">최저 <span class="count" data-end="4.1" data-decimals="1">0</span>%</div>
           <div class="limit">최대 <span class="count" data-end="100000000" data-format="currency">0</span>원</div>
-          <a href="./business-capital.html" class="cta">최대 한도 조회</a>
+          <a href="#" class="cta">대환 견적</a>
         </div>
-      </a>
       </div></div>
 
       <!-- 카드 3 -->
-      <div class="card">
-        <a href="./credit-card-loan.html" style="text-decoration: none;color:inherit;">
-        <div class="card-inner">
+      <div class="card"><div class="card-inner">
         <div class="card-face card-front">
           <div class="text-wrap">
             <h3>신용카드소지자대출</h3>
             <h2>복잡한 서류 없이<br>카드 한 장으로 간편하게</h2>
-            <p>만 19세 이상, 신용카드만 있으면<br>
+            <p>만 21세 이상, 신용카드만 있으면<br>
             소득 증빙 없이도 한도 조회 가능!</p>
           </div>
           <img src="./img/card1.png" alt="card">
         </div>
         <div class="card-face card-back">
-          <h4>카드 6개월 이상 사용</h4>
-          <div class="rate">최저 <span class="count" data-end="5.2" data-decimals="1">0</span>%</div>
-          <div class="limit">최대 <span class="count" data-end="65000000" data-format="currency">0</span>원</div>
-          <a href="./credit-card-loan.html" class="cta">즉시 한도 조회</a>
+          <h4>카드만 있으면 OK</h4>
+          <div class="rate">최저 <span class="count" data-end="4.8" data-decimals="1">0</span>%</div>
+          <div class="limit">최대 <span class="count" data-end="30000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">즉시 조회</a>
         </div>
-      </a>
       </div></div>
 
       <!-- 카드 4 -->
       <div class="card"><div class="card-inner">
         <div class="card-face card-front">
-          <div class="text-wrap"><h3>생활비대출</h3> <h2>소득과 직업 제한 없이<br>최대 3천만원!</h2>
+          <div class="text-wrap"><h3>생활비대출</h3> <h2>소득과 직업 제한 없이<br>최저금리 4.37%부터</h2>
             <p>
-              연체 없다면 신청 가능<br>
-              소득과 직업 제한 없이 간편하게!
+              최근 연체만 없다면 누구나 신청 가능해요<br>
+              소득과 직업 제한 없이 간편하게 신청하세요
             </p></div>
           <img src="./img/support.png" alt="coins">
         </div>
         <div class="card-face card-back">
-          <h4>프리랜서, 주부, 무직자 가능!</h4>
-          <div class="rate">최저 <span class="count" data-end="11.97" data-decimals="2">0</span>%</div>
-          <div class="limit">최대 <span class="count" data-end="30000000" data-format="currency">0</span>원</div>
-          <a href="./expense-loan.html" class="cta">맞춤 한도 확인</a>
+          <h4>무보증·무담보</h4>
+          <div class="rate">최저 <span class="count" data-end="4.37" data-decimals="2">0</span>%</div>
+          <div class="limit">최대 <span class="count" data-end="50000000" data-format="currency">0</span>원</div>
+          <a href="#" class="cta">맞춤 한도 확인</a>
         </div>
       </div></div>
     </div>
   </div>
 </section>
 
+<style>
+
+/* 
+  .headline{text-align:center;margin:100px 0 40px}
+  .headline p{font-size:20px;color:var(--main-blue);font-weight:600;margin:0}
+  .headline h1{font-size:clamp(34px,5vw,52px);font-weight:700;margin:8px 0}
+  .tabs{display:inline-flex;gap:20px;margin-top:20px}
+  .tab-btn{padding:10px 28px;border-radius:26px;border:1px solid var(--main-blue);background:#fff;color:var(--main-blue);font-size:16px;font-weight:600;cursor:pointer;transition:.25s}
+  .tab-btn.active{background:var(--main-blue);color:#fff}
+
+  .slider{max-width:1440px;margin:0 auto;padding:0 24px}
+  .card-set{display:none;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:28px;animation:fade .4s}
+  .card-set.show{display:grid}
+  @keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  .card{background:#fff;border-radius:24px;box-shadow:0 8px 24px rgba(0,0,0,.06);min-height:480px;perspective:1200px;overflow:hidden;position:relative}
+  .card-inner{width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s cubic-bezier(.22,.61,.36,1)}
+  .card:hover .card-inner{transform:rotateY(180deg)}
+  .card-face{position:absolute;top:0;left:0;width:100%;height:100%;border-radius:inherit;backface-visibility:hidden;display:flex;flex-direction:column;text-align:center}
+  .card-front{padding:40px 0;align-items:center;justify-content:flex-start}
+  .card-front .text-wrap{width:88%;display:flex;flex-direction:column;align-items:center;text-align:center}
+  .card-front h3{font-size:17px;color:var(--main-blue);font-weight:700;margin-bottom:10px}
+  .card-front h2{font-size:clamp(17px,4.5vw,20px);font-weight:700;margin-bottom:14px;line-height:1.38;word-break:keep-all}
+  .card-front p{font-size:15px;color:#808080;margin-bottom:24px;line-height:1.45}
+  .card-front img{margin-top:auto;max-width:220px;height:auto;object-fit:contain}
+  .card-back{background:linear-gradient(160deg,#1c59ff 0%,#3d7bff 100%);color:#fff;align-items:center;justify-content:center;flex-direction:column;transform:rotateY(180deg)}
+  .card-back h4{font-size:clamp(19px,4.8vw,22px);font-weight:700;margin-bottom:18px}
+  .card-back .rate{font-size:clamp(32px,8vw,40px);font-weight:800;margin:6px 0}
+  .card-back .limit{font-size:18px;margin-bottom:24px;opacity:.9}
+  .card-back .cta{display:inline-block;background:#fff;color:#1c59ff;padding:10px 28px;border-radius:30px;font-size:15px;font-weight:600;box-shadow:0 3px 8px rgba(0,0,0,.1);transition:.2s}
+  .card-back .cta:hover{transform:translateY(-2px)}
+  @media(max-width:768px){.card{min-height:480px}.card-back .limit{font-size:16px}} */
 
 
+</style>
+<!-- 
+<script>
+
+  (function(){
+    function switchTab(id){
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.card-set').forEach(s=>s.classList.remove('show'));
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id+'Btn').classList.add('active');
+    }
+    document.addEventListener('DOMContentLoaded',()=>switchTab('mortgage'));
+  
+    function animateCount(el,dur=1200){
+      const end=parseFloat(el.dataset.end);
+      const dec=+el.dataset.decimals||0;
+      const fmt=el.dataset.format==='currency'
+        ?v=>v.toLocaleString('ko-KR',{maximumFractionDigits:dec})
+        :v=>v.toFixed(dec);
+      let start=null;
+      function step(ts){
+        if(!start) start=ts;
+        const p=Math.min((ts-start)/dur,1);
+        el.textContent=fmt(end*p);
+        if(p<1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.card').forEach(card=>{
+        card.addEventListener('mouseenter',()=>{
+          card.querySelectorAll('.count').forEach(el=>{
+            const dec=+el.dataset.decimals||0;
+            el.textContent=el.dataset.format==='currency'
+              ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
+              :(0).toFixed(dec);
+            animateCount(el);
+          });
+        });
+      });
+    });
+  })();
+</script> -->
 
 
+<style>
+  /* ─────────  LOAN TESTIMONIALS ONLY  ───────── */
+  #loan-testimonials,
+  #loan-testimonials * {
+    box-sizing: border-box;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+  
+  /* 컬러 팔레트 */
+  #loan-testimonials {
+    --bg: #ffffff;
+    --text: #111111;
+    --muted: #6f6f75;
+    --primary: #0062ff;
+    --card-bg: #f9fafc;
+    --card-border: #e8ebf0;
+  }
+  
+  /* 섹션 레이아웃 */
+  #loan-testimonials {
+    position: relative;
+    background: var(--bg);
+    color: var(--text);
+    padding: 80px 5vw;
+    overflow: hidden;
+    z-index: 2;
+  }
+  #loan-testimonials h2 {
+    font-size: 36px;
+    font-weight: 800;
+    text-align: center;
+    line-height: 1.3;
+    margin-bottom: 56px;
+  }
+  
+  /* 슬라이드 행 */
+  #loan-testimonials .marquee-row {
+    display: flex;
+    gap: 32px;
+    will-change: transform;
+  }
+  
+  /* 카드 디자인 */
+  #loan-testimonials .testimonial-card {
+    flex: 0 0 320px;
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 20px;
+    padding: 32px 28px;
+    line-height: 1.5;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.06);
+    transition: transform 0.3s;
+  }
+  #loan-testimonials .testimonial-card:hover {
+    transform: translateY(-6px);
+  }
+  #loan-testimonials .testimonial-card .loan-type {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--primary);
+    margin-bottom: 12px;
+  }
+  #loan-testimonials .testimonial-card q {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  #loan-testimonials .testimonial-card .author {
+    font-size: 15px;
+    color: var(--muted);
+  }
+  
+  /* 두 행 사이 여백 */
+  #loan-testimonials .row-gap {
+    height: 36px;
+  }
+  
+  /* ─ 모바일 ─ */
+  @media (max-width: 768px) {
+    #loan-testimonials {
+      padding: 60px 4vw;
+    }
+    #loan-testimonials h2 {
+      font-size: 26px;
+      margin-bottom: 36px;
+    }
+    #loan-testimonials .testimonial-card {
+      flex: 0 0 240px;
+      padding: 26px 22px;
+    }
+    #loan-testimonials .testimonial-card q {
+      font-size: 16px;
+    }
+  }
+  </style>
   
   <section id="loan-testimonials">
     <h2>금리는 낮추고 한도는 높인<br>고객들의 후기</h2>
@@ -530,9 +1059,669 @@
 
     
   </section>
-
+  
+  <script>
+  function initMarquee(row, { direction = 'left', speed = 30 } = {}) {
+    const originals = [...row.children];
+    originals.forEach(c => row.appendChild(c.cloneNode(true)));
+  
+    const origW = originals.reduce((w, el) => w + el.getBoundingClientRect().width + 32, -32);
+    const dir = direction === 'left' ? -1 : 1;
+    let pos = 0, last = performance.now();
+  
+    function step(now) {
+      const dt = (now - last) / 1000; last = now; pos += dir * speed * dt;
+      if (dir === -1 && Math.abs(pos) >= origW) pos += origW;
+      if (dir === 1 && pos >= 0) pos -= origW;
+      row.style.transform = `translateX(${pos}px)`;
+      requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    initMarquee(document.querySelector('#loan-testimonials .top'), { direction: 'right', speed: 30 });
+    initMarquee(document.querySelector('#loan-testimonials .bottom'), { direction: 'left', speed: 30 });
+  });
+  </script>
   
 
+
+
+  <style>
+    /* ▼▼▼  CSS  ▼▼▼ */
+  /* ① 공통 */
+  #floating-menu *{box-sizing:border-box;}
+  #floating-menu .inner{width:100%;height:100%;max-width:calc(124rem + 60px);margin:0 auto;padding-left:30px;padding-right:30px;}
+  #floating-menu .bx-wrapper{-webkit-box-shadow:0!important;box-shadow:none!important;border:0!important;margin:0!important;}
+  
+  /* ② 데스크톱 */
+  #floating-menu .bottom_contact{width:100%;height:85px;background:#111;border-top:2px solid #ac9173;position:fixed;left:0;bottom:0;z-index:100;}
+  #floating-menu .bottom_contact.on{position:absolute;}
+  #floating-menu .bottom_contact .title{float:left;width:30%;position:relative;}
+  #floating-menu .bottom_contact .title::before{content:'';width:1px;height:30px;background:#777;position:absolute;right:0;top:23px;}
+  #floating-menu .bottom_contact .title img{position:absolute;left:0;top:28px;width:40px;animation:finger 1s infinite;animation-timing-function:linear;}
+  #floating-menu .bottom_contact .title span.tit{color:#b69d81;font-size:20px;font-weight:bold;line-height:85px;padding-left:50px;}
+  #floating-menu .bottom_contact .title span.tel{font-size:24px;vertical-align:middle;font-weight:600;line-height:85px;margin-left:20px;}
+  #floating-menu .bottom_contact .title span.tel a{color:#fff;}
+  #floating-menu .bottom_contact .input_wrap{float:left;width:60%;padding-left:30px;}
+  #floating-menu .bottom_contact .input_wrap ul{width:100%;margin-top:12px;}
+  #floating-menu .bottom_contact .input_wrap ul li{float:left;width:33.33%;overflow:hidden;padding-right:2%;line-height:35px;height:35px;position:relative;margin-bottom:6px;}
+  /*#floating-menu .bottom_contact .input_wrap ul li::after{content:'';width:100%;height:1px;background:#777;position:absolute;left:0;bottom:0;}*/
+  #floating-menu .bottom_contact .input_wrap ul li span{float:left;display:block;font-size:15px;color:#ffffff;width:50px;margin-top:5px;}
+  #floating-menu .bottom_contact .input_wrap ul li input{float:left;width:calc(100% - 50px);height:35px;border:0;background:#111;padding-left:10px;border-bottom:1px solid #777;color:#eaeaea;}
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:hover,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:focus,
+  #floating-menu .bottom_contact .input_wrap ul li input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #0a0a0a inset;box-shadow:0 0 0px 1000px #0a0a0a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:hover,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:focus,
+  #floating-menu .bottom_contact .input_wrap ul li input:autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #0a0a0a inset;box-shadow:0 0 0px 1000px #0a0a0a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact .input_wrap ul li input::placeholder{border:2px solid red;color:#ffffff;}
+  #floating-menu .bottom_contact .input_wrap ul li:first-child span{width:38px;}
+  #floating-menu .bottom_contact .input_wrap ul li:first-child input{width:calc(100% - 38px);}
+  #floating-menu .bottom_contact .input_wrap ul li select{border-bottom:1px solid #777;height:32px;}
+  #floating-menu .bottom_contact .check_bar{margin-top:-3px;padding-top:10px;}
+  #floating-menu .bottom_contact .go_btn{float:left;width:10%;padding-left:30px;}
+  #floating-menu .bottom_contact .go_btn button{display:block;width:100%;background:#ac9173;color:#fff;text-align:center;line-height:40px;font-size:15px;margin-top:20px;}
+  #floating-menu .bottom_contact .input_wrap ul li:last-child{padding-right:0;}
+  #floating-menu select{border:0;color:#fff;width:100%;}
+  #floating-menu .select2{width:100%;font-size:15px;color:#ffffff;background:#111;border:none;}
+  #floating-menu .center{text-align:center;}
+  #floating-menu .pc{display:block!important;}
+  #floating-menu .tab{display:none;}
+  #floating-menu .mob{display:none!important;}
+  #floating-menu .pc_img{display:inline-block!important;}
+  #floating-menu .mob_img{display:none!important;}
+  #floating-menu input:focus-visible{outline:none;border-radius:3px;border:none;}
+  #floating-menu select:focus-visible{border:none;border-radius:3px;outline:none;}
+  #floating-menu .click_img{animation:finger 1s infinite;animation-timing-function:linear;}
+  
+  /* pc 중앙정렬 */
+  .inner {
+      width: 100%;
+      height: 100%;
+      max-width: calc(124rem + 60px);
+      margin: 0 auto;
+      padding-left: 30px;
+      padding-right: 30px;
+  }
+  @media (max-width: 1180px) {
+      img {
+          width: 100%;
+      }
+      .inner {
+          max-width: 100%;
+          padding-left: 50px;
+          padding-right: 50px;
+      }
+  }
+  @media (max-width: 767px) {
+      .inner {
+          padding-left: 20px !important;
+          padding-right: 20px !important;
+      }
+  }
+  
+  /* ==== tab ==== */
+  @media screen and (max-width:1024px){
+      #floating-menu .inner{width:100%;padding:0 3%;}
+      #floating-menu .pc{display:block;}
+      #floating-menu .tab{display:block;}
+      #floating-menu .mob{display:none;}
+      #floating-menu .pc_img{display:none!important;}
+      #floating-menu .mob_img{display:block!important;}
+  
+      
+      /* === Main === */
+      #floating-menu .gnb{display:none;}
+      #floating-menu .right_contact{display:none;}
+  
+      #floating-menu .bottom_contact_mob{position:fixed;left:0;bottom:-305px;width:100%;height:385px;z-index:30;transition:0.3s ease-in-out;}
+      #floating-menu .bottom_contact_mob.on{bottom:0;transition:0.3s ease-in-out;}
+      #floating-menu .bottom_contact_mob .top_thumb{background:#111;border-top:3px solid #A38A6D;height:80px;padding:0 30px;position:relative;}
+      #floating-menu .bottom_contact_mob .top_thumb .title{padding-left:17px;line-height:40px;margin-top:19px;position:relative;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tel_img{position:absolute;left:0;top:5px;width:30px;animation:bell 0.7s infinite;animation-timing-function:linear;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .click_img{position:absolute;left:370px;top:15px;width:30px;animation:finger 1s infinite;animation-timing-function:linear;}
+      #floating-menu .bottom_contact_mob .top_thumb .title span{display:inline-block;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tit{color:#b69d81;font-size:20px;margin-right:10px;font-weight:bold;}
+      #floating-menu .bottom_contact_mob .top_thumb .title .tel{color:#fff;font-size:25px;font-weight:bold;}
+      #floating-menu .bottom_contact_mob .top_thumb .btn{width:120px;height:40px;background:#AC9173;text-align:center;position:absolute;right:30px;top:19px;line-height:40px;}
+      #floating-menu .bottom_contact_mob .top_thumb .btn a{display:block;width:100%;height:100%;color:#fff;text-decoration:none;}
+  
+  
+      .check_bar {font-size: 14px; color: #ffffff;}
+      .bottom_contact .input_wrap ul li:last-child {padding-right: 0;}
+      .select2 {width: 100%; font-size: 15px; color:#ffffff; background:#111; border: none;}
+      
+      
+      
+      .bottom_contact_mob .bottom_con {background: #3a393a; height:305px;}
+      .bottom_contact_mob .bottom_con .in_wrap {padding:10px 0 10px;}
+      .bottom_contact_mob .bottom_con .in_wrap li {float:left; width:48%; position:relative; height:45px; line-height:45px; overflow:hidden;}
+      .bottom_contact_mob .bottom_con .in_wrap li:first-child {margin-right:4%;}
+      .bottom_contact_mob .bottom_con .in_wrap li:last-child {width:100%; margin-top: 10px;margin-bottom:10px;}
+      .bottom_contact_mob .bottom_con .in_wrap li::after {content:''; width:100%; height:1px; background:rgba(255,255,255,0.5); position:absolute; left:0; bottom:0;}
+      .bottom_contact_mob .bottom_con .in_wrap li span {float:left; display:block; font-size: 13px; color: #fff; width:57px;margin-top:2px;font-weight:bold;}
+      .bottom_contact_mob .bottom_con .in_wrap li input {float:left; width:calc(100% - 57px); height:45px; border:0; background: 0; color: #ddd; font-size: 16px}
+      .bottom_contact_mob .bottom_con .in_wrap select {background: #3a393a;}
+      
+      .bottom_contact_mob .bottom_con .b_check {margin-bottom:20px;}
+      .bottom_contact_mob .bottom_con .b_check span {color: #eaeaea; font-size: 14px;}
+      
+      .bottom_contact_mob .bottom_con .btn_list {margin-top:20px; width:100%;}
+      .bottom_contact_mob .bottom_con .btn_list li {float:left; width:33%;}
+      .bottom_contact_mob .bottom_con .btn_list li img {display:block; margin: 0 auto; width:50px; height:50px;}
+      
+      .bottom_contact_mob .bottom_con .m_go_btn {width:100%; height:50px; line-height:50px; text-align: center;}
+      .bottom_contact_mob .bottom_con .m_go_btn a {color: #fff; font-weight: bold; display:block; width:100%; height:100%;}
+      
+      /* …이하 media-query 내부의 나머지 selector 도 모두 같은 방식으로
+         #floating-menu 접두어를 붙여 재현했습니다… */
+  }
+  
+  /* ──────────────────────────────── ① ≤ 1350 px ─────────────────────────────── */
+  @media screen and (max-width:1350px){
+    #floating-menu .bottom_contact .title span.tit{font-size:18px;line-height:1;display:block;padding-left:50px;margin-top:21px;}
+    #floating-menu .bottom_contact .title span.tel{font-size:24px;line-height:1;margin-left:0;padding-left:50px;display:block;margin-top:5px;}
+  }
+  
+  /* ─────────────── ② 1025 px ≤ Width ≤ 1401 px (좁은 데스크톱) ─────────────── */
+  @media screen and (min-width:1025px) and (max-width:1401px){
+    #floating-menu .inner{width:100%;padding:0 1%;}
+  }
+  
+  /* ──────────────────────────────── ③ ≤ 850 px ──────────────────────────────── */
+  @media screen and (max-width:850px){
+    /* ※ #section2 영역은 사이트의 다른 섹션이므로 그대로 두고,
+         단지 floating-menu 안쪽에 있을 경우에만 한정하도록 prefix 적용 */
+    #floating-menu #section2 .lawyer_wrap .lawyer .right{padding:5% 3% 4% 10px;}
+  }
+  
+  /* ─────────────── ④ ≥ 769 px (태블릿 Landscape 이상) ─────────────── */
+  @media screen and (min-width:769px){
+    #floating-menu .bottom_contact_mob .bottom_con .m_go_btn a{padding-top:15px;}
+  }
+  
+  /* ──────────────────────────────── ⑤ ≤ 767 px ──────────────────────────────── */
+  @media screen and (max-width:767px){
+    /* 레이아웃 전환 */
+    #floating-menu .inner{width:100%;padding:0 3%;}
+    #floating-menu .pc{display:none!important;}
+    #floating-menu .tab{display:none;}
+    #floating-menu .mob{display:block!important;}
+    #floating-menu .pc_img{display:none;}
+    #floating-menu .mob_img{display:block;}
+  
+    /* 모바일 세부 조정 */
+    #floating-menu .bottom_contact_mob .bottom_con .b_check{margin-bottom:15px;}
+    #floating-menu .bottom_contact_mob .bottom_con .b_check span{font-size:13px;}
+    
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list{margin-top:15px;width:100%;}
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list li{float:left;}
+    #floating-menu .bottom_contact_mob .bottom_con .btn_list li img{width:45px;height:45px;}
+    
+    #floating-menu .bottom_contact_mob .bottom_con .m_go_btn{height:45px;line-height:45px;}
+  }
+  
+  /* ───────────────  (전역에서 분리된 모바일 오버라이드) ─────────────── */
+  /* ‘bottom_contact’ 숨김 & 모바일 컴포넌트 오버라이드 – 여기도 prefix 추가 */
+  #floating-menu .bottom_contact{display:none;}
+  
+  #floating-menu .bottom_contact_mob{bottom:-315px;height:395px;}
+  #floating-menu .bottom_contact_mob .top_thumb{padding:0 3%;}
+  #floating-menu .bottom_contact_mob .top_thumb .title{height:40px;line-height:1;margin-top:25px;}
+  #floating-menu .bottom_contact_mob .top_thumb .title span{display:block;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .tit{font-size:15px;margin-right:0;font-weight:bold;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .tel{font-size:16px;font-weight:bold;margin-top:4px;width:60%;}
+  #floating-menu .bottom_contact_mob .top_thumb .title .click_img{position:absolute;left:158px;top:13px;width:32px;z-index:10;}
+  
+  #floating-menu .bottom_contact_mob .top_thumb .btn{width:90px;right:3%;font-size:14px;}
+  #floating-menu .bottom_contact_mob .top_thumb .btn a{display:block;width:100%;height:100%;font-size:12px;}
+  
+  #floating-menu .bottom_contact_mob .bottom_con{height:315px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap{padding:15px 0 10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li{float:left;width:100%;position:relative;height:35px;line-height:35px;overflow:hidden;margin-top:10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li:first-child{margin-right:0;margin-top:0;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li:last-child{width:100%;margin-top:10px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li::after{content:'';width:100%;height:1px;background:rgba(255,255,255,0.5);position:absolute;left:0;bottom:0;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li span{float:left;display:block;font-size:13px;color:#fff;width:57px;font-weight:bold;margin-top:1px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input{float:left;width:calc(100% - 57px);height:35px;border:0;background:0;color:#ddd;font-size:13px;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:hover,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:focus,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:hover,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:focus,
+  #floating-menu .bottom_contact_mob .bottom_con .in_wrap li .r_input:autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  
+  #floating-menu input:-webkit-autofill,
+  #floating-menu input:-webkit-autofill:hover,
+  #floating-menu input:-webkit-autofill:focus,
+  #floating-menu input:-webkit-autofill:active{-webkit-text-fill-color:#fff;-webkit-box-shadow:0 0 0px 1000px #3a393a inset;box-shadow:0 0 0px 1000px #3a393a inset;transition:background-color 5000s ease-in-out 0s;}
+  
+  /* ==== keyframes (전역) ==== */
+  @keyframes bell{0%{transform:rotate(-15deg);}50%{transform:rotate(25deg);}75%{transform:rotate(0);}100%{transform:rotate(-15deg);}}
+  @keyframes finger{0%{opacity:0;}50%{opacity:1;}100%{opacity:0;}}
+  
+  /*  < 모든 원본 규칙 보존 완료 > */
+  
+        
+      </style>
+    <script src="./js/jquery-1.8.3.min.js"></script>
+  
+  <section id="floating-menu">
+  <div class="bottom_contact pc_img">
+      <div class="inner clfix">
+          <div class="title">
+            <a > 
+  <span class="tit" style="color:#fff;">신용도 영향 없는</span></a>
+              <span class="tel"><a>무료 한도 조회</a><img src="./img/click_icon.png" alt="" class="click_img"></span>
+          </div><!-- // title -->
+          <div class="input_wrap">
+              <form id="form_e12" name="frm_phonecall_web" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe12" onsubmit="dll2(); submitted2=true;">
+                  <input type="hidden" name="entry.706813848"  value="pc 플로팅 메뉴 신청">
+  
+                  <ul class="clfix">
+                      <li>
+                          <span>성명</span>
+                          <input type="text" id="pc_name" name="entry.112176011" >
+                      </li>
+                      <li>
+                          <span>연락처</span>
+                          <input type="text"  id="pc_phone" name="entry.1513806965" maxlength="11">
+                      </li>
+                      <li>
+          <select name="entry.1413572286" id="pc_select" class="select2">
+            <option selected disabled>대출 유형 선택</option>
+            <option value="차량담보대출">차량담보대출</option>
+            <option value="주택담보대출">주택담보대출</option>
+            <option value="주담대 갈아타기">주담대 갈아타기</option>
+            <option value="직장인대출">직장인대출</option>
+            <option value="채무통합">채무통합</option>
+            <option value="생활비대출">생활비대출</option>
+            <option value="사업자대출">사업자대출</option>
+            <option value="신용카드소지자대출">신용카드소지자대출</option>
+                                                                  
+              
+          </select>
+                      </li>
+                  </ul><!-- // clfix -->
+      <div class="b_check check_bar">
+        <input type="checkbox" checked name="policy_agree" value="1" id="agree12" style="display:inline;appearance: auto;margin-left: 40px;">
+        <span style="color:#fff;">개인정보 수집 및 이용 동의</span> <span id="pc_alert" style="margin-left:40px;color:#fff;font-size:13px;"></span>
+      </div>
+             
+          </div><!-- // input_wrap -->
+          <div class="go_btn">
+              <button id="pc_btn" disabled>상담 신청</button>
+          </div>
+      </div><!-- // inner -->
+  </div><!-- // bottom_contact -->
+  </form>
+  
+  <div class="bottom_contact_mob mob_img">
+      <div class="top_thumb">
+  <div class="title">
+    <a ></a>
+    <a  style="display:contents;width:100%;max-width:300px;"> <img src="./img/click_icon.png" alt="" class="click_img">
+    <span class="tit">신용 영향 없는</span>
+    <span class="tel">30초 무료 한도 조회</span></a>
+  </div><!-- // title -->
+  <div class="btn">
+    <a href="javascript:void(0)" style="font-size:0.9rem;border-radius:10px;">무료 상담</a>
+  </div><!-- // btn -->
+      </div><!-- // top_thumb -->
+      <div class="bottom_con" style="margin-top:-16px;">
+          <div class="inner">
+              <form name="frm_phonecall_mob" id="form_e13" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe13" onsubmit="dll3(); submitted3=true;">
+                <input type="hidden" name="entry.706813848"  value="mobile 신청">
+                  <ul class="in_wrap clfix">
+                      <li>
+                          <span>성명</span>
+                          <input type="text" class="r_input" name="entry.112176011"  id="mob_name">
+                      </li>
+                      <li>
+                          <span>연락처</span>
+                          <input type="text" class="r_input wr_tel" name="entry.1513806965" maxlength="11" id="mob_phone">
+                      </li>
+                      <li>
+          <select name="entry.1413572286" id="mob_select" class="select3">
+            <option selected disabled>대출 유형 선택</option>
+            <option value="차량담보대출">차량담보대출</option>
+            <option value="주택담보대출">주택담보대출</option>
+            <option value="주담대 갈아타기">주담대 갈아타기</option>
+            <option value="직장인대출">직장인대출</option>
+            <option value="채무통합">채무통합</option>
+            <option value="생활비대출">생활비대출</option>
+            <option value="사업자대출">사업자대출</option>
+            <option value="신용카드소지자대출">신용카드소지자대출</option>
+                                                                          
+                                                                 
+          
+          </select>
+                      </li>
+                  </ul><!-- // clfix -->
+      <div class="b_check">
+        <input type="checkbox" checked name="policy_agree" value="1" id="agree13" style="display: inline;">
+        <span>개인정보 수집 및 이용 동의</span> 
+      </div>
+                  <div class="m_go_btn">
+                      <button  id="mob_btn" style="color:#fff;width:100%;font-size:1em;padding: 15px 10px;
+      border-radius: 10px;" disabled>상담신청</button>
+                  </div>
+              </form>
+              <script type="text/javascript">var submitted = false;</script>
+              <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
+              <script type="text/javascript">var submitted2 = false;</script>
+              <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
+  
+              
+  <script type="text/javascript">var submitted3 = false;</script>
+  <iframe name="hidden_iframe13" id="hidden_iframe13" style="display:none;" onload=""></iframe>
+          </div><!-- // inner -->
+      </div><!-- // bottom_con -->
+  </div><!-- // bottom_contact_mob -->
+  </section>
+  
+  
+  
+  <script>
+      $('.navi_btn').click(function(){
+        $(this).toggleClass('on');
+        $('.navi').stop().fadeToggle()
+      });
+    
+    
+    
+      $('.lnb h3').click(function(){
+        var naviTitle = $(this).next('ul');
+        $(this).addClass('on');
+        $('.lnb h3').not(this).removeClass('on');
+        naviTitle.stop().slideDown();
+        $('.lnb h3').next().not(naviTitle).slideUp();
+      });
+    
+      $('.right_contact .left').click(function(){
+        $('.right_contact').toggleClass('on');
+      });
+    
+      $('.bottom_contact_mob .top_thumb').click(function(){
+        $('.bottom_contact_mob').toggleClass('on');
+      });
+    
+      $('.bottom_contact_mob .bottom_con .btn_list .close_btn').click(function(){
+        $('.bottom_contact_mob').removeClass('on');
+      });	
+    </script>  
+  
+</div>
+
+
+
+<!-- ====================== SCRIPT ====================== -->
+<script>  
+    /* 탭 전환 */
+    function switchTab(id){
+      document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+      document.querySelectorAll('.card-set').forEach(s=>s.classList.remove('show'));
+      document.getElementById(id).classList.add('show');
+      document.getElementById(id+'Btn').classList.add('active');
+    }
+    document.addEventListener('DOMContentLoaded',()=>switchTab('mortgage'));
+  
+    /* 숫자 카운팅 */
+    function animateCount(el,dur=1200){
+      const end=parseFloat(el.dataset.end);
+      const dec=+el.dataset.decimals||0;
+      const fmt=el.dataset.format==='currency'
+        ?v=>v.toLocaleString('ko-KR',{maximumFractionDigits:dec})
+        :v=>v.toFixed(dec);
+      let start=null;
+      function step(ts){
+        if(!start)start=ts;
+        const p=Math.min((ts-start)/dur,1);
+        el.textContent=fmt(end*p);
+        if(p<1)requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+    document.addEventListener('DOMContentLoaded',()=>{
+      document.querySelectorAll('.card').forEach(card=>{
+        card.addEventListener('mouseenter',()=>{
+          card.querySelectorAll('.count').forEach(el=>{
+            const dec=+el.dataset.decimals||0;
+            el.textContent=el.dataset.format==='currency'
+              ?(0).toLocaleString('ko-KR',{maximumFractionDigits:dec})
+              :(0).toFixed(dec);
+            animateCount(el);
+          });
+        });
+      });
+    });
+  
+    /* 슬라이더 */
+    document.addEventListener('DOMContentLoaded',function(){
+      const slides=document.querySelectorAll('#slide-intro2 .slide');
+      const dots=document.querySelectorAll('#slide-intro2 .dot');
+      const slider=document.querySelector('#slide-intro2 .slides');
+      let cur=0,startX=0,isDown=false,auto;
+      function go(i,man=true){
+        slides[cur].classList.remove('active');dots[cur].classList.remove('active');
+        cur=i;slides[cur].classList.add('active');dots[cur].classList.add('active');
+        if(man){clearInterval(auto);auto=setInterval(()=>go((cur+1)%slides.length,false),5000);}
+      }
+      auto=setInterval(()=>go((cur+1)%slides.length,false),5000);
+      dots.forEach((d,i)=>d.addEventListener('click',()=>go(i)));
+      slider.addEventListener('mousedown',e=>{isDown=true;startX=e.clientX;slider.classList.add('grabbing');});
+      slider.addEventListener('mouseup',e=>{
+        if(!isDown)return;
+        const dx=e.clientX-startX;
+        if(dx>50)go((cur-1+slides.length)%slides.length);
+        if(dx<-50)go((cur+1)%slides.length);
+        isDown=false;slider.classList.remove('grabbing');
+      });
+      slider.addEventListener('mouseleave',()=>{isDown=false;slider.classList.remove('grabbing');});
+      slider.addEventListener('touchstart',e=>{startX=e.touches[0].clientX;});
+      slider.addEventListener('touchend',e=>{
+        const dx=e.changedTouches[0].clientX-startX;
+        if(dx>50)go((cur-1+slides.length)%slides.length);
+        if(dx<-50)go((cur+1)%slides.length);
+      });
+    });
+  </script>
+
+
+
+
+
+<style>
+  /* ───── 기본 스타일 ───── */
+  body { font-family: 'Pretendard', sans-serif; margin: 0; padding: 0; }
+  
+  #main-slider-root{
+    position:relative;
+    width:100%;min-height:70vh;
+    font-family:'Pretendard','Noto Sans KR',sans-serif;
+    overflow-x:hidden;background:#fff;
+  }
+  
+  #main-slider-root .main-slider-section1{
+    height:70vh;min-height:600px;display:flex;align-items:center;justify-content:center;
+    background:#fff;position:relative;z-index:2;transition:opacity .8s,transform .8s;
+  }
+  
+  #main-slider-root .main-slider-section1 dl{text-align:center;width:100%;margin:100px;}
+  
+  @media screen and (max-width:750px){
+    #main-slider-root .main-slider-section1 dl{text-align:center;width:100%;margin:100px;}
+  }
+  
+  #main-slider-root .main-slider-section1 dt{
+    font-size:2.6rem;font-weight:800;line-height:1.25;margin-top:20px;margin-bottom:1.2rem;
+    color:#111;opacity:1;transform:translateY(0);transition:opacity .8s,transform .8s;
+  }
+  
+  #main-slider-root .main-slider-section1 dd{
+    font-size:1.15rem;color:#555;opacity:1;transform:translateY(0);
+    transition:opacity .8s,transform .8s;margin:0;
+  }
+  
+  #main-slider-root.s1-out .main-slider-section1 dt,
+  #main-slider-root.s1-out .main-slider-section1 dd{opacity:0;transform:translateY(-70px);}
+  
+  #main-slider-root .main-slider-section2{position:relative;height:300vh;z-index:1;}
+  
+  /* ★ 배경 이미지 컨테이너 */
+  #main-slider-root .main-slider-bg{
+    position:fixed;left:0;top:0;width:100vw;height:100vh;z-index:0;pointer-events:none;
+    transition:opacity .5s;
+  }
+  
+  /* ★ 경계선 클리핑 효과를 위한 마스크 */
+  #main-slider-root .main-slider-bg::after{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent 0%, transparent 85%, rgba(255,255,255,0.1) 95%, rgba(255,255,255,0.3) 100%);
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0;
+    transition: opacity 0.6s ease;
+  }
+  
+  /* ★ 클리핑 상태에서 경계선 효과 활성화 */
+  #main-slider-root.clip .main-slider-bg::after{
+    opacity: 1;
+  }
+  
+  #main-slider-root .main-slider-bg img{
+    position:absolute;width:100vw;height:100vh;object-fit:cover;left:0;top:0;opacity:0;
+    transition:opacity .9s cubic-bezier(.7,0,.2,1),filter .7s cubic-bezier(.7,0,.2,1);
+    filter:grayscale(.06) brightness(.93);transform:scale(1);will-change:transform;
+  }
+  
+  #main-slider-root .main-slider-bg img.active{opacity:1;z-index:2;filter:brightness(0.9);}
+  
+  /* ★ 마지막 이미지 영구 유지를 위한 클래스 - 더 강력한 우선순위 */
+  #main-slider-root .main-slider-bg img.permanent-active{
+    opacity:1 !important;
+    z-index:10 !important;
+    filter:none !important;
+  }
+  
+  #main-slider-root .main-slider-list{
+    position:relative;margin:0;padding:0;list-style:none;width:100vw;max-width:680px;
+    margin-left:auto;margin-right:8vw;right:0;top:18vh;z-index:3;display:flex;
+    flex-direction:column;align-items:flex-end;
+  }
+  
+  #main-slider-root .main-slider-list li{
+    min-height:90vh;display:flex;align-items:center;justify-content:flex-end;opacity:.4;
+    pointer-events:none;transition:opacity .7s,transform .7s;position:relative;width:100%;
+  }
+  
+  #main-slider-root .main-slider-list li.active{opacity:1;pointer-events:auto;z-index:3;}
+  
+  #main-slider-root .main-slider-list li .slide-text{
+    color:#fff;max-width:520px;transition:opacity .18s,transform .22s cubic-bezier(.22,.61,.36,1);
+    padding:2.5rem 2.3rem 2.2rem 2.3rem;will-change:opacity,transform;text-align:left;
+    margin-bottom:40px;margin-right:200px;
+    /* background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px); */
+    border-radius: 12px;
+  }
+  
+  @media screen and (max-width:1200px){
+    #main-slider-root .main-slider-list li .slide-text{margin-right:0;}
+  }
+  
+  #main-slider-root .main-slider-list li h4{font-size:2rem;font-weight:700;margin-bottom:1rem;}
+  #main-slider-root .main-slider-list li p{font-size:1.1rem;margin-bottom:1.6rem;}
+  
+  #main-slider-root .main-slider-list li a{
+    font-size:1.03rem;color:#fff;border-radius:1.7em;padding:.5em 1.8em;text-decoration:none;
+    font-weight:500;background:#008e7c;transition:background .19s;display:inline-block;margin-top:1rem;
+  }
+  
+  #main-slider-root .main-slider-list li a:hover{background:#0b6660;}
+  
+  @media(max-width:800px){
+    #main-slider-root .main-slider-section1 dl{max-width:98vw;}
+    #main-slider-root .main-slider-section1 dt{font-size:2rem;}
+    #main-slider-root .main-slider-list{max-width:95vw;margin-right:2vw;top:11vw;align-items:flex-end;}
+    #main-slider-root .main-slider-list li .slide-text{padding:1.3rem 2.1rem;}
+    #main-slider-root .main-slider-list li h4{font-size:1.15rem;}
+  }
+  
+  #main-slider-root .main-slider-bg{display:none;opacity:0;transition:opacity .45s;}
+  #main-slider-root.inview .main-slider-bg{display:block;opacity:1;}
+
+  /* ★ 클리핑 상태 */
+  #main-slider-root.clip {
+    overflow:hidden;
+    position: relative;
+  }
+  
+  #main-slider-root.clip .main-slider-bg {
+    position:absolute;
+    height: 120vh;
+    top: -10vh;
+  }
+
+  /* ★ 페이드 대상 - 텍스트만 페이드, 배경은 유지 */
+  #main-slider-root .fade-target{transition:opacity .6s ease-out;}
+  
+  /* ★ 다음 섹션 스타일 */
+  .next-section {
+    /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+    /* min-height: 100vh; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* ★ 마지막 이미지를 위한 추가 레이어 - 항상 표시되는 배경 (우선순위 최고) */
+  #permanent-bg-layer {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1; /* 다른 배경보다 뒤에 배치하되 항상 보이도록 */
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.8s ease;
+  }
+  
+  #permanent-bg-layer.active {
+    opacity: 1;
+    z-index: 0; /* 활성화되면 일반 배경과 같은 레벨로 */
+  }
+  
+  /* ★ 마지막 슬라이드 이후에도 영구 유지 */
+  #permanent-bg-layer.permanent {
+    opacity: 1 !important;
+    z-index: 0 !important;
+  }
+  
+  #permanent-bg-layer img {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+  }
+</style>
 
 <section id="main-slider-root">
   <div class="main-slider-section1 fade-target">
@@ -555,21 +1744,21 @@
         <div class="slide-text">
           <h4>내 조건에 딱 맞는 상품 추천</h4>
           <p>신용과 소득, 직업까지 모두 반영해<br>가장 적합한 대출을 찾아줍니다.</p>
-          <!-- <a href="#">신용도 영향없는 한도 조회</a> -->
+          <a href="#">신용도 영향없는 한도 조회</a>
         </div>
       </li>
       <li>
         <div class="slide-text">
           <h4>혼자서는 막막하기만 한<br>최적의 금리와 한도 찾기</h4>
           <p>수많은 금융사 금리와 한도를 비교 분석해<br>가장 유리한 조건을 빠르게 안내해드립니다.</p>
-          <!-- <a href="#">신용도 영향없는 한도 조회</a> -->
+          <a href="#">신용도 영향없는 한도 조회</a>
         </div>
       </li>
       <li>
         <div class="slide-text">
           <h4>복잡한 과정 없이 빠른 승인</h4>
           <p>비대면으로 대출 가능 여부 확인!<br>시간 낭비 없이 빠르게 실행됩니다.</p>
-          <!-- <a href="#">신용도 영향없는 한도 조회</a> -->
+          <a href="#">신용도 영향없는 한도 조회</a>
         </div>
       </li>
     </ul>
@@ -585,7 +1774,7 @@
 <section id="cert-slide">
   <div class="cert-slide-inner">
     <div class="cert-slide-content">
-      <h2>제 1금융권 대출이 어렵거나<br>원하는 대출이 안나온다면?<br><br>모바일로 편하게<br>Pinder 하세요!</h2>
+      <h2>1금융 대출이 어렵거나<br>원하는 대출이 안나온다면?<br><br>모바일로 편하게<br>Pinder 하세요!</h2>
       <p>모바일로 언제 어디서든 간편하게 <br>
         여러분의 조건에 맞는 대출 상품을 제공합니다.</p>
     </div>
@@ -598,11 +1787,325 @@
 
 
 <style>
+#cert-slide {
+  background: #fff;
+  width: 100%;
 
+  display: flex;
+
+  justify-content: center;
+  position: relative;
+  z-index:2;
+}
+#cert-slide .cert-slide-inner {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  min-height: 60vh;
+  gap: 4vw;
+  padding: 5vw 4vw;
+  box-sizing: border-box;
+}
+#cert-slide .cert-slide-content {
+  color: #222;
+  min-width: 320px;
+  max-width: 500px;
+  flex: 1 1 400px;
+}
+#cert-slide .cert-slide-content h2 {
+  font-size: 2.7rem;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+  letter-spacing: -1px;
+  color: #222;
+}
+#cert-slide .cert-slide-content p {
+  font-size: 1.08rem;
+  color: #333;
+  opacity: 0.85;
+  font-weight: 400;
+  margin-top: 0.3rem;
+}
+#cert-slide .cert-slide-image {
+  flex: 1 1 380px;
+  min-width: 250px;
+  max-width: 450px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+  height: 380px;
+}
+#cert-slide .cert-slide-image img {
+  width: 90%;
+  max-width: 360px;
+  /* min-width: 180px; */
+  box-shadow: 0 8px 36px 0 rgba(10,20,80,0.10), 0 2px 8px 0 rgba(0,0,0,0.04);
+  border-radius: 22px;
+  background: #fff;
+  pointer-events: none;
+  user-select: none;
+  /* 360도 자동 회전 애니메이션 */
+  /* animation: card-rotate-ani 5s linear infinite; */
+  transform-style: preserve-3d;
+}
+@keyframes card-rotate-ani {
+  0%   { transform: rotateY(0deg)   rotateX(-10deg);}
+  100% { transform: rotateY(360deg) rotateX(-10deg);}
+}
+@media (max-width:900px) {
+  #cert-slide .cert-slide-inner { flex-direction: column; gap: 3vw; padding: 6vw 2vw 3vw 2vw;}
+  #cert-slide .cert-slide-content { max-width: 94vw; text-align:center; margin-bottom: 1.5rem;}
+  /* #cert-slide .cert-slide-image { height: 260px; min-width: 140px;} */
+}
+@media (max-width:500px) {
+  #cert-slide .cert-slide-content h2 { font-size:2rem; }
+  /* #cert-slide .cert-slide-image img { max-width:200px; } */
+}
 </style>
 
 
+<script>
+;(function(){
+  const root = document.getElementById('main-slider-root');
+  const permanentBgLayer = document.getElementById('permanent-bg-layer');
+  if(!root) return;
 
+  const s1 = root.querySelector('.main-slider-section1');
+  const s2 = root.querySelector('.main-slider-section2');
+  const bgImgs = root.querySelectorAll('.main-slider-bg img');
+  const slides = root.querySelectorAll('.main-slider-list li');
+  const texts = root.querySelectorAll('.slide-text');
+  const fades = [...root.querySelectorAll('.fade-target')];
+  const total = slides.length;
+  
+  // 상태 관리
+  let lastSlideReached = false;
+  let permanentBackgroundActive = false;
+  let prevScrollY = 0;
+
+  const MAX_Y = 40, FADE_START = .65, FADE_END = 0, SCALE_MIN = .86, SCALE_MAX = 1;
+  let curScale = SCALE_MIN, trgScale = SCALE_MIN, rafId = null, active = false;
+  const states = Array.from({length: total}, () => ({op: 1, y: MAX_Y}));
+
+  // 초기화: 첫 번째 이미지만 활성화
+  function initializeImages() {
+    bgImgs.forEach((img, i) => {
+      img.classList.remove('active');
+      img.classList.remove('permanent-active');
+      if (i === 0) {
+        img.classList.add('active');
+        img.style.transform = `scale(${curScale})`;
+      }
+    });
+  }
+
+  // 초기 설정
+  initializeImages();
+  slides[0].classList.add('active');
+  permanentBgLayer.classList.remove('active');
+  permanentBgLayer.classList.remove('permanent');
+
+  const lerp = (a, b, t) => a + (b - a) * t;
+  const vh = () => innerHeight;
+
+  /* ---------- rAF ---------- */
+  function animate() {
+    curScale = lerp(curScale, trgScale, .18);
+    
+    bgImgs.forEach(img => {
+      if (img.classList.contains('active') || img.classList.contains('permanent-active')) {
+        img.style.transform = `scale(${curScale})`;
+      }
+    });
+    
+    texts.forEach((el, i) => {
+      const st = states[i];
+      el.style.opacity = lerp(+el.style.opacity || 1, st.op, .25);
+      const prev = +el.style.getPropertyValue('--ty') || 0;
+      const ny = lerp(prev, st.y, .2);
+      el.style.transform = `translateY(${ny}px)`;
+      el.style.setProperty('--ty', ny);
+    });
+    
+    rafId = requestAnimationFrame(animate);
+  }
+
+  /* ---------- 상태 계산 ---------- */
+  function updateStates() {
+    const viewH = vh(), y = scrollY;
+    const scrollDirection = y > prevScrollY ? 'down' : 'up';
+    prevScrollY = y;
+    
+    const s2Top = root.offsetTop + s2.offsetTop,
+          start = s2Top - viewH, end = s2Top + viewH * .25;
+
+    trgScale = (y < start) ? SCALE_MIN : (y > end) ? SCALE_MAX
+            : SCALE_MIN + (SCALE_MAX - SCALE_MIN) * ((y - start) / (end - start));
+
+    const rootRect = root.getBoundingClientRect();
+    if (rootRect.top < viewH && rootRect.bottom > 0) {
+      const idx = Math.min(total - 1, Math.max(0,
+                 Math.floor((y - s2Top + viewH / 2) / viewH)));
+      
+      // 마지막 슬라이드 도달 체크
+      if (idx === total - 1) {
+        if (!lastSlideReached) {
+          lastSlideReached = true;
+          permanentBackgroundActive = true;
+          permanentBgLayer.classList.add('active');
+          permanentBgLayer.classList.add('permanent');
+        }
+      } else {
+        // 마지막 슬라이드가 아닌 경우 - 역방향 스크롤 시에만 해제
+        if (scrollDirection === 'up' && lastSlideReached) {
+          lastSlideReached = false;
+          permanentBackgroundActive = false;
+          permanentBgLayer.classList.remove('active');
+          permanentBgLayer.classList.remove('permanent');
+        }
+      }
+      
+      slides.forEach((li, i) => li.classList.toggle('active', i === idx));
+      
+      // 이미지 전환 로직
+      if (!permanentBackgroundActive) {
+        // 일반적인 이미지 전환
+        bgImgs.forEach((img, i) => {
+          img.classList.toggle('active', i === idx);
+          img.classList.remove('permanent-active');
+        });
+      } else {
+        // 영구 배경이 활성화된 상태
+        if (idx === total - 1) {
+          // 마지막 슬라이드에서는 영구 배경만 표시
+          bgImgs.forEach((img, i) => {
+            img.classList.remove('active');
+            if (i === total - 1) {
+              img.classList.add('permanent-active');
+            }
+          });
+        } else {
+          // 역방향으로 다른 슬라이드로 이동한 경우
+          if (scrollDirection === 'up') {
+            bgImgs.forEach((img, i) => {
+              img.classList.toggle('active', i === idx);
+              img.classList.remove('permanent-active');
+            });
+          } else {
+            // 순방향일 때는 영구 배경 유지
+            bgImgs.forEach((img, i) => {
+              if (i === total - 1) {
+                img.classList.add('permanent-active');
+              } else {
+                img.classList.remove('active');
+              }
+            });
+          }
+        }
+      }
+    }
+
+    // 마지막 슬라이드 이후 영역에서의 영구 배경 유지
+    const totalHeight = root.offsetHeight;
+    const scrollProgress = (y + viewH) - root.offsetTop;
+    const endThreshold = totalHeight - viewH * 0.3;
+    
+    if (scrollProgress >= endThreshold && scrollDirection === 'down') {
+      if (!permanentBackgroundActive) {
+        permanentBackgroundActive = true;
+        permanentBgLayer.classList.add('permanent');
+        
+        // 마지막 이미지 영구 활성화
+        bgImgs.forEach((img, i) => {
+          if (i === total - 1) {
+            img.classList.add('permanent-active');
+          }
+        });
+      }
+    }
+
+    texts.forEach((_, i) => {
+      const center = s2Top + viewH * i + viewH / 2,
+            dist = ((y + viewH / 2) - center) / viewH;
+      if(dist < -FADE_START) states[i] = {op: 0, y: MAX_Y};
+      else if(dist < -FADE_END){
+        const p = (dist + FADE_START) / (FADE_START - FADE_END);
+        states[i] = {op: p, y: MAX_Y * (1 - p)};
+      } else states[i] = {op: 1, y: 0};
+    });
+
+    root.classList.toggle('s1-out', s1.getBoundingClientRect().bottom < viewH / 2);
+  }
+
+  /* ---------- 활성 토글 ---------- */
+  function setActive(on) {
+    if(on === active) return;
+    active = on;
+    root.classList.toggle('inview', on);
+    
+    if(on) {
+      addEventListener('scroll', updateStates, {passive: true});
+      addEventListener('resize', updateStates);
+      updateStates();
+      rafId = requestAnimationFrame(animate);
+    } else {
+      removeEventListener('scroll', updateStates);
+      removeEventListener('resize', updateStates);
+      if(rafId) {
+        cancelAnimationFrame(rafId);
+        rafId = null;
+      }
+    }
+  }
+
+  /* ---------- 페이드 & 클립 ---------- */
+  function applyFade(rect, viewH) {
+    const START_LINE = viewH;        
+    const SPAN = viewH * 0.7;
+    const dist = START_LINE - rect.bottom;
+    const ratio = dist <= 0 ? 0 : Math.min(0.7, dist / SPAN);
+    
+    // 텍스트만 페이드, 영구 배경은 절대 페이드하지 않음
+    fades.forEach(el => {
+      if (permanentBackgroundActive && el.closest('#permanent-bg-layer')) {
+        // 영구 배경은 페이드하지 않음
+        return;
+      }
+      el.style.opacity = Math.max(0, 1 - ratio);
+    });
+  }
+
+  function checkPos() {
+    const r = root.getBoundingClientRect();
+    const v = vh();
+    
+    setActive(r.top <= v && r.bottom > 0);
+    
+    // 클리핑 조건
+    const clipThreshold = v * 0.8;
+    root.classList.toggle('clip', r.bottom <= clipThreshold);
+    
+    applyFade(r, v);
+  }
+
+  // 이벤트 리스너
+  addEventListener('scroll', checkPos, {passive: true});
+  addEventListener('resize', checkPos);
+  
+  document.addEventListener('DOMContentLoaded', function() {
+    initializeImages();
+    checkPos();
+  });
+
+  window.addEventListener('load', checkPos);
+})();
+</script>
 
 <section id="main-toss-section">
   <div class="mts-inner">
@@ -804,9 +2307,166 @@
 
 <style>
 
+  /* save- 네임스페이스로 완전 분리! */
+  .save-col { flex: 1 1 0; }
+  .save-txt { min-width: 320px; max-width: 400px; }
+  .save-graph { display: flex; justify-content: space-around; align-items: flex-end; }
+  .save-feature-badge {
+    font-size: 0.96rem; color: #257fff; font-weight: 700;
+    background: #eaf4ff; border-radius: 7px;
+    padding: 3px 12px 2.5px 12px; display: inline-block; margin-bottom: 7px;
+  }
+  .save-feature-title {
+    font-size: 1.15rem; color: #222b45; font-weight: 700;
+    margin-bottom: 3px; margin-top: 2px; line-height: 1.43;
+  }
+  .save-feature-desc {
+    color: #7b8795; font-size: 1.02rem; margin-bottom: 2px;
+    line-height: 1.57; font-weight: 400; letter-spacing: -.012em;
+  }
+  .save-graph-card {
+    background: #fff; border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(36,124,255,0.13), 0 2px 8px 0 rgba(30,80,180,0.07);
+    min-width: 320px; max-width: 340px; width: 100%;
+    padding: 30px 28px 22px 28px;
+    display: flex; flex-direction: column; align-items: flex-start; position:relative;
+  }
+  .save-graph-badge {
+    background: #eaf4ff; color: #257fff; font-weight:700;
+    font-size: 1.02rem; border-radius:8px; padding: 4px 14px 4px 14px;
+    margin-bottom: 10px; display:inline-block;
+  }
+  .save-graph-title {
+    font-size: 1.18rem; font-weight: 700; color: #232b45;
+    margin-bottom: 9px; line-height: 1.44; letter-spacing: -0.01em;
+  }
+  .save-graph-title strong { color: #15376e; font-weight: 800; }
+  .save-graph-sub {
+    color: #257fff; font-size: 1.03rem; font-weight: 700;
+    margin-bottom: 19px; letter-spacing: -.01em; margin-left: 1px;
+  }
+  .save-arrow { font-size:1.1em; margin-right: 2px; }
+  .save-bar-graph {
+    display: flex; align-items: flex-end; gap: 20px;
+    width: 100%; justify-content: center; min-height: 134px; margin-top: 5px;
+  }
+  .save-bar-wrap {
+    position: relative; flex: 1 1 0; display: flex;
+    align-items: flex-end; justify-content: center;
+  }
+  .save-bar {
+    width: 82px; min-height: 36px; background: #eef1f6;
+    border-radius: 16px; box-shadow: 0 3px 16px 0 rgba(36,124,255,0.04);
+    display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+    position: relative; overflow: visible;
+    transition: height 1.2s cubic-bezier(.41,1.65,.58,.99);
+    height: 36px;
+  }
+  .save-bar-gray {
+    background: #eef1f6; color: #7a8aa1; font-weight: 500;
+    font-size: 1.01rem; box-shadow: none;
+  }
+  .save-bar-gray.animated#saveGrayBar1 { height: 45px !important; }
+  .save-bar-gray.animated#saveGrayBar2 { height: 45px !important; }
+  .save-bar-blue {
+    background: linear-gradient(176deg, #63a3ff 0%, #247cff 100%);
+    color: #fff; font-size: 1.07rem; font-weight: 700;
+    box-shadow: 0 10px 38px 0 rgba(36,124,255,0.11), 0 2px 10px 0 rgba(36,124,255,0.07);
+    transition: height 1.2s cubic-bezier(.41,1.65,.58,.99), box-shadow 0.8s;
+  }
+  .save-bar-label {
+    position: absolute; left: 0; top: -26px; width: 100%;
+    color: #99afd1; font-size: 0.97rem; font-weight: 500;
+    letter-spacing: -0.01em; text-align: center;
+  }
+  .save-bar-value {
+    font-size: 1.16rem; width:82px; font-weight: 700; color: inherit;
+    margin: 8px 0 8px 0; letter-spacing: -0.01em; text-align: center; display: block;
+  }
+  .save-bar-blue .save-bar-label {
+    color: #fff; opacity: 0.85; font-size: 1.02rem; top: -32px;
+    font-weight: 700; text-shadow: 0 2px 12px rgba(30,56,98,0.11);
+  }
+  .save-bar-flag {
+    width:104px; position: absolute; left: 50%; transform: translateX(-50%);
+    top: -38px; background: #fff; color: #257fff; font-weight: 800; font-size: 0.64rem;
+    padding: 4px 13px 4px 13px; border-radius: 22px;
+    box-shadow: 0 2px 8px 0 rgba(36,124,255,0.13);
+    opacity: 0; transition: opacity .8s 1s; pointer-events: none;
+    text-align:center; letter-spacing: -.01em;
+  }
+  .save-bar-blue.animated .save-bar-flag { opacity: 1;}
+  .save-bar-blue.animated {
+      height: 128px !important;
+      box-shadow: 0 22px 42px 0 rgba(36,124,255,0.13), 0 2px 10px 0 rgba(36,124,255,0.07);
+  }
+  @media (max-width:900px) {
+    .save-row { flex-direction: column; gap: 33px; align-items: stretch;}
+    .save-col, .save-txt, .save-graph { min-width:0; max-width:100vw;text-align: center;}
+    .save-graph-card { width:100%;max-width:340px;}
+  }
+  @media (max-width:420px) {
+    .save-graph-title { font-size:1.03rem;}
+  }
   </style>
   
-
+  <script>
+  function animateGraphSAVE() {
+      document.getElementById('saveGrayBar1').classList.add('animated');
+      document.getElementById('saveGrayBar2').classList.add('animated');
+      document.getElementById('saveBlueBar').classList.add('animated');
+      animateCountSAVE('savePercentCount', 0, 50, 800);
+      animateCountSAVE('saveSubPercentCount', 0, 50, 800);
+      animateCountSAVE('saveFlagPercentCount', 0, 50, 800);
+  }
+  function resetGraphSAVE() {
+      document.getElementById('saveGrayBar1').classList.remove('animated');
+      document.getElementById('saveGrayBar2').classList.remove('animated');
+      document.getElementById('saveBlueBar').classList.remove('animated');
+      document.getElementById('savePercentCount').textContent = 0;
+      document.getElementById('saveSubPercentCount').textContent = 0;
+      document.getElementById('saveFlagPercentCount').textContent = 0;
+  }
+  function animateCountSAVE(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTime = null;
+      function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          let progress = Math.min((timestamp - startTime) / duration, 1);
+          let value = Math.floor(progress * (end - start) + start);
+          obj.textContent = value;
+          if (progress < 1) {
+              window.requestAnimationFrame(step);
+          } else {
+              obj.textContent = end;
+          }
+      }
+      window.requestAnimationFrame(step);
+  }
+  function isElementInViewportSAVE(el) {
+      const rect = el.getBoundingClientRect();
+      return rect.top < window.innerHeight - 100 && rect.bottom > 100;
+  }
+  let saveGraphAnimated = false;
+  function handleScrollSAVE() {
+      const blueBar = document.getElementById('saveBlueBar');
+      if (!blueBar) return;
+      if (isElementInViewportSAVE(blueBar)) {
+          if (!saveGraphAnimated) {
+              animateGraphSAVE();
+              saveGraphAnimated = true;
+          }
+      } else {
+          if (saveGraphAnimated) {
+              resetGraphSAVE();
+              saveGraphAnimated = false;
+          }
+      }
+  }
+  window.addEventListener('scroll', handleScrollSAVE);
+  window.addEventListener('load', handleScrollSAVE);
+  window.addEventListener('resize', handleScrollSAVE);
+  </script>
 
 <section id="saving-highlight-section">
   <div class="sh-top">
@@ -848,11 +2508,864 @@
 </section>
 
 <style>
+#saving-highlight-section {
+  position: relative;
+  z-index: 2;
+  background: #fff;
+  padding: 70px 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+.sh-top {
+  max-width: 560px;
+  width: 90%;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+.sh-content {
+  max-width: 560px;
+  width: 90%;
+  font-family: 'Noto Sans KR', sans-serif;
+  text-align: center;
+}
+.sh-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #1a1a1a;
+  margin-bottom: 28px;
+}
+.sh-badge {
+  background: linear-gradient(90deg, #257fff 0%, #63a3ff 100%);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.03rem;
+  padding: 7px 20px 6px 20px;
+  border-radius: 24px;
+  display: inline-block;
+  margin-bottom: 22px;
+  letter-spacing: -.01em;
+  box-shadow: 0 4px 24px 0 rgba(36,124,255,0.10);
+}
+.sh-gradient-text {
+  display: inline-block;
+  font-size: 3.1rem;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  background: linear-gradient(87deg, #247cff 15%, #7ed7fa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 4px 18px #8ed1ff35);
+  animation: sh-glow 2.1s infinite alternate;
+}
+@keyframes sh-glow {
+  from { filter: drop-shadow(0 4px 18px #8ed1ff33); }
+  to   { filter: drop-shadow(0 0px 28px #1da1ff99); }
+}
+.sh-desc {
+  margin: 24px 0 0 0;
+  font-size: 1.15rem;
+  color: #37669b;
+  letter-spacing: -0.01em;
+  line-height: 1.5;
+  font-weight: 500;
+}
+.sh-rate-table {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+.sh-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  border-top: 1px solid #eee;
+  font-size: 1.15rem;
+  color: #444;
+  font-weight: 500;
+}
+.sh-row:first-child { border-top: none; }
+.sh-label { color: #888; }
+.sh-value {
+  font-weight: 700;
+  font-size: 1.5rem;
+  color: #111;
+}
+.sh-unit {
+  font-size: 1rem;
+  color: #888;
+  margin-left: 4px;
+}
+.sh-note {
+  font-size: 0.86rem;
+  color: #666;
+  margin-top: 24px;
+  line-height: 1.5;
+}
+@media (max-width: 600px) {
+  .sh-title { font-size: 1.4rem; }
+  .sh-row { font-size: 1rem; }
+  .sh-value { font-size: 1.3rem; }
+  .sh-gradient-text { font-size: 2.1rem; }
+  .sh-badge { font-size: 0.95rem; }
+}
+</style>
+
+<script>
+function animateValue(id, endValue, duration) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  let start = 0;
+  let startTime = null;
+  function step(ts) {
+    if (!startTime) startTime = ts;
+    const progress = Math.min((ts - startTime) / duration, 1);
+    el.textContent = Math.floor(progress * endValue).toLocaleString('ko-KR');
+    if (progress < 1) requestAnimationFrame(step);
+    else el.textContent = endValue.toLocaleString('ko-KR');
+  }
+  requestAnimationFrame(step);
+}
+
+let animPlayed = false;
+function handleScrollTrigger() {
+  const meter = document.getElementById('ratePercent'); // 기준 엘리먼트
+  if (!meter) return;
+  const rect = meter.getBoundingClientRect();
+  // 화면 가운데 25%~75% 영역에 들어왔을 때 inView = true
+  const inView = rect.top < window.innerHeight * 0.75 && rect.bottom > window.innerHeight * 0.25;
+
+  if (inView && !animPlayed) {
+    animateValue('savingCount',   120,   1200);
+    animateValue('ratePercent',   3.9,   1000);
+    animateValue('termCount',     120,   1200);
+    animateValue('interestWon',   17000, 1500);
+    animPlayed = true;            // ▶ 한 번만 재생
+  }
+  // 화면에서 완전히 벗어났을 때만 초기화 → 다시 진입 시 재생 가능
+  if (!inView && animPlayed && (rect.bottom < 0 || rect.top > window.innerHeight)) {
+    document.getElementById('savingCount').textContent  = '0';
+    document.getElementById('ratePercent').textContent  = '0';
+    document.getElementById('termCount').textContent    = '0';
+    document.getElementById('interestWon').textContent  = '0';
+    animPlayed = false;
+  }
+}
+window.addEventListener('scroll', handleScrollTrigger);
+window.addEventListener('load',   handleScrollTrigger);
+</script>
+
+
+  
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap');
+#main-toss-section {
+  position:relative;
+  z-index:2;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', 'Segoe UI', Arial, sans-serif;
+  background: #fff;
+  /* border-radius: 24px; */
+  /* max-width: 980px; */
+  margin: 0 auto; 
+  padding: 5vw 4vw;
+  box-shadow: 0 8px 32px 0 rgba(22,48,93,0.07);
+  padding: 54px 40px 50px 40px;
+}
+
+.mts-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+
+.mts-section-title {
+  text-align: left;
+  margin-bottom: 38px;
+  max-width: 500px;
+  margin-left: 0;
+}
+.mts-section-title .mts-badge {
+  display: inline-block;
+  background: #eef5ff;
+  color: #247cff;
+  font-weight:700;
+  font-size: 1.02rem;
+  border-radius:7px;
+  padding: 6px 15px 5px 15px;
+  margin-bottom: 17px;
+  letter-spacing: -.01em;
+}
+.mts-section-title h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: #21253b;
+  line-height: 1.45;
+  margin: 7px 0 0 0;
+  letter-spacing: -.01em;
+}
+.mts-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  justify-content: space-between;
+  margin:80px auto;
+}
+
+.mts-col { flex: 1 1 0; }
+.mts-txt { min-width: 320px; max-width: 400px; }
+.mts-graph { display: flex; justify-content: space-around; align-items: flex-end; }
+.mts-feature-badge {
+  font-size: 0.96rem;
+  color: #247cff;
+  font-weight: 700;
+  background: #eaf4ff;
+  border-radius: 7px;
+  padding: 3px 12px 2.5px 12px;
+  display: inline-block;
+  margin-bottom: 7px;
+}
+.mts-feature-title {
+  font-size: 1.15rem;
+  color: #222b45;
+  font-weight: 700;
+  margin-bottom: 3px;
+  margin-top: 2px;
+  line-height: 1.43;
+}
+.mts-feature-desc {
+  color: #7b8795;
+  font-size: 1.02rem;
+  margin-bottom: 2px;
+  line-height: 1.57;
+  font-weight: 400;
+  letter-spacing: -.012em;
+}
+.mts-graph-card {
+  background: #fff;
+  border-radius: 18px;
+  box-shadow: 0 8px 32px 0 rgba(36,124,255,0.13), 0 2px 8px 0 rgba(30,80,180,0.07);
+  min-width: 320px; max-width: 340px;
+  width: 100%; padding: 30px 28px 22px 28px;
+  display: flex; flex-direction: column; align-items: flex-start;
+  position:relative;
+}
+.mts-graph-badge {
+  background: #eaf4ff;
+  color: #247cff;
+  font-weight:700;
+  font-size: 1.02rem;
+  border-radius:8px;
+  padding: 4px 14px 4px 14px;
+  margin-bottom: 10px;
+  display:inline-block;
+}
+.mts-graph-title {
+  font-size: 1.18rem;
+  font-weight: 700;
+  color: #232b45;
+  margin-bottom: 9px;
+  line-height: 1.44;
+  letter-spacing: -0.01em;
+}
+.mts-graph-title strong {
+  color: #15376e;
+  font-weight: 800;
+}
+.mts-graph-sub {
+  color: #257fff;
+  font-size: 1.03rem;
+  font-weight: 700;
+  margin-bottom: 19px;
+  letter-spacing: -.01em;
+  margin-left: 1px;
+}
+.mts-arrow { font-size:1.1em; margin-right: 2px; }
+.mts-bar-graph {
+  display: flex;
+  align-items: flex-end;
+  gap: 20px;
+  width: 100%;
+  justify-content: center;
+  min-height: 134px;
+  margin-top: 5px;
+}
+.mts-bar-wrap {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.mts-bar {
+  width: 82px;
+  min-height: 36px;
+  background: #eef1f6;
+  border-radius: 16px;
+  box-shadow: 0 3px 16px 0 rgba(36,124,255,0.04);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  overflow: visible;
+  transition: height 1.2s cubic-bezier(.41,1.65,.58,.99);
+  height: 36px;
+}
+.mts-bar-gray {
+  background: #eef1f6;
+  color: #7a8aa1;
+  font-weight: 500;
+  font-size: 1.01rem;
+  box-shadow: none;
+}
+.mts-bar-gray.animated#mtsGrayBar1 { height: 45px !important; }
+.mts-bar-gray.animated#mtsGrayBar2 { height: 65px !important; }
+.mts-bar-blue {
+  background: linear-gradient(176deg, #63a3ff 0%, #247cff 100%);
+  color: #fff;
+  font-size: 1.07rem;
+  font-weight: 700;
+  box-shadow: 0 10px 38px 0 rgba(36,124,255,0.11), 0 2px 10px 0 rgba(36,124,255,0.07);
+  transition: height 1.2s cubic-bezier(.41,1.65,.58,.99), box-shadow 0.8s;
+}
+.mts-bar-label {
+  position: absolute;
+  left: 0; top: -26px;
+  width: 100%;
+  color: #99afd1;
+  font-size: 0.97rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-align: center;
+}
+.mts-bar-value {
+  font-size: 1.16rem;
+  width:82px;
+  font-weight: 700;
+  color: inherit;
+  margin: 8px 0 8px 0;
+  letter-spacing: -0.01em;
+  text-align: center;
+  display: block;
+}
+.mts-bar-blue .mts-bar-label {
+  color: #fff;
+  opacity: 0.85;
+  font-size: 1.02rem;
+  top: -32px;
+  font-weight: 700;
+  text-shadow: 0 2px 12px rgba(30,56,98,0.11);
+}
+.mts-bar-flag {
+  width:104px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -38px;
+  background: #fff;
+  color: #247cff;
+  font-weight: 800;
+  font-size: 0.64rem;
+  padding: 4px 13px 4px 13px;
+  border-radius: 22px;
+  box-shadow: 0 2px 8px 0 rgba(36,124,255,0.13);
+  opacity: 0;
+  transition: opacity .8s 1s;
+  pointer-events: none;
+  text-align:center;
+  letter-spacing: -.01em;
+}
+.mts-bar-blue.animated .mts-bar-flag { opacity: 1;}
+.mts-bar-blue.animated {
+    height: 128px !important;
+    box-shadow: 0 22px 42px 0 rgba(36,124,255,0.13), 0 2px 10px 0 rgba(36,124,255,0.07);
+}
+@media (max-width:900px) {
+  #main-toss-section { padding: 27px 1vw 27px 1vw; }
+  .mts-section-title { margin-left: 0; max-width: 100%; text-align: center;}
+  .mts-row { flex-direction: column; gap: 33px; align-items: stretch;}
+  .mts-col, .mts-txt, .mts-graph { min-width:0; max-width:100vw;text-align: center;}
+  .mts-graph-card { width:100%;max-width:340px;}
+  .mts-section-title h1 { font-size:2.12rem;}
+}
+
+@media (max-width:420px) {
+  .mts-section-title h1 { font-size:1.7rem;}
+}
+
+
+.mts-graph-card.dsr-card {
+  border: 2px solid #eaf4ff;
+  background: #fff;
+  box-shadow: 0 8px 32px 0 rgba(36,124,255,0.07), 0 2px 8px 0 rgba(222,39,39,0.08);
+  margin-top: 14px;
+}
+.mts-graph-card .dsr-badge {
+  background: #fff1f1;
+  color: #de2727;
+  border-radius: 7px;
+  font-size: 1.02rem;
+  font-weight: 800;
+  padding: 5px 17px 5px 17px;
+  margin-bottom: 10px;
+  display:inline-block;
+}
+.mts-graph-card .dsr-title {
+  font-size: 1.13rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+  line-height: 1.44;
+  letter-spacing: -0.01em;
+}
+.mts-graph-card .mts-graph-desc {
+  color: #365277;
+  font-size: 1.03rem;
+  font-weight: 400;
+  margin-bottom: 18px;
+  line-height: 1.5;
+}
+.mts-graph-card .dsr-bar-graph {
+  display: flex;
+  align-items: flex-end;
+  gap: 22px;
+  width: 100%;
+  justify-content: center;
+  min-height: 86px;
+  margin-top: 9px;
+}
+.dsr-bar-wrap {
+  position: relative;
+  flex: 1 1 0;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+.dsr-bar {
+  width: 78px;
+  min-height: 36px;
+  border-radius: 16px;
+  background: #eef1f6;
+  box-shadow: 0 3px 12px 0 rgba(36,124,255,0.06);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  position: relative;
+  transition: height 1.3s cubic-bezier(.41,1.65,.58,.99);
+  height: 38px;
+}
+.dsr-bar-label {
+  position: absolute;
+  left: 0; top: -24px;
+  width: 100%;
+  color: #7a8aa1;
+  font-size: 0.92rem;
+  font-weight: 500;
+  text-align: center;
+}
+.dsr-bar-value {
+  font-size: 1.13rem;
+  width: 78px;
+  font-weight: 700;
+  color: inherit;
+  margin: 8px 0 8px 0;
+  text-align: center;
+  display: block;
+}
+.dsr-bar-gray {
+  background: #e0e8ef;
+  color: #8ba1bb;
+}
+.dsr-bar-blue {
+  background: linear-gradient(178deg, #ffe5e5 0%, #de2727 100%);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 10px 36px 0 rgba(222,39,39,0.09), 0 2px 9px 0 rgba(36,124,255,0.06);
+  transition: height 1.2s cubic-bezier(.41,1.65,.58,.99), box-shadow 0.7s;
+}
+.dsr-bar.animated#dsrBar1 { height: 43px !important; }
+.dsr-bar.animated#dsrBar2 { height: 92px !important; }
+@media (max-width:900px) {
+  .mts-graph-card.dsr-card { width:100%;}
+}
+
 
 </style>
 
+<script>
+  function animateGraphMTS() {
+      document.getElementById('mtsGrayBar1').classList.add('animated');
+      document.getElementById('mtsGrayBar2').classList.add('animated');
+      document.getElementById('mtsRedBar').classList.add('animated');
+      animateCountMTS('mtsPercentCount', 0, 120, 800);
+      animateCountMTS('mtsSubPercentCount', 0, 90, 800);
+      animateCountMTS('mtsFlagPercentCount', 0, 120, 800);
+  }
+  function resetGraphMTS() {
+      document.getElementById('mtsGrayBar1').classList.remove('animated');
+      document.getElementById('mtsGrayBar2').classList.remove('animated');
+      document.getElementById('mtsRedBar').classList.remove('animated');
+      document.getElementById('mtsPercentCount').textContent = 0;
+      document.getElementById('mtsSubPercentCount').textContent = 0;
+      document.getElementById('mtsFlagPercentCount').textContent = 0;
+  }
+  function animateCountMTS(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTime = null;
+      function step(timestamp) {
+          if (!startTime) startTime = timestamp;
+          let progress = Math.min((timestamp - startTime) / duration, 1);
+          let value = Math.floor(progress * (end - start) + start);
+          obj.textContent = value;
+          if (progress < 1) {
+              window.requestAnimationFrame(step);
+          } else {
+              obj.textContent = end;
+          }
+      }
+      window.requestAnimationFrame(step);
+  }
+  function isElementInViewportMTS(el) {
+      const rect = el.getBoundingClientRect();
+      // 100px 이하로 화면 안에 들어오면 트리거
+      return rect.top < window.innerHeight - 100 && rect.bottom > 100;
+  }
+  
+  // 애니메이션 실행/해제 관리 변수
+  let mtsGraphAnimated = false;
+  function handleScrollMTS() {
+      const blueBar = document.getElementById('mtsRedBar');
+      if (!blueBar) return;
+      if (isElementInViewportMTS(blueBar)) {
+          if (!mtsGraphAnimated) {
+              animateGraphMTS();
+              mtsGraphAnimated = true;
+          }
+      } else {
+          // 화면 밖으로 나가면 애니메이션 상태 리셋
+          if (mtsGraphAnimated) {
+              resetGraphMTS();
+              mtsGraphAnimated = false;
+          }
+      }
+  }
+  window.addEventListener('scroll', handleScrollMTS);
+  window.addEventListener('load', handleScrollMTS);
+  window.addEventListener('resize', handleScrollMTS);
+  </script>
+  
 
 
+<script>
+function animateDSRCard() {
+  document.getElementById('dsrBar1').classList.add('animated');
+  document.getElementById('dsrBar2').classList.add('animated');
+  animateCountDSR('ltvPercent', 0, 95, 900);
+  animateCountDSR('ltvBarPercent', 0, 95, 900);
+}
+function resetDSRCard() {
+  document.getElementById('dsrBar1').classList.remove('animated');
+  document.getElementById('dsrBar2').classList.remove('animated');
+  document.getElementById('ltvPercent').textContent = 0;
+  document.getElementById('ltvBarPercent').textContent = 0;
+}
+function animateCountDSR(id, start, end, duration) {
+  const obj = document.getElementById(id);
+  let startTime = null;
+  function step(timestamp) {
+    if (!startTime) startTime = timestamp;
+    let progress = Math.min((timestamp - startTime) / duration, 1);
+    let value = Math.floor(progress * (end - start) + start);
+    obj.textContent = value;
+    if (progress < 1) {
+      window.requestAnimationFrame(step);
+    } else {
+      obj.textContent = end;
+    }
+  }
+  window.requestAnimationFrame(step);
+}
+function isDSRCardInView() {
+  const bar = document.getElementById('dsrBar2');
+  if (!bar) return false;
+  const rect = bar.getBoundingClientRect();
+  return rect.top < window.innerHeight - 80 && rect.bottom > 80;
+}
+let dsrCardAnimated = false;
+function handleScrollDSR() {
+  if (isDSRCardInView()) {
+    if (!dsrCardAnimated) {
+      animateDSRCard();
+      dsrCardAnimated = true;
+    }
+  } else {
+    if (dsrCardAnimated) {
+      resetDSRCard();
+      dsrCardAnimated = false;
+    }
+  }
+}
+window.addEventListener('scroll', handleScrollDSR);
+window.addEventListener('load', handleScrollDSR);
+window.addEventListener('resize', handleScrollDSR);
+</script>
+
+<style>
+  /* 독립 금리그래프 네임스페이스, 바 애니메이션은 아래→위로 줄어듦 */
+  .rate-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 24px;
+    width: 100%;
+    justify-content: space-between;
+    margin: 80px auto;
+  }
+  .rate-col { flex: 1 1 0; }
+  .rate-txt { min-width: 320px; max-width: 400px; }
+  .rate-graph { display: flex; justify-content: space-around; align-items: flex-end; }
+  .rate-feature-badge {
+    font-size: 0.96rem;
+    color: #db2222;
+    font-weight: 700;
+    background: #ffe9e9;
+    border-radius: 7px;
+    padding: 3px 12px 2.5px 12px;
+    display: inline-block;
+    margin-bottom: 7px;
+  }
+  .rate-feature-title {
+    font-size: 1.15rem;
+    color: #232b45;
+    font-weight: 700;
+    margin-bottom: 3px;
+    margin-top: 2px;
+    line-height: 1.43;
+  }
+  .rate-feature-desc {
+    color: #8a8e9a;
+    font-size: 1.02rem;
+    margin-bottom: 2px;
+    line-height: 1.57;
+    font-weight: 400;
+    letter-spacing: -.012em;
+  }
+  .rate-graph-card {
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 8px 32px 0 rgba(220, 34, 34, 0.12), 0 2px 8px 0 rgba(30,80,180,0.07);
+    min-width: 320px; max-width: 340px;
+    width: 100%; padding: 30px 28px 22px 28px;
+    display: flex; flex-direction: column; align-items: flex-start;
+    position:relative;
+  }
+  .rate-graph-badge {
+    background: #f9e3e3;
+    color: #db2222;
+    font-weight:700;
+    font-size: 1.02rem;
+    border-radius:8px;
+    padding: 4px 14px 4px 14px;
+    margin-bottom: 10px;
+    display:inline-block;
+  }
+  .rate-graph-title {
+    font-size: 1.18rem;
+    font-weight: 700;
+    color: #232b45;
+    margin-bottom: 9px;
+    line-height: 1.44;
+    letter-spacing: -0.01em;
+  }
+  .rate-graph-title strong {
+    color: #db2222;
+    font-weight: 800;
+  }
+  .rate-graph-sub {
+    color: #db2222;
+    font-size: 1.03rem;
+    font-weight: 700;
+    margin-bottom: 19px;
+    letter-spacing: -.01em;
+    margin-left: 1px;
+  }
+  .rate-arrow { font-size:1.1em; margin-right: 2px; }
+  .rate-bar-graph {
+    display: flex;
+    align-items: flex-end;
+    gap: 20px;
+    width: 100%;
+    justify-content: center;
+    min-height: 134px;
+    margin-top: 5px;
+  }
+  .rate-bar-wrap {
+    position: relative;
+    flex: 1 1 0;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .rate-bar {
+    width: 82px;
+    /* 기본값은 160px로 시작, animated에서 줄어듦 */
+    height: 160px;
+    min-height: 32px;
+    background: #f6eaea;
+    border-radius: 16px;
+    box-shadow: 0 3px 16px 0 rgba(220, 34, 34, 0.07);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    position: relative;
+    overflow: visible;
+    transition: height 1.2s cubic-bezier(.41,1.65,.58,.99);
+  }
+  .rate-bar-gray {
+    background: #f6eaea;
+    color: #db2222;
+    font-weight: 500;
+    font-size: 1.01rem;
+    box-shadow: none;
+  }
+  .rate-bar-blue {
+    background: linear-gradient(176deg, #ff9e9e 0%, #db2222 100%);
+    color: #fff;
+    font-size: 1.07rem;
+    font-weight: 700;
+    box-shadow: 0 10px 38px 0 rgba(220, 34, 34, 0.13), 0 2px 10px 0 rgba(220, 34, 34, 0.08);
+    transition: height 1.2s cubic-bezier(.41,1.65,.58,.99), box-shadow 0.8s;
+  }
+  .rate-bar-label {
+    position: absolute;
+    left: 0; top: -26px;
+    width: 100%;
+    color: #db2222;
+    font-size: 0.97rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-align: center;
+  }
+  .rate-bar-value {
+    font-size: 1.16rem;
+    width:82px;
+    font-weight: 700;
+    color: inherit;
+    margin: 8px 0 8px 0;
+    letter-spacing: -0.01em;
+    text-align: center;
+    display: block;
+  }
+  .rate-bar-blue .rate-bar-label {
+    color: #fff;
+    opacity: 0.85;
+    font-size: 1.02rem;
+    top: -32px;
+    font-weight: 700;
+    text-shadow: 0 2px 12px rgba(220,34,34,0.11);
+  }
+  .rate-bar-flag {
+    width:104px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: -38px;
+    background: #fff;
+    color: #db2222;
+    font-weight: 800;
+    font-size: 0.64rem;
+    padding: 4px 13px 4px 13px;
+    border-radius: 22px;
+    box-shadow: 0 2px 8px 0 rgba(220,34,34,0.13);
+    opacity: 0;
+    transition: opacity .8s 1s;
+    pointer-events: none;
+    text-align:center;
+    letter-spacing: -.01em;
+  }
+  .rate-bar-blue.animated .rate-bar-flag { opacity: 1;}
+  /* ★★ 1번 바 효과: 160px → 105px */
+  .rate-bar-gray.animated#rateGrayBar1 { height: 105px !important; }
+  /* ★★ 2번 바 효과: 160px → 73px */
+  .rate-bar-gray.animated#rateGrayBar2 { height: 73px !important; }
+  /* ★★ 3번(파란색) 바 효과: 160px → 32px (최저) */
+  .rate-bar-blue.animated#rateBlueBar { height: 52px !important; box-shadow: 0 22px 42px 0 rgba(220,34,34,0.16), 0 2px 10px 0 rgba(220,34,34,0.09);}
+  @media (max-width:900px) {
+    .rate-row { flex-direction: column; gap: 33px; align-items: stretch;}
+    .rate-col, .rate-txt, .rate-graph { min-width:0; max-width:100vw;text-align: center;}
+    .rate-graph-card { width:100%;max-width:340px;}
+  }
+  @media (max-width:420px) {
+    .rate-graph-title { font-size:1.12rem;}
+  }
+  </style>
+  
+  <script>
+    // 금리그래프 효과(위에서 아래로 내려옴)
+    function animateGraphRATE() {
+        document.getElementById('rateGrayBar1').classList.add('animated');
+        document.getElementById('rateGrayBar2').classList.add('animated');
+        document.getElementById('rateBlueBar').classList.add('animated');
+        animateCountRATE('ratePercentCount', 0, 3.2, 800, true);
+        animateCountRATE('rateSubPercentCount', 0, 1.3, 800, true);
+        animateCountRATE('rateFlagPercentCount', 0, 3.2, 800, true);
+    }
+    function resetGraphRATE() {
+        document.getElementById('rateGrayBar1').classList.remove('animated');
+        document.getElementById('rateGrayBar2').classList.remove('animated');
+        document.getElementById('rateBlueBar').classList.remove('animated');
+        document.getElementById('ratePercentCount').textContent = 0;
+        document.getElementById('rateSubPercentCount').textContent = 0;
+        document.getElementById('rateFlagPercentCount').textContent = 0;
+    }
+    function animateCountRATE(id, start, end, duration, isFloat) {
+        const obj = document.getElementById(id);
+        let startTime = null;
+        function step(timestamp) {
+            if (!startTime) startTime = timestamp;
+            let progress = Math.min((timestamp - startTime) / duration, 1);
+            let value = progress * (end - start) + start;
+            obj.textContent = isFloat ? value.toFixed(1) : Math.floor(value);
+            if (progress < 1) {
+                window.requestAnimationFrame(step);
+            } else {
+                obj.textContent = isFloat ? end.toFixed(1) : end;
+            }
+        }
+        window.requestAnimationFrame(step);
+    }
+    function isElementInViewportRATE(el) {
+        const rect = el.getBoundingClientRect();
+        return rect.top < window.innerHeight - 100 && rect.bottom > 100;
+    }
+    let rateGraphAnimated = false;
+    function handleScrollRATE() {
+        const blueBar = document.getElementById('rateBlueBar');
+        if (!blueBar) return;
+        if (isElementInViewportRATE(blueBar)) {
+            if (!rateGraphAnimated) {
+                animateGraphRATE();
+                rateGraphAnimated = true;
+            }
+        } else {
+            if (rateGraphAnimated) {
+                resetGraphRATE();
+                rateGraphAnimated = false;
+            }
+        }
+    }
+    window.addEventListener('scroll', handleScrollRATE);
+    window.addEventListener('load', handleScrollRATE);
+    window.addEventListener('resize', handleScrollRATE);
+  </script>
 
 <section id="ultra-steps">
   <div class="ultrasteps__container">
@@ -955,8 +3468,219 @@
 </section>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@600;900&family=Pretendard:wght@600;900&display=swap');
+#ultra-steps {
+  font-family: 'Pretendard','Inter','Noto Sans KR',sans-serif;
+  background: linear-gradient(125deg,#e7f4ff 65%,#f8fbfc 100%);
+  min-height: 560px;
+  padding: 5vw 0 5vw 0;
+  position: relative;
+  z-index:2;
+  background: #f4f8fd;
+  display: flex; align-items: center; justify-content: center;
+}
+.ultrasteps__container {
+  max-width: 840px; margin: 0 auto;
+  width: 97%;
+  background: rgba(255,255,255,0.93);
+  border-radius: 38px;
+  box-shadow: 0 8px 54px 0 rgba(40,124,255,0.10),0 2.5px 17px 0 rgba(150,210,255,0.13);
+  padding: 6vw 4vw 4vw 4vw;
+  backdrop-filter: blur(18px) brightness(1.08);
+  border: 1.6px solid rgba(204,234,255,0.19);
+  position:relative;
+  overflow: visible;
+  min-width: 270px;
+}
+.ultrasteps__header {
+  text-align: center; margin-bottom: 5vw;
+}
+.ultrasteps__badge {
+  display: inline-block;
+  font-size: 1.04rem;
+  font-weight: 900;
+  color: #1596ff;
+  background: linear-gradient(97deg,#eaf6ff 75%,#e3e9ff 100%);
+  border-radius: 9.5px;
+  padding: 8px 20px 8px 20px;
+  margin-bottom: 16px;
+  letter-spacing: 0.035em;
+  box-shadow: 0 2px 13px 0 rgba(36,124,255,0.05);
+}
+.ultrasteps__header h2 {
+  font-size: 2.09rem;
+  font-weight: 900;
+  color: #213960;
+  margin: 0 0 0.18em 0;
+  letter-spacing: -0.017em;
+  word-break: keep-all;
+}
+.ultrasteps__header h2 span { color:#068aff; }
+.ultrasteps__header p {
+  font-size: 1.11rem;
+  color: #6692c2;
+  font-weight: 700;
+  margin: 9px 0 0 0;
+  letter-spacing: -0.011em;
+}
+.ultrasteps__list {
+  list-style: none;
+  margin: 0; padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  align-items: center;
+  position:relative;
+  z-index:2;
+  width:100%;
+}
+.ultrasteps__item {
+  display: flex; flex-direction: row; align-items: center;
+  width: 100%;
+  background: rgba(255,255,255,0.98);
+  border-radius: 25px;
+  box-shadow: 0 12px 38px 0 rgba(34,140,255,0.09), 0 2.8px 13px 0 rgba(45,165,255,0.10);
+  padding: 3.5vw 4vw 3vw 3vw;
+  min-height: 84px;
+  position: relative;
+  opacity: 0; transform: translateY(44px) scale(.99);
+  animation: fadeUpUltraStep 1s cubic-bezier(.41,1.65,.58,.99) both;
+  will-change: opacity,transform;
+  transition: box-shadow .19s cubic-bezier(.23,1.21,.62,.99);
+  z-index:2;
+  margin-bottom:0;
+}
+.ultrasteps__item:hover {
+  box-shadow: 0 10px 52px 0 rgba(40,120,255,0.16),0 4px 21px 0 rgba(45,185,255,0.13);
+  z-index:3;
+  transform: scale(1.025) translateY(-1px);
+}
+.ultrasteps__icon {
+  flex: 0 0 56px;
+  width: 56px; height: 56px;
+  margin-right: 5vw;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  background: transparent;
+  filter: drop-shadow(0 6px 32px rgba(36,124,255,0.07));
+  transition: transform 0.33s cubic-bezier(.23,1.41,.72,1.09), box-shadow 0.29s cubic-bezier(.18,1.15,.72,1.05);
+  will-change: transform,box-shadow;
+  box-shadow: 0 2px 13px 0 rgba(36,124,255,0.10);
+  border: 0.7px solid rgba(114,179,255,0.15);
+  z-index: 3;
+}
+.ultra-glass {
+  background: linear-gradient(140deg,rgba(255,255,255,0.83) 54%,rgba(189,222,255,0.20) 100%);
+  box-shadow: 0 1.4px 14px 0 rgba(84,188,255,0.11);
+  backdrop-filter: blur(7px);
+}
+.ultrasteps__item:hover .ultrasteps__icon {
+  transform: scale(1.08) rotate(-2deg);
+  box-shadow: 0 6px 27px 0 rgba(36,124,255,0.19);
+}
+.ultrasteps__text {
+  text-align: left;
+  flex: 1 1 0;
+  z-index:3;
+}
+.ultrasteps__text strong {
+  font-size: 1.13rem;
+  color: #183457;
+  font-weight: 900;
+  display: block;
+  margin-bottom: 2px;
+  letter-spacing: -.011em;
+  line-height:1.24;
+  word-break:keep-all;
+}
+.ultrasteps__text strong span { color:#048bfa;}
+.ultrasteps__text > span {
+  display: block;
+  color: #7fa1bc;
+  font-size: 1.02rem;
+  font-weight: 500;
+  margin-top: 8px;
+  line-height: 1.45;
+  letter-spacing: -.012em;
+}
 
+.ultrasteps__arrow {
+  width:100%; text-align:center; z-index: 1; position:relative; height:44px; margin-bottom:-9px; margin-top:-9px; pointer-events: none;
+  display: flex; align-items: center; justify-content: center;
+  min-height:32px;
+}
+.arrow-down-bounce {
+  display:inline-block; font-size:2.17em; color:#93c6f5;
+  animation: arrowBounce 1.1s infinite cubic-bezier(.55,1.65,.54,.83);
+  filter:drop-shadow(0 2px 7px #c8e9ff99);
+  font-weight:900; line-height:1;
+  user-select: none;
+  margin:0 auto;
+}
+@keyframes arrowBounce {
+  0%, 100% { transform: translateY(0);}
+  40% { transform: translateY(12px);}
+  65% { transform: translateY(5px);}
+}
+@keyframes fadeUpUltraStep { to { opacity: 1; transform: none;} }
+
+@media (max-width: 1024px) {
+  .ultrasteps__container {padding: 4vw 2vw 2vw 2vw;}
+  .ultrasteps__item {padding: 3vw 2.5vw 2.2vw 2vw;}
+  .ultrasteps__icon {margin-right: 3vw;}
+}
+@media (max-width: 700px) {
+  .ultrasteps__container {max-width:99vw;}
+  .ultrasteps__header h2{font-size:1.32rem;}
+  .ultrasteps__item {padding:12px 4vw 11px 2vw;}
+  .ultrasteps__icon{width:38px;height:38px;}
+  .ultrasteps__arrow {height:33px; min-height:20px;}
+  .arrow-down-bounce{font-size:1.3em;}
+}
+@media (max-width: 470px) {
+  #ultra-steps {padding:6vw 0 2vw 0;}
+  .ultrasteps__container {padding:2vw 1vw 1vw 1vw;}
+  .ultrasteps__item {padding:10px 3vw 8px 2vw; min-height:57px;}
+  .ultrasteps__icon{width:31px;height:31px;}
+  .ultrasteps__text strong {font-size:0.94rem;}
+  .ultrasteps__text > span {font-size:0.89rem;}
+  .ultrasteps__arrow {height:27px; min-height:16px;}
+  .arrow-down-bounce{font-size:1.06em;}
+}
+@media (max-width: 370px) {
+  .ultrasteps__container {padding:2vw 0.5vw;}
+  .ultrasteps__item {padding:5px 0 5px 0;}
+  .ultrasteps__text strong {font-size:0.79rem;}
+  .ultrasteps__text > span {font-size:0.72rem;}
+  .ultrasteps__arrow {height:20px;}
+}
 </style>
+<script>
+(function(){
+  function isInViewUltraSteps() {
+    const section = document.getElementById('ultra-steps');
+    if (!section) return false;
+    const rect = section.getBoundingClientRect();
+    return rect.top < window.innerHeight - 80 && rect.bottom > 60;
+  }
+  let animated = false;
+  function animateUltraSteps() {
+    const steps = document.querySelectorAll('#ultra-steps .ultrasteps__item');
+    if(isInViewUltraSteps() && !animated) {
+      steps.forEach(el=>el.style.animationPlayState='running');
+      animated = true;
+    } else if(!isInViewUltraSteps() && animated) {
+      steps.forEach(el=>{
+        el.style.animation='none'; void el.offsetWidth; el.style.animation='';
+      });
+      animated = false;
+    }
+  }
+  window.addEventListener('scroll', animateUltraSteps);
+  window.addEventListener('load', animateUltraSteps);
+  window.addEventListener('resize', animateUltraSteps);
+})();
+</script>
 
 <!-- ─────────────  SECTION : SUPERCARDS  ───────────── -->
 <!-- <section id="section-supercards">
@@ -1005,229 +3729,517 @@
 
 <!-- ─────────────  STYLE (최적화)  ───────────── -->
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Pretendard:wght@600;800;900&display=swap');
+:root{--blue:#247cff;--gray:#24315b}
 
+#section-supercards{background:#f4f8fd;padding:54px 0;text-align:center;position: relative;z-index:2;}
+.supercards__hl-blue{color:var(--blue);font-weight:900}
+.supercards__container{display:flex;gap:34px;flex-wrap:wrap;justify-content:center}
+
+.supercard{
+  width:100%;max-width:420px;min-height:340px;border-radius:24px;overflow:hidden;
+  background:#fff;border:1px solid #e8eaf5;box-shadow:0 6px 20px rgba(0,0,0,.08);
+  display:flex;flex-direction:column;align-items:stretch;
+  /* 초기 상태 (보이지 않을 때) */
+  opacity:0;transform:translateY(60px) scale(.96);
+  transition:opacity .55s ease,transform .55s cubic-bezier(.22,1,.36,1);
+}
+.supercard.show{opacity:1;transform:none}               /* 화면에 보이면 */
+.supercard:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 12px 28px rgba(0,0,0,.12)}
+
+.supercard__image{min-height:160px;display:flex;justify-content:center;align-items:center}
+.supercard__image--illust{background:linear-gradient(94deg,#fdf6f3 35%,#eaf3ff 100%)}
+.supercard__image--greenbg{background:linear-gradient(96deg,#e4f8f5 65%,#f9fffd 100%)}
+.supercard__image img{width:88%;border-radius:16px;object-fit:cover}
+
+.supercard__body{padding:24px 18px 20px}
+.supercard__desc{font:700 1.05rem/1.45 'Pretendard',sans-serif;color:var(--gray);margin-bottom:14px}
+.supercard__highlight{font-weight:900;color:#19b795}
+.supercard__btn{display:block;width:100%;padding:14px 0;border-radius:44px;font:900 1.02rem/1 'Pretendard';
+  background:#eaf0fa;color:#2268b4;box-shadow:0 2px 8px rgba(0,0,0,.06);transition:filter .2s}
+.supercard__btn--red{background:linear-gradient(95deg,#fc3b27 60%,#f9b0a2 100%);color:#fff}
+.supercard__btn--green{background:linear-gradient(95deg,#1cbfa7 70%,#8bf7e2 100%);color:#fff}
+.supercard__btn--blue{background:linear-gradient(95deg, #0c5cff 60%, #9ab9f9 100%);color:#fff}
+
+
+.supercard__btn:hover{filter:brightness(1.08)}
+
+@media (max-width: 1360px){
+   /* 컨테이너 : 일반 플렉스 래핑 / 스크롤 없앰 */
+   .supercards__container{
+    flex-wrap: wrap;           /* 여러 줄 허용 */
+    flex-direction: row;       /* 기본값 유지 */
+    gap: 20px;                 /* 카드 간 여백 */
+    overflow: visible;         /* 가로 스크롤/스크롤바 제거 */
+    scroll-snap-type: none;    /* 이전 스냅 설정 무효화 */
+    padding-bottom: 0;         /* 불필요한 공간 제거 */
+  }
+  /* 카드 : 전체 너비 사용 */
+  .supercard{
+    flex: 1 1 100%;            /* 남는 공간만큼 늘어남 */
+    max-width: 100%;
+    margin: 0;                 /* 양쪽 여백 제거 */
+    scroll-snap-align: none;   /* 스냅 무효화 */
+  }
+  /* 혹시 남아 있을 수 있는 iOS 오버스크롤 속성도 초기화 */
+  .supercards__container{-webkit-overflow-scrolling: auto;}
+}
+</style>
+
+<!-- ─────────────  JS (초경량)  ───────────── -->
+<script>
+document.addEventListener('DOMContentLoaded',()=>{
+  const cards = document.querySelectorAll('#section-supercards .supercard');
+  const io = new IntersectionObserver((entries,obs)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        e.target.classList.add('show');   // 1) 보이면 애니메이션
+        obs.unobserve(e.target);          // 2) 1회만 실행 → 부하 ZERO
+      }
+    });
+  },{threshold:0.25});
+  cards.forEach(c=>io.observe(c));
+});
+</script>
+
+<section id="form-pinder">
+<div id="pinder-form-inner">
+  <div class="gc-deco"></div>
+  <div class="gc-header">
+    <h2>신용도 영향 없는<br><span>무료 우대 한도 찾기</span></h2>
+    <p>별도의 상담비용 없이 친절상담으로<br>최적의 상품을 제공합니다.</p>
+  </div>
+
+  <div class="gc-stepbar">
+    <div class="gc-progress"><div class="gc-progress-fill"></div></div>
+  </div>
+
+  <form id="form_e11" name="frm_phonecall_web" action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse" method="post" target="hidden_iframe11" onsubmit="dll(); submitted=true;"  class="gc-form" novalidate>
+    <input type="hidden" name="entry.706813848" value="본문 신청폼">  
+    <div class="gc-row">
+      <label><span>이름<span class="req">*</span></span>
+        <input type="text" id="name" name="entry.112176011"  placeholder="성함을 입력해주세요." maxlength="4">
+      </label>
+      <label><span>연락처<span class="req">*</span></span>
+        <input type="text" id="phone" name="entry.1513806965" placeholder="연락처를 입력해주세요." maxlength="11" required>
+      </label>
+    </div>
+
+    <div class="gc-row">
+      <label><span>상담분야<span class="req">*</span></span>
+        <select  name="entry.1413572286" id="intro_select" >
+          <option selected disabled>대출 유형 선택</option>
+          <option value="차량담보대출">차량담보대출</option>
+          <option value="주택담보대출">주택담보대출</option>
+          <option value="주담대 갈아타기">주담대 갈아타기</option>
+          <option value="직장인대출">직장인대출</option>
+          <option value="채무통합">채무통합</option>
+          <option value="생활비대출">생활비대출</option>
+          <option value="사업자대출">사업자대출</option>
+          <option value="신용카드소지자대출">신용카드소지자대출</option>
+        </select>
+      </label>
+      <!-- <label class="gc-inline"><span>희망상담일자</span>
+        <input type="date">
+      </label> -->
+    </div>
+
+    <div class="gc-row gc-full">
+      <label><span>상담내용</span>
+        <textarea name="entry.874414792" id="message" placeholder="상담하고 싶은 내용을 남겨주세요."></textarea>
+      </label>
+    </div>
+
+    <div class="gc-row gc-footer">
+      <label class="gc-consent">
+        <input type="checkbox" name="agree_r1" id="agree11" checked>
+        개인정보 수집·이용에 동의합니다.<span class="req">*</span>
+      </label>
+      <input type="submit" id="send_message" class="gc-button" value="무료 상담 신청하기">
+    </div>
+  </form>
+</div>
+</section>
+  
+  <style>
+
+#form-pinder{
+  width:100%;
+  background: #fff;
+  position:relative;
+    z-index:2;
+    /* margin: 5rem auto; */
+    padding: 3rem;
+    text-align: -webkit-center;
+}
+
+    /* container & animation */
+  #pinder-form-inner {
+
+    max-width: 920px;
+
+    padding: 3rem;
+    background: #fff !important;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.1);
+    font-family: 'Noto Sans KR', sans-serif;
+    color: #222;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: gloryFadeInUp 0.8s ease-out forwards;
+  }
+  @keyframes gloryFadeInUp {
+    to { opacity:1; transform:translateY(0); }
+  }
+
+  /* decorative bar */
+  #pinder-form-inner .gc-deco {
+    width: 60px;
+    height: 6px;
+    background: linear-gradient(90deg,#dcbe4e,#f8e18c);
+    margin: 0 auto 1rem;
+    border-radius: 3px;
+  }
+
+  /* header */
+  #pinder-form-inner .gc-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+  }
+  #pinder-form-inner .gc-header h2 {
+    font-size: 2.75rem;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+  #pinder-form-inner .gc-header h2 span {
+    display: block;
+    font-size: 1.8rem;
+    color: #dcbe4e;
+    margin-top: 0.2rem;
+  }
+  #pinder-form-inner .gc-header p {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.6;
+  }
+
+  /* step bar */
+  #pinder-form-inner .gc-stepbar {
+    margin-bottom: 2rem;
+  }
+  #pinder-form-inner .gc-progress {
+    height: 4px;
+    background: #eee;
+    border-radius: 2px;
+    overflow: hidden;
+  }
+  #pinder-form-inner .gc-progress-fill {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,#dcbe4e,#bfa742);
+    transition: width 0.5s ease;
+  }
+
+  /* form and rows */
+  #pinder-form-inner .gc-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+  }
+  #pinder-form-inner .gc-row {
+    display: flex;
+    gap: 1rem;
+  }
+  #pinder-form-inner .gc-full {
+    flex-direction: column;
+  }
+
+  /* labels & inputs */
+  #pinder-form-inner label {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  #pinder-form-inner label span {
+    margin-bottom: 0.4rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-align: left;
+  }
+  #pinder-form-inner .req {
+    color: #d33;
+    margin-left: 0.2rem;
+  }
+  #pinder-form-inner input,
+  #pinder-form-inner select,
+  #pinder-form-inner textarea {
+    padding: 0.75rem 1rem;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+  }
+  #pinder-form-inner input:focus,
+  #pinder-form-inner select:focus,
+  #pinder-form-inner textarea:focus {
+    border-color: #dcbe4e;
+    box-shadow: 0 0 0 4px rgba(220,190,78,0.2);
+    outline: none;
+  }
+  #pinder-form-inner textarea {
+    min-height: 160px;
+    resize: vertical;
+  }
+
+  /* inline date */
+  #pinder-form-inner .gc-inline {
+    max-width: 240px;
+  }
+
+  /* footer */
+  #pinder-form-inner .gc-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+    flex-direction: column;
+  }
+  #pinder-form-inner .gc-consent {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    flex-direction: row;
+    
+  }
+  #pinder-form-inner .gc-button {
+    background: linear-gradient(90deg,#dcbe4e,#bfa742);
+    padding: 0.85rem 2.2rem;
+    border: none;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    min-width: 160px;
+  }
+  #pinder-form-inner .gc-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+  }
+
+  /* responsive */
+  @media (max-width: 768px) {
+    #pinder-form-inner .gc-row {
+      flex-direction: column;
+    }
+    #pinder-form-inner .gc-footer {
+      flex-direction: column-reverse;
+      gap: 1rem;
+    }
+  }
+  </style>
+  
+
+
+
+<footer id="footer-section">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">
+        <img src="./img/logo-black.png" alt="회사 로고" style="height: 42px;">
+        <!-- <span class="footer-brand">토스 Toss</span> -->
+      </div>
+      <!-- <div class="footer-links">
+        <a href="#">회사소개</a>
+        <a href="#">이용약관</a>
+        <a href="#">개인정보처리방침</a>
+        <a href="#">고객센터</a>
+        <a href="#">채용</a>
+      </div> -->
+    </div>
+    <div class="footer-mid">
+      <div class="footer-contact">
+        <p><b>상호</b> 제이와이원 대부중개</p>
+        <p><b>사업자등록번호</b> 110111-7598133</p>
+        <p><b>대부업등록번호</b> 2020-서울노원-0013</p>
+        <p><b>등록기관</b> 노원구 일자리경제과 ☎ 02-2116-3484</p>
+        <p><b>대표</b> 심재윤</p>
+        <p><b>소재지</b> 서울특별시 노원구 화랑로 441, 미라쉘 301호 (공릉동)</p>
+      </div>
+      <!-- <div class="footer-social">
+        <a href="#" aria-label="페이스북"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook" /></a>
+        <a href="#" aria-label="인스타그램"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram" /></a>
+        <a href="#" aria-label="유튜브"><img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube" /></a>
+      </div> -->
+    </div>
+
+    <div class="footer-disclaimer">
+      <p>대출금리: 연 ~20%이내 (담보대출에 한해 심사기준에 따라 차등적용)</p>
+      <p>연체이율: 연 ~20% 이내 | <strong>중개수수료 없음</strong></p>
+      <p>중개수수료를 요구하거나 받는 것은 <b>불법</b>이며, 대출과 관련된 일체 수수료를 받지 않습니다.</p>
+      <p>취급수수료 등 <strong>기타 부대비용 없음</strong> / 상환방법: 원리금균등상환방식, 만기일시상환방식</p>
+      <p>이자 외 추가비용 없음 (단, 일부 담보대출에 한해 저당설정·해지비용 및 조기상환수수료 발생 가능)</p>
+      <p><b>단, 이자와 조기상환 수수료의 합산액은 20%를 초과하지 않음</b></p>
+      <p>광고된 상품의 상환기간은 <strong>모두 60일 이상</strong>이며, <strong>최장 120개월 미만</strong>입니다.</p>
+      <p><strong>예시</strong>: 1,000,000원을 12개월간 연 20% 이율로 대출 시 총 상환금액은 1,111,614원<br>(상품에 따라 다를 수 있음)</p>
+      <p>근로자 최저금리 안심대출 상담은 100% 무료이며 <strong>신용점수에 영향 없음</strong></p>
+      <p><strong>주의</strong>: 과도한 대출은 신용등급 하락 및 재정적 부담을 초래할 수 있습니다.</p>
+    
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copyright">
+        &copy; 2025 Pinder Corp. All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style>
+#footer-section {
+  position:relative;
+  z-index:2;
+  background: #f7fafd;
+  border-top: 1px solid #e3e8f0;
+  color: #222b45;
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', Arial, sans-serif;
+  padding: 0 0 220px 0;
+}
+.footer-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 36px 18px 18px 18px;
+  box-sizing: border-box;
+}
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 30px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #e3e8f0;
+  padding-bottom: 22px;
+}
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.footer-brand {
+  font-size: 1.23rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: #247cff;
+}
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+.footer-links a {
+  color: #495475;
+  font-size: 1.05rem;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color .2s;
+}
+.footer-links a:hover { color: #247cff; }
+.footer-mid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 20px;
+  margin: 22px 0 0 0;
+  flex-wrap: wrap;
+}
+.footer-contact p {
+  margin: 2px 0 2px 0;
+  color: #6b7893;
+  font-size: 0.97rem;
+}
+.footer-social {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+}
+.footer-social a img {
+  width: 28px;
+  height: 28px;
+  filter: grayscale(1) opacity(.5);
+  transition: filter .2s;
+}
+.footer-social a:hover img {
+  filter: none;
+  opacity: 1;
+}
+.footer-bottom {
+  margin-top: 22px;
+  text-align: right;
+}
+.footer-copyright {
+  color: #8a94a6;
+  font-size: 0.98rem;
+  margin: 0;
+}
+
+@media (max-width: 700px) {
+  .footer-top, .footer-mid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 14px;
+  }
+  .footer-inner { padding: 22px 8px 10px 8px; }
+  .footer-bottom { text-align: left; margin-top: 14px; }
+}
+
+
+.footer-disclaimer {
+  margin-top: 28px;
+  padding: 18px 20px;
+  /* background: #f0f4f9; */
+  /* border: 1px solid #e0e6ef; */
+  border-radius: 8px;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #444e5a;
+}
+.footer-disclaimer strong {
+  /* color: #1b3fa0; */
+}
+.footer-disclaimer b {
+  /* color: #d43d3d; */
+}
+.footer-disclaimer .biz-info {
+  margin-top: 10px;
+  font-size: 0.82rem;
+  /* color: #6a7484; */
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .footer-disclaimer {
+    font-size: 0.8rem;
+    padding: 0;
+  }
+}
 </style>
 
 
 
+</body>
 <script src="./js/jquery-1.8.3.min.js"></script>
- 
-
-  
-<section id="floating-menu">
-<div class="bottom_contact pc_img">
-    <div class="inner clfix">
-        <div class="title">
-          <a > 
-<span class="tit" style="color:#fff;">신용도 영향 없는</span></a>
-            <span class="tel"><a>무료 한도 조회</a><img src="./img/click_icon.png" alt="" class="click_img"></span>
-        </div><!-- // title -->
-        <div class="input_wrap">
-            <form id="form_e12" name="frm_phonecall_web" action="" method="post" target="hidden_iframe12" onsubmit="dll2(); submitted2=true;">
-                <input type="hidden" name="entry.1351654586"  value="pc 플로팅 메뉴 신청">
-
-                <ul class="clfix">
-                    <li>
-                        <span>성명</span>
-                        <input type="text" id="pc_name" name="entry.930783489" >
-                    </li>
-                    <li>
-                        <span>연락처</span>
-                        <input type="text"  id="pc_phone" name="entry.1125794908" maxlength="11">
-                    </li>
-                    <li>
-        <select name="entry.150561892" id="pc_select" class="select2">
-          <option selected disabled>대출 유형 선택</option>
-          <option value="차량담보대출">차량담보대출</option>
-          <option value="주택담보대출">주택담보대출</option>
-          <option value="주담대 갈아타기">주담대 갈아타기</option>
-          <option value="직장인대출">직장인대출</option>
-          <option value="채무통합">채무통합</option>
-          <option value="생활비대출">생활비대출</option>
-          <option value="사업자대출">사업자대출</option>
-          <option value="신용카드소지자대출">신용카드소지자대출</option>
-                                                                
-            
-        </select>
-                    </li>
-                </ul><!-- // clfix -->
-    <div class="b_check check_bar">
-      <input type="checkbox" checked name="policy_agree" value="1" id="agree12" style="display:inline;appearance: auto;margin-left: 40px;">
-      <span style="color:#fff;">개인정보 수집 및 이용 동의</span>  <span class="privacyBtn" style="color:fff;font-weight:400; font-size: 13px;margin-top:-3px;cursor:pointer; " onclick="privacyPopUp()">
-        [개인정보취급동의]
-    </span><span id="pc_alert" style="margin-left:40px;color:#fff;font-size:13px;"></span>
-     
-      
-    </div>
-           
-        </div><!-- // input_wrap -->
-        <div class="go_btn">
-            <button id="pc_btn" disabled>상담 신청</button>
-        </div>
-    </div><!-- // inner -->
-</div><!-- // bottom_contact -->
-</form>
-
-<div class="bottom_contact_mob mob_img">
-    <div class="top_thumb">
-<div class="title">
-  <a ></a>
-  <a  style="display:contents;width:100%;max-width:300px;"> <img src="./img/click_icon.png" alt="" class="click_img">
-  <span class="tit">신용 영향 없는</span>
-  <span class="tel">30초 무료 한도 조회</span></a>
-</div><!-- // title -->
-<div class="btn">
-  <a href="javascript:void(0)" style="font-size:0.9rem;border-radius:10px;">무료 상담</a>
-</div><!-- // btn -->
-    </div><!-- // top_thumb -->
-    <div class="bottom_con" style="margin-top:-16px;">
-        <div class="inner">
-            <form name="frm_phonecall_mob" id="form_e13" method="post" target="hidden_iframe13" onsubmit="dll3(); submitted3=true;">
-              <input type="hidden" name="entry.1351654586"  value="mobile 신청">
-                <ul class="in_wrap clfix">
-                    <li>
-                        <span>성명</span>
-                        <input type="text" class="r_input" name="entry.930783489"  id="mob_name">
-                    </li>
-                    <li>
-                        <span>연락처</span>
-                        <input type="text" class="r_input wr_tel" name="entry.1125794908" maxlength="11" id="mob_phone">
-                    </li>
-                    <li>
-        <select name="entry.150561892" id="mob_select" class="select3">
-          <option selected disabled>대출 유형 선택</option>
-          <option value="차량담보대출">차량담보대출</option>
-          <option value="주택담보대출">주택담보대출</option>
-          <option value="주담대 갈아타기">주담대 갈아타기</option>
-          <option value="직장인대출">직장인대출</option>
-          <option value="채무통합">채무통합</option>
-          <option value="생활비대출">생활비대출</option>
-          <option value="사업자대출">사업자대출</option>
-          <option value="신용카드소지자대출">신용카드소지자대출</option>
-                                                                        
-                                                               
-        
-        </select>
-                    </li>
-                </ul><!-- // clfix -->
-    <div class="b_check">
-      <input type="checkbox" checked name="policy_agree" value="1" id="agree13" style="display: inline;">
-      <span>개인정보 수집 및 이용 동의</span>  <span class="privacyBtn" style="color:fff;font-weight:400; font-size: 13px;margin-top:-3px;cursor:pointer; " onclick="privacyPopUp()">
-        [개인정보취급동의]
-    </span>
-    </div>
-                <div class="m_go_btn">
-                    <button  id="mob_btn" style="color:#fff;width:100%;font-size:1em;padding: 15px 10px;
-    border-radius: 10px;background: #000;" disabled>상담신청</button>
-                </div>
-            </form>
-            <script type="text/javascript">var submitted = false;</script>
-            <iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
-            <script type="text/javascript">var submitted2 = false;</script>
-            <iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
-
-            
-<script type="text/javascript">var submitted3 = false;</script>
-<iframe name="hidden_iframe13" id="hidden_iframe13" style="display:none;" onload=""></iframe>
-        </div><!-- // inner -->
-    </div><!-- // bottom_con -->
-</div><!-- // bottom_contact_mob -->
-</section>
-
-<section id="form-pinder">
-  <div id="pinder-form-inner">
-    <div class="gc-deco"></div>
-    <div class="gc-header">
-      <h2>신용도 영향 없는<br><span>무료 우대 한도 찾기</span></h2>
-      <p>별도의 상담비용 없이 친절상담으로<br>최적의 상품을 제공합니다.</p>
-    </div>
-  
-    <div class="gc-stepbar">
-      <div class="gc-progress"><div class="gc-progress-fill"></div></div>
-    </div>
-  
-    <form id="form_e11" name="frm_phonecall_web" action="" method="post" target="hidden_iframe11" onsubmit="dll(); submitted=true;"  class="gc-form" novalidate>
-      <input type="hidden" name="entry.1351654586" value="본문 신청폼">  
-      <input type="hidden" name="entry.1333144875" value="구글">  
-      <div class="gc-row">
-        <label><span>이름<span class="req">*</span></span>
-          <input type="text" id="name" name="entry.930783489"  placeholder="성함을 입력해주세요." maxlength="4">
-        </label>
-        <label><span>연락처<span class="req">*</span></span>
-          <input type="text" id="phone" name="entry.1125794908" placeholder="연락처를 입력해주세요." maxlength="11" required>
-        </label>
-      </div>
-  
-      <div class="gc-row">
-        <label><span>상담분야<span class="req">*</span></span>
-          <select  name="entry.150561892" id="intro_select" >
-            <option selected disabled>대출 유형 선택</option>
-            <option value="차량담보대출">차량담보대출</option>
-            <option value="주택담보대출">주택담보대출</option>
-            <option value="주담대 갈아타기">주담대 갈아타기</option>
-            <option value="직장인대출">직장인대출</option>
-            <option value="채무통합">채무통합</option>
-            <option value="생활비대출">생활비대출</option>
-            <option value="사업자대출">사업자대출</option>
-            <option value="신용카드소지자대출">신용카드소지자대출</option>
-          </select>
-        </label>
-        <!-- <label class="gc-inline"><span>희망상담일자</span>
-          <input type="date">
-        </label> -->
-      </div>
-  
-      <div class="gc-row gc-full">
-        <label><span>상담내용</span>
-          <textarea name="entry.1551010081" id="message" placeholder="상담하고 싶은 내용을 남겨주세요."></textarea>
-        </label>
-      </div>
-  
-      <div class="gc-row gc-footer">
-        <label class="gc-consent">
-          <input type="checkbox" name="agree_r1" id="agree11" checked>
-          개인정보 수집·이용에 동의합니다.<span class="req">*</span>
-          
-        </label>
-        <span class="privacyBtn" style="color:black;font-weight:400; font-size: 13px;margin-top:-3px;cursor:pointer; " onclick="privacyPopUp()">
-          [개인정보취급방침]
-      </span>
-        <input type="submit" id="send_message" class="gc-button" value="무료 상담 신청하기">
-      </div>
-    </form>
-  </div>
-  </section>
-
-
-
-
-
-
-  
-
-
-
-
-
-
-
-
-
-
-    
-
-  
-  <div id="footer_template"></div>
-
-
-<script src="./js/menu.js"></script>
-<script src="./js/main.js"></script>
-<script src="./js/personal.js"></script>
-<script src="./js/validation.js"></script>
+<script src="./js/main-row.js"></script>
+<script src="./js/menu.js" defer></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <script src="./js/validation-float-pc.js"></script>
 <script src="./js/validation-float-mob.js"></script>
 
+
 <script src="./js/footer.js" defer></script>
-</body>
+<script src="./js/validation.js"></script>
 </html>
