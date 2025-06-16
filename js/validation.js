@@ -1,6 +1,7 @@
-$(document).ready(function(){
-    $('#send_message').click(function(){
+
         
+        $(function () {
+            $('#send_message').on('click', function () {
           //Stop form submission & check the validation
         // e.preventDefault();
         

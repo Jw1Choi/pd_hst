@@ -1,26 +1,24 @@
-$(document).ready(function form_pc(){
-    $('#pc_btn').click(function(){
-        
-          //Stop form submission & check the validation
-        // e.preventDefault();
-        
-        // Variable declaration
-        var error = false;
-        const regex1 = /^[|가-힣a-zA-Z\s+]+$/;
-        const regex = /^[|0-9|]+$/;
-        var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var position = $('#pc_select').val();
-        // var id = $('#id-number').val();
-        var name = $('#pc_name').val();
-        // var email = $('#email').val();
-        var phone = $('#pc_phone').val();
-        var message = $('#message').val();
-        var agree = $('#agree12').is(":checked");
-        
-        
-        $('#pc_name, #pc_phone,#pc_select,#agree12').click(function(){
-            $(this).removeClass("error_input");
-        });
+$(function () {
+    $('#pc_btn').on('click', function () {
+  
+      // ────────── 원래 있던 코드 시작 ──────────
+      //Stop form submission & check the validation
+      // e.preventDefault();
+      
+      // Variable declaration
+      var error = false;
+      const regex1 = /^[|가-힣a-zA-Z\s+]+$/;
+      const regex  = /^[|0-9|]+$/;
+      var regExp   = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+      var position = $('#pc_select').val();
+      var name     = $('#pc_name').val();
+      var phone    = $('#pc_phone').val();
+      var message  = $('#message').val();
+      var agree    = $('#agree12').is(':checked');
+      
+      $('#pc_name, #pc_phone, #pc_select, #agree12').click(function () {
+        $(this).removeClass('error_input');
+      });
         
 
 

@@ -1,6 +1,6 @@
-$(document).ready(function form_mob(){
-    $('#mob_btn').click(function(){
-        
+
+$(function () {
+    $('#mob_btn').on('click', function () {
           //Stop form submission & check the validation
         // e.preventDefault();
         
