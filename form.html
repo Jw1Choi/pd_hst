@@ -198,7 +198,11 @@
 <body>
 
   
+
+
+	<script src="./js/jquery-1.8.3.min.js"></script>
   
+
 <section id="consultFormSection">
   <style>
     #consultFormSection #consultForm {
@@ -649,14 +653,10 @@
 
 
 
-
 <!-- <div id="footer_template"></div> -->
 
 
 
-
-
-	<script src="./js/jquery-1.8.3.min.js"></script>
 
 
 
@@ -692,179 +692,6 @@
   </script>  
 
 
-  <script src="./js/jquery-1.8.3.min.js"></script>
-
-
-  <script>
-   /* 모바일 메뉴 토글 */
-   function toggleMobile(){
-      const panel   = document.getElementById('mobilePanel');
-      const burger  = document.getElementById('hamburgerBtn');
-      const nav     = document.getElementById('mainNav');
-      const logoImg = document.getElementById('logoImg');
-    
-      panel.classList.toggle('show');
-      burger.classList.toggle('open');
-      nav.classList.toggle('menu-open', panel.classList.contains('show'));
-    
-      if (window.pageYOffset === 0){
-        logoImg.src = panel.classList.contains('show')
-          ? logoImg.dataset.srcDark
-          : logoImg.dataset.srcLight;
-      }
-    }
-    
-    /* 스크롤 효과 */
-    const nav      = document.getElementById('mainNav');
-    const logoImg  = document.getElementById('logoImg');
-    let lastY      = window.pageYOffset;
-    
-    function onScroll(){
-      const y = window.pageYOffset;
-      if (y === 0){
-        nav.classList.add('transparent');
-        nav.classList.remove('solid');
-        logoImg.src = logoImg.dataset.srcLight;
-      } else {
-        nav.classList.remove('transparent');
-        nav.classList.add('solid');
-        logoImg.src = logoImg.dataset.srcDark;
-        nav.classList.remove('menu-open');
-        document.getElementById('hamburgerBtn').classList.remove('open');
-        document.getElementById('mobilePanel').classList.remove('show');
-      }
-      if (y > lastY && y > 50) nav.classList.add('hide');
-      else nav.classList.remove('hide');
-      lastY = y;
-    }
-    window.addEventListener('scroll', onScroll);
-    onScroll();
-    
-    /* 전화 버튼 로테이션 */
-    const callData = [
-      { lines:["24시간 비밀상담 (송무)", "서울 : 02-6954-0378"], tel:"0269540378"   },
-      { lines:["24시간 비밀상담 (송무)", "대전 : 042-721-0606"], tel:"0427210606" }
-    ];
-    const swapDelay = 4000;
-    const fadeDur   = 350;
-    
-    const phoneBtns = Array.from(document.querySelectorAll(".phone-btn"));
-    const txtSpans  = phoneBtns.map(btn=>btn.querySelector(".txt"));
-    let idx = 0;
-    
-    function setContent(lines,tel){
-      txtSpans.forEach(s=>s.innerHTML=`${lines[0]}<br>${lines[1]}`);
-      phoneBtns.forEach(b=>b.href=`tel:${tel}`);
-    }
-    
-    function swapPhoneMsg(){
-      idx = (idx + 1) % callData.length;     // 먼저 다음 인덱스로
-      txtSpans.forEach(s=>s.style.opacity=0);
-      setTimeout(()=>{
-        const {lines,tel} = callData[idx];
-        setContent(lines,tel);
-        txtSpans.forEach(s=>s.style.opacity=1);
-      }, fadeDur);
-    }
-    
-    setContent(callData[0].lines, callData[0].tel);
-    setInterval(swapPhoneMsg, swapDelay);
-    </script>
-
-
-
-<!-- 카운트 애니메이션 & 카운트다운 -->
-<script>
-  (function () {
-    /* ────────── ① 숫자 애니메이션(기존) ────────── */
-    const counters = document.querySelectorAll('#reliefBanner .counter');
-    function animate(counter) {
-      const target = +counter.dataset.target,
-            duration = +counter.dataset.duration || 1500,
-            startTime = performance.now();
-      function update(now) {
-        const progress = Math.min((now - startTime) / duration, 1),
-              value    = Math.round(progress * target);
-        counter.textContent = value.toLocaleString();
-        if (progress < 1) requestAnimationFrame(update);
-      }
-      requestAnimationFrame(update);
-    }
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        const el = entry.target;
-        if (entry.isIntersecting) animate(el);
-        else el.textContent = '0';
-      });
-    }, { threshold: 0.5 });
-    counters.forEach(c => io.observe(c));
-  
-    /* ────────── ② 매일 23:59:59 카운트다운 ────────── */
-    const cd      = document.getElementById('dailyCountdown');
-    const dayEl   = cd.querySelector('.dd');
-    const hourEl  = cd.querySelector('.hh');
-    const minEl   = cd.querySelector('.mm');
-    const secEl   = cd.querySelector('.ss');
-  
-    function getTodayDeadline() {
-      const t = new Date();
-      t.setHours(23, 59, 59, 999);          // 오늘 23:59:59.999
-      if (Date.now() > t.getTime()) {       // 이미 지났다면 내일로
-        t.setDate(t.getDate() + 1);
-      }
-      return t;
-    }
-    function updateCountdown() {
-      const now   = new Date();
-      const end   = getTodayDeadline();
-      const diff  = end - now;
-  
-      const total = Math.floor(diff / 1000);
-      const days  = Math.floor(total / 86400);
-      const hours = Math.floor((total % 86400) / 3600);
-      const mins  = Math.floor((total % 3600) / 60);
-      const secs  = total % 60;
-  
-      // dayEl.textContent  = String(days).padStart(2, '0');
-      hourEl.textContent = String(hours).padStart(2, '0');
-      minEl.textContent  = String(mins).padStart(2, '0');
-      secEl.textContent  = String(secs).padStart(2, '0');
-    }
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  })();
-  </script>
-  <!-- ▲▲▲ 회생지원 배너 끝 ▲▲▲ -->
-
-  <script>
-    // 모든 내부 링크(<a href="#...">)에 대해 스무스 스크롤 적용
-    document.addEventListener("DOMContentLoaded", function () {
-      const menuLinks = document.querySelectorAll('a[href^="#"]');
-  
-      menuLinks.forEach(link => {
-        link.addEventListener("click", function (e) {
-          const targetId = this.getAttribute("href");
-          const targetElement = document.querySelector(targetId);
-  
-          if (targetElement) {
-            e.preventDefault();
-  
-            // 부드럽게 스크롤
-            window.scrollTo({
-              top: targetElement.offsetTop,
-              behavior: "smooth"
-            });
-  
-            // 모바일 메뉴가 열려 있다면 닫기
-            const mobilePanel = document.getElementById("mobilePanel");
-            if (mobilePanel.classList.contains("open")) {
-              toggleMobile(); // 이미 존재하는 함수 사용
-            }
-          }
-        });
-      });
-    });
-  </script>
   
 
 
@@ -1248,5 +1075,5 @@
 
 <!-- <script src="./js/validation-float-mob.js"></script> -->
 
-<!-- <script src="./js/footer.js" defer></script> -->
+<script src="./js/footer.js" defer></script>
 </html>
