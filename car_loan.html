@@ -1058,6 +1058,11 @@ cards.forEach(c=>io.observe(c));
 
 <section id="form-pinder" style="text-align:-webkit-center;">
 
+
+
+	<script src="./js/jquery-1.8.3.min.js"></script>
+  
+
 <section id="consultFormSection">
   <style>
     #consultFormSection #consultForm {
@@ -1508,42 +1513,427 @@ cards.forEach(c=>io.observe(c));
 
 
 
-
 <!-- <div id="footer_template"></div> -->
 
 
 
 
 
-	<script src="./js/jquery-1.8.3.min.js"></script>
 
 
+
+<script>
+    $('.navi_btn').click(function(){
+      $(this).toggleClass('on');
+      $('.navi').stop().fadeToggle()
+    });
+  
+  
+  
+    $('.lnb h3').click(function(){
+      var naviTitle = $(this).next('ul');
+      $(this).addClass('on');
+      $('.lnb h3').not(this).removeClass('on');
+      naviTitle.stop().slideDown();
+      $('.lnb h3').next().not(naviTitle).slideUp();
+    });
+  
+    $('.right_contact .left').click(function(){
+      $('.right_contact').toggleClass('on');
+    });
+  
+    // $('.bottom_contact_mob .top_thumb').click(function(){
+    //   $('.bottom_contact_mob').toggleClass('on');
+    // });
+  
+    // $('.bottom_contact_mob .bottom_con .btn_list .close_btn').click(function(){
+    //   $('.bottom_contact_mob').removeClass('on');
+    // });	
+  </script>  
+
+
+  
+
+
+  <div id="privacy">
+    <div id="privacyContent">
+        <div class="titWrap">
+            <span>개인정보취급방침</span>
+            <i style="margin-top:-20px !important" class="ion-close-circled closeBtn"></i>
+        </div>
+        <div style="line-height:1.2" class="conWrap">
+            개인정보취급방침<br><br>
+            수집하는 개인정보의 항목<br>
+            "플로스"는 적법하고 공정한 수단에 의해서만 개인정보를 수집하며, 회원가입약관 또는 개인정보의 제공, 활용 동의서의 내용에 대해 이용자의 개인정보를 수집하는 경우에 당해<br> 이용자가 동의함 또는 동의하지 않음 버튼을 클릭 하는 등의 이용자의 동의를 얻는 절차를 거칩니다.<br>
+            <br>
+          개인정보 수집 및 이용 동의(필수)
+  1. 수집항목: 이름, 사업자명, 사업자등록번호, 업종, 개업연월일, 지역, 주소, 연매출, 기존대출, 필요자금 정보
+  2. 수집 및 이용 목적: 이용자 식별, 서비스 이용 및 고객상담, 본인 여부 확인, 계약 체결 시 계약인증, 연락, 문의 회신 및 고지사항 등 전달, 서비스 품질 개선을 위한 데이터 분석, 맞춤형 콘텐츠 및 서비스 등 제공 또는 추천
+  3. 보유 및 이용 기간: 2년. 단, 서비스 이용계약 체결시는 회원탈퇴시까지 보유할 수 있으며, 기타 관련 법령의 규정에 따라 거래 관계 확인을 위해 개인정보를 일정기간 보유할 수 있습니다.
+  4. 개인정보 제공에 동의하지 않으실 수 있으며, 동의하지 않으시면 서비스 이용이 제한될 수 있습니다. 가입시 ' 개인정보 마케팅 활용 ' 에 동의한 경우에 한하여 위 수집정보를 광고 및 마케팅 목적으로 활용할 수 있습니다.
+  <section id="thirdParty">
+    <h3 class="tp-heading">개인정보 제3자 제공 동의 (필수)</h3>
+    <p class="tp-note">
+      귀하는 개인정보 보호법 등 관련 법령에 따라 제3자 제공에 대한 동의를 거부할 권리가 있습니다. 다만 동의하지 않을 경우 일부 서비스 이용이 제한될 수 있습니다.
+    </p>
+  
+    <table class="tp-table">
+      <tr>
+        <th>제공하는 자</th>
+        <td>서민채무조정안심센터</td>
+      </tr>
+      <tr>
+        <th>제공받는 자</th>
+        <td>
+          <span id="toggleBtn" class="toggle-btn">서비스제공업체</span>
+          <div id="partnerList" class="partner-list">
+            
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>제공 목적</th>
+        <td>
+          채무 조정 상담·계약 체결 및 사후 관리 등 서비스 제공계약의 이행을 위한 고객 확인 및 업무 수행
+        </td>
+      </tr>
+      <tr>
+        <th>제공하는 개인정보</th>
+        <td>
+          이름, 연락처, 주소, 채무 현황, 필요자금 등 상담·계약 이행에 필요한 정보 일체
+        </td>
+      </tr>
+      <tr>
+        <th>보유·이용 기간</th>
+        <td>
+          서비스 제공 목적 달성 시까지(단, 관계 법령에 따라 보관이 필요한 경우 해당 기간 동안 보관)
+        </td>
+      </tr>
+    </table>
   </section>
+  
+  <section id="thirdPartyPro">
+    <h3 class="tp-heading">(제공업체) 개인정보 제3자 제공 동의 (필수)</h3>
+    <p class="tp-note">
+      본 동의는 전문가와 서민채무조정안심센터 간 서비스 품질 향상을 위한 정보 제공에 관한 것입니다. 동의하지 않을 경우 전문가용 서비스 이용이 제한될 수 있습니다.
+    </p>
+  
+    <table class="tp-table">
+      <tr>
+        <th>제공하는 자</th>
+        <td>
+          <span id="proToggleBtn" class="toggle-btn">서비스제공업체</span>
+          <div id="proPartnerList" class="partner-list">
+          
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>제공받는 자</th>
+        <td>서민채무조정안심센터</td>
+      </tr>
+      <tr>
+        <th>제공 목적</th>
+        <td>
+          전문가 서비스 이용 실적 확인, 고객 만족도 조사 및 서비스 개선을 위한 분석
+        </td>
+      </tr>
+      <tr>
+        <th>제공하는 개인정보</th>
+        <td>이름, 연락처, 상담·계약 이력, 고객 의견 등 서비스 품질 개선에 필요한 정보</td>
+      </tr>
+      <tr>
+        <th>보유·이용 기간</th>
+        <td>서비스 제공 목적 달성 시 또는 법령에 따른 보존 기간 종료 시까지</td>
+      </tr>
+    </table>
+  </section>
+  <br><Br>
+  <style>
+    #thirdParty, #thirdPartyPro { font-family:"Pretendard","Apple SD Gothic Neo",sans-serif; margin-top:24px; }
+    .tp-heading  { font-size:18px; font-weight:700; margin-bottom:8px; }
+    .tp-note     { font-size:14px; margin-bottom:18px; line-height:1.4; }
+    .tp-table    { width:100%; border-collapse:collapse; font-size:14px; }
+    .tp-table th, .tp-table td { border:1px solid #444; padding:12px; vertical-align:top; line-height:1.5; }
+    .tp-table th { width:130px; background:#f7f7f7; font-weight:600; text-align:left; }
+    .toggle-btn  { color:#000; cursor:pointer; text-decoration:underline; }
+    .partner-list{ display:none; margin-top:8px; line-height:1.4; }
+    .partner-list.show{ display:block; }
+  </style>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded',()=>{
+      const toggle = (btnId,listId)=>{
+        const btn=document.getElementById(btnId);
+        const list=document.getElementById(listId);
+        if(btn&&list){btn.addEventListener('click',()=>list.classList.toggle('show'));}
+      };
+      toggle('toggleBtn','partnerList');
+      toggle('proToggleBtn','proPartnerList');
+    });
+  </script>
 
 
- 
+            개인정보의 보유 및 이용기간<br>
+            원칙적으로, 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체 없이 파기합니다. 단, 다음의 정보에 대해서는 아래의 이유로 명시한 기간 동안 보존합니다.<br><br>
+    
+            보존 항목 : 이름 , 휴대전화번호 , 필요시기, 직업구분, 대출신청종류 등.<br>
+            보존 근거 : 고객의요청이 있을시 즉시폐기<br>
+            보존 기간 : 3년<br><br>
+    
+            그리고 관계법령의 규정에 의하여 보존할 필요가 있는 경우 회사는 아래와 같이 관계법령에서 정한 일정한 기간 동안 회원정보를 보관합니다.<br><br>
+    
+            소비자의 불만 또는 분쟁처리에 관한 기록 : 3년 (전자상거래등에서의 소비자보호에 관한 법률)<br>
+            신용정보의 수집/처리 및 이용 등에 관한 기록 : 3년 (신용정보의 이용 및 보호에 관한 법률)<br><br>
+    
+            개인정보의 파기절차 및 방법<br>
+            회사는 원칙적으로 개인정보 수집 및 이용목적이 달성된 후에는 해당 정보를 지체없이 파기합니다. 파기절차 및 방법은 다음과 같습니다.<br><br>
+    
+            ● 파기절차<br>
+            회원님이 회원가입 등을 위해 입력하신 정보는 목적이 달성된 후 별도의 DB로 옮겨져(종이의 경우 별도의 서류함) 내부 방침 및 기타 관련 법령에 의한 정보보호 사유에 따라(보유 및 이용기간 참조) 일정 기간 저장된 후 파기되어집니다.<br><br>
+    
+            별도 DB로 옮겨진 개인정보는 법률에 의한 경우가 아니고서는 보유되어지는 이외의 다른 목적으로 이용되지 않습니다.<br><br>
+    
+            ● 파기방법<br>
+            - 전자적 파일형태로 저장된 개인정보는 기록을 재생할 수 없는 기술적 방법을 사용하여 삭제합니다.<br>
+            - 종이에 출력된 개인정보는 분쇄기로 분쇄하거나 소각을 통하여 파기합니다.<br><br>
+    
+            
+            이용자 및 법정대리인의 권리와 그 행사방법<br>
+            이용자는 언제든지 등록되어 있는 자신의 개인정보를 조회하거나 수정할 수 있으며 가입해지를 요청할 수도 있습니다.<br><br>
+    
+            이용자들의 개인정보 조회,수정을 위해서는 '개인정보변경'(또는 '회원정보수정' 등)을 가입해지(동의철회)를 위해서는 "회원탈퇴"를 클릭하여 본인 확인 절차를 거치신 후 직접 열람, 정정 또는 탈퇴가 가능합니다.<br><br>
+    
+            혹은 개인정보관리책임자에게 서면, 전화 또는 이메일로 연락하시면 지체없이 조치하겠습니다.<br><br>
+    
+            귀하가 개인정보의 오류에 대한 정정을 요청하신 경우에는 정정을 완료하기 전까지 당해 개인정보를 이용 또는 제공하지 않습니다. 또한 잘못된 개인정보를 제3자에게 이미 제공한 경우에는 정정 처리결과를 제3자에게 지체없이 통지하여 정정이 이루어지도록 하겠습니다.<br><br>
+    
+            회사는 이용자의 요청에 의해 해지 또는 삭제된 개인정보는 "회사가 수집하는 개인정보의 보유 및 이용기간"에 명시된 바에 따라 처리하고 그 외의 용도로 열람 또는 이용할 수 없도록 처리하고 있습니다.<br><br>
+    
+    
+            개인정보에 관한 민원서비스<br>
+            회사는 고객의 개인정보를 보호하고 개인정보와 관련한 불만을 처리하기 위하여 아래와 같이 관련 부서 및 개인정보관리책임자를 지정하고 있습니다.<br>
+            <br>
+        귀하께서는 회사의 서비스를 이용하시며 발생하는 모든 개인정보보호 관련 민원을 개인정보관리책임자 혹은 담당부서로 신고하실 수 있습니다. 회사는 이용자들의 신고사항에 대해 신속하게 충분한 답변을 드릴 것입니다.<br><br>
+    
+            기타 개인정보침해에 대한 신고나 상담이 필요하신 경우에는 아래 기관에 문의하시기 바랍니다.<br>
+            1.개인분쟁조정위원회 (https://www.1336.or.kr/1336)<br>
+            2.정보보호마크인증위원회 (https://www.eprivacy.or.kr/02-580-0533~4)<br>
+            3.대검찰청 인터넷범죄수사센터 (02-3480-3600)<br>
+            4.경찰청 사이버테러대응센터 (https://www.ctrc.go.kr/02-392-0330)<br />
+            <br />
+        </div>
+    </div>
+  </div>
+  
+
+
+
+<script>
+  /* ─ 숫자 애니메이션 함수 ─ */
+  function animateCount(el) {
+    const target   = +el.dataset.target;        // 목표 값
+    const duration = +el.dataset.duration || 1800;
+    const startT   = performance.now();
+  
+    (function step(now){
+      const p   = Math.min((now - startT) / duration, 1);
+      const val = Math.round(p * target);
+      el.firstChild.nodeValue = val.toLocaleString();
+      if (p < 1) requestAnimationFrame(step);
+    })(startT);
+  }
+  
+  /* ─ 인터섹션 옵저버 ─ */
+  document.addEventListener('DOMContentLoaded', () => {
+    const nums = document.querySelectorAll('#late-response .lr-status-number');
+  
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        const el = entry.target;
+  
+        if (entry.isIntersecting) {       // 화면 안으로 들어왔을 때
+          animateCount(el);
+        } else {                          // 화면 밖으로 나갔을 때 → 리셋
+          el.firstChild.nodeValue = '0';
+        }
+      });
+    }, { threshold: 0.5 });               // 요소가 50 % 이상 보이면 트리거
+  
+    nums.forEach(el => io.observe(el));
+  });
+  </script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const OFFSET = 0;          // 고정 헤더 높이만큼 보정하려면 숫자(px)로 입력
+  
+    // #sm-consult 로 향하는 모든 링크에 적용
+    document.querySelectorAll('a[href="#consultFormSection"]').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();                           // 기본 점프 동작 막기
+        const target = document.querySelector('#sm-consult');
+        if (!target) return;
+  
+        const top = target.getBoundingClientRect().top + window.pageYOffset - OFFSET;
+  
+        window.scrollTo({ top, behavior: 'smooth' }); // 부드럽게 이동
+      });
+    });
+  });
+  </script>
+  
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn    = document.getElementById('pc_btn');
+      const target = document.getElementById('sm-consult');
+    
+      btn.addEventListener('click', () => {
+        if (!target) return;
+        /* 부드러운 스크롤 */
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    
+        /* 선택 ─ 시각적 강조(1.5초) */
+        target.classList.add('pulse');
+        setTimeout(() => target.classList.remove('pulse'), 1500);
+      });
+    });
+    </script>
+
+
+
+<script>
+  (function () {
+    /* ── A. 숫자 애니메이션 함수(변경 없음) ── */
+    function animate(el) {
+      const target   = +el.dataset.target,
+            duration = +el.dataset.duration || 1500,
+            start    = +el.textContent.replace(/,/g, '') || 0,
+            t0       = performance.now();
+  
+      function step(now) {
+        const p   = Math.min((now - t0) / duration, 1),
+              val = Math.round(start + (target - start) * p);
+        el.textContent = val.toLocaleString();
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+  
+    /* ── B. 채무 조정 가능액 롤링 ── */
+    const figures = [7000, 3200, 8000, 13000];   // 단위: 만 원
+    const counter = document.getElementById('rollingCounter');
+    let idx = 0;
+  
+    function rollNext() {
+      counter.dataset.target = figures[idx];
+      animate(counter);                 // 1.5 초 카운팅
+      idx = (idx + 1) % figures.length;
+      setTimeout(rollNext, 4500);       // 1.5 초 + 3 초 머무름
+    }
+    rollNext();                         // 페이지 로드 후 즉시 시작
+  
+    /* ── C. 매일 23:59:59 카운트다운(기존) ── */
+    const cd      = document.getElementById('dailyCountdown');
+    const dayEl   = cd.querySelector('.dd');
+    const hourEl  = cd.querySelector('.hh');
+    const minEl   = cd.querySelector('.mm');
+    const secEl   = cd.querySelector('.ss');
+  
+    function todayDeadline() {
+      const d = new Date();
+      d.setHours(23, 59, 59, 999);
+      if (Date.now() > d) d.setDate(d.getDate() + 1);
+      return d;
+    }
+    function tick() {
+      const diff  = todayDeadline() - Date.now();
+      const s = Math.max(0, Math.floor(diff / 1000));
+  
+      const days  = Math.floor(s / 86400);
+      const hours = Math.floor((s % 86400) / 3600);
+      const mins  = Math.floor((s % 3600) / 60);
+      const secs  = s % 60;
+  
+      dayEl.textContent  = String(days).padStart(2, '0');
+      hourEl.textContent = String(hours).padStart(2, '0');
+      minEl.textContent  = String(mins).padStart(2, '0');
+      secEl.textContent  = String(secs).padStart(2, '0');
+    }
+    tick();
+    setInterval(tick, 1000);
+  })();
+  </script>
+  
+
+
+  
+
+  <script src="https://unpkg.com/swiper@9/swiper-bundle.min.js"></script>
+  <script>
+    const DELAY = 5000, SPEED = 1000;
+
+    const swiper = new Swiper('.swiper-container', {
+      effect: 'fade',
+      loop: true,
+      speed: SPEED,
+      slidesPerView: 1,
+      autoplay: {
+        delay: DELAY,
+        disableOnInteraction: false,
+        waitForTransition: false
+      },
+      shortSwipes: true,
+      longSwipes: false,
+      threshold: 20,
+      slideToClickedSlide: true,
+    });
+
+    // Progress Bar 생성
+    const slides = Array.from(document.querySelectorAll('.swiper-container .swiper-slide'))
+                        .filter(s => !s.classList.contains('swiper-slide-duplicate'));
+    const bar = document.querySelector('.progress-container');
+    const fills = [];
+
+    slides.forEach((_, i) => {
+      const seg = document.createElement('div');
+      seg.className = 'progress-segment';
+      const fill = document.createElement('span');
+      fill.className = 'progress-fill';
+      seg.appendChild(fill);
+      bar.appendChild(seg);
+      fills.push(fill);
+
+      seg.addEventListener('click', () => swiper.slideToLoop(i, SPEED));
+    });
+
+    function updateProgress(idx) {
+      fills.forEach((f, j) => {
+        f.style.transition = 'none';
+        f.style.width = j < idx ? '100%' : '0';
+      });
+      const active = fills[idx];
+      void active.offsetWidth;
+      active.style.transition = `width ${DELAY}ms linear`;
+      active.style.width = '100%';
+    }
+
+    updateProgress(0);
+    swiper.on('slideChange', () => updateProgress(swiper.realIndex));
+  </script>
+
+
+</body>
 <script src="./js/jquery-1.8.3.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script src="./js/menu.js"></script>
 <script src="./js/main.js"></script>
+<script src="./js/menu.js" defer></script>
 <script src="./js/personal.js"></script>
 <script src="./js/validation1.js"></script>
 
-<!-- <script src="./js/validation-float-pc.js"></script> -->
+
 <!-- <script src="./js/validation-float-mob.js"></script> -->
 
 <script src="./js/footer.js" defer></script>
-</body>
-
-<script type="text/javascript">var submitted = false;</script>
-<iframe name="hidden_iframe11" id="hidden_iframe11" style="display:none;" onload=""></iframe>
-<script type="text/javascript">var submitted2 = false;</script>
-<iframe name="hidden_iframe12" id="hidden_iframe12" style="display:none;" onload=""></iframe>
-
-
-<script type="text/javascript">var submitted3 = false;</script>
-<iframe name="hidden_iframe13" id="hidden_iframe13" style="display:none;" onload=""></iframe>
-
-<div id="footer_template"></div>
-
 </html>
