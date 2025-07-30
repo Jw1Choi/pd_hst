@@ -51,7 +51,7 @@ mn.innerHTML = `
     <div id="privacyContent">
         <div class="titWrap">
             <span>개인정보취급방침</span>
-            <i style="margin-top:-12px !important" class="ion-close-circled closeBtn"></i>
+            <i style="margin-top:-23px !important" class="ion-close-circled closeBtn"></i>
         </div>
         <div style="line-height:1.2" class="conWrap">
             개인정보취급방침<br><br>

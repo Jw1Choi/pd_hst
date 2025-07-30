@@ -90,8 +90,8 @@
         $('.lnb h3').next().not(naviTitle).slideUp();
       });
       $('.right_contact .left').click(function(){ $('.right_contact').toggleClass('on'); });
-      $('.bottom_contact_mob .top_thumb').click(function(){ $('.bottom_contact_mob').toggleClass('on'); });
-      $('.bottom_contact_mob .bottom_con .btn_list .close_btn').click(function(){ $('.bottom_contact_mob').removeClass('on'); });
+      // $('.bottom_contact_mob .top_thumb').click(function(){ $('.bottom_contact_mob').toggleClass('on'); });
+      // $('.bottom_contact_mob .bottom_con .btn_list .close_btn').click(function(){ $('.bottom_contact_mob').removeClass('on'); });
     });
   })(jQuery);
   
