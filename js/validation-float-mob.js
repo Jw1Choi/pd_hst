@@ -1,253 +1,187 @@
+// ============================================
+// mob-form-supabase.js
+// loan_consultations 테이블로 모바일 폼 데이터 전송
+// ============================================
 
+// ──────────────────────────────────────────
+// ⚠️  본인 Supabase 프로젝트 값으로 교체하세요
+// ──────────────────────────────────────────
+const SUPABASE_URL  = 'https://yiuioprceyuybwkgxmrm.supabase.co';
+const SUPABASE_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InlpdWlvcHJjZXl1eWJ3a2d4bXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzg3NDM1MDIsImV4cCI6MjA5NDMxOTUwMn0.SkkBCH9avPMZu-LeBtdOh5zsppcRMvbnilj38CkHEZs';
+
+const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+
+// ── 모바일 폼 제출 ──
 $(function () {
-    $('#mob_btn').on('click', function () {
-          //Stop form submission & check the validation
-        // e.preventDefault();
-        
-        // Variable declaration
-        var error = false;
-        const regex1 = /^[|가-힣a-zA-Z\s+]+$/;
-        const regex = /^[|0-9|]+$/;
-        var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        var position = $('#mob_select').val();
-        // var id = $('#id-number').val();
-        var name = $('#mob_name').val();
-        // var email = $('#email').val();
-        var phone = $('#mob_phone').val();
-        var message = $('#message').val();
-        var agree = $('#agree13').is(":checked");
-        
-        
-        $('#mob_name, #mob_phone, #position2, #agree13')
-        .on('click', function () {
-          $(this).removeClass('error_input');
-        });
-        
 
+  // 기존 form submit 차단 (Google Forms action 제거)
+  $('#form_e13').on('submit', function (e) {
+    e.preventDefault();
+  });
 
-        //  // Form field validation
-        //  if(!regex1.test(name) || name.length<0 ){
-        //     var error = true;
-        //     $('#mob_name').addClass("error_input");
-        //    alert("이름 입력을 확인하세요.");
-        // }else{
-        //     $('#mob_name').removeClass("error_input");
-        // }
+  $('#mob_btn').on('click', async function () {
 
-        if (agree == false){
-            var error = true;
-            $('#agree13').addClass("error_input");
-            alert("개인정보동의를 체크해주세요.");
-        }else{
-            $('#agree13').removeClass("error_input");
-        }
-        
-        
-        // If there is no validation error, next to process the mail function
-        if(error == false){
-           // Disable submit button just after the form processed 1st time successfully.
-          
-           $('#form_e13').prop("action", "https://docs.google.com/forms/u/0/d/e/1FAIpQLScjfBo-TLn94LZMHgsUg2e5oBpCXdHtj9WcMlvziZZ29LWKAw/formResponse");
-           $('#mob_btn').text('신청이 완료되었습니다.');
-           $('.m_go_btn, #mob_btn').css({background:"#000"});
-           
-            
-     $('.m_go_btn, #mob_btn').prop("disabled", false);
-    $('#mob_btn').css({transition:"1s"});
-    $('.m_go_btn, #mob_btn').css({background:"#000"});
-    $('#mob_btn').css({color:"#fff"});
-    $('#hidden_iframe13').attr("onload", "hoa();");
+    var agree = $('#agree13').is(':checked');
 
-        }
-    });    
+    if (agree === false) {
+      alert('개인정보동의를 체크해주세요.');
+      return;
+    }
 
-   
+    // 버튼 상태 변경
+    $('#mob_btn').text('전송 중...');
+    $('#mob_btn').prop('disabled', true);
+    $('.m_go_btn, #mob_btn').css({ background: '#000', color: '#fff', cursor: 'default' });
 
+    // Supabase INSERT
+    var { error } = await sb
+      .from('loan_consultations')
+      .insert([{
+        job_type:      $('#mob_job_type').val(),
+        collateral:    $('#mob_collateral').val(),
+        loan_amount:   $('#mob_loan_amount').val(),
+        loan_type:     $('#mob_select').val(),
+        no_disqualify: $('#mob_no_disqualify').val(),
+        recent_loan:   $('#mob_recent_loan').val(),
+        name:          $('#mob_name').val().trim(),
+        phone:         $('#mob_phone').val().trim(),
+        call_time:     $('#mob_call_time').val(),
+        message:       $('#mob_message').val() ? $('#mob_message').val().trim() : null,
+        source:        'mobile 신청'
+      }]);
+
+    if (error) {
+      console.error('Supabase error:', error);
+
+      if (error.code === 'P0001') {
+        alert('잠시 후 다시 시도해주세요. (1분 내 중복 신청 제한)');
+      } else {
+        alert('신청 중 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+      }
+
+      // 버튼 복원
+      form_check2();
+      return;
+    }
+
+    // 성공
+    $('#mob_btn').text('신청이 완료되었습니다.');
+    setTimeout(function () {
+      alert('상담 신청이 완료되었습니다.');
+      window.location.href = './thanks.html';
+    }, 1200);
+  });
 });
 
 
-function dll3(){
-//     window.karrotPixel.track('SubmitApplication');
-//     alert("무료 상담 신청이 완료되었습니다.");
-//     $('.m_go_btn, #mob_btn').prop("disabled", true);
-//    hoa();
-}
- 
-function maxLengthCheck(object){
-  if (object.value.length > object.maxLength){
-    object.value = object.value.slice(0, object.maxLength);
-  }    
-}
- 
-function hoa(){
-    setTimeout( function(){
-        alert("상담 신청이 완료되었습니다.");
-        // $(window).scrollTop(0);
-        window.location.href = './thanks.html';
-      },1200);
-    // alert("무료 상담 신청이 완료되었습니다.");
-    // $(window).scrollTop(0);
-    //  window.location.reload();
-  
+// ── 실시간 유효성 검사 ──
+function form_check2() {
+
+  const nameRegex  = /^[가-힣]+$/;
+  const phoneRegex = /^[0-9]+$/;
+
+  var name         = $('#mob_name').val();
+  var phone        = $('#mob_phone').val();
+  var jobType      = $('#mob_job_type').val();
+  var collateral   = $('#mob_collateral').val();
+  var loanAmount   = $('#mob_loan_amount').val();
+  var loanType     = $('#mob_select').val();
+  var noDQ         = $('#mob_no_disqualify').val();
+  var recentLoan   = $('#mob_recent_loan').val();
+  var callTime     = $('#mob_call_time').val();
+  var agree        = $('#agree13').is(':checked');
+
+  // 이름 검증
+  if (!nameRegex.test(name) || name.length < 2) {
+    if (name.length > 0) {
+      setMobBtn(true, '성함 입력을 확인하세요.');
+    } else {
+      setMobBtn(true, '성함을 입력하세요.');
+    }
+    return;
   }
- 
- function site1111(){
-  //$('#mc-embedded-subscribe').click();
-  
 
-  window.location.reload();
- }
-
-
- function form_check2(){
-
-    const regex2 = /^[가-힣]+$/;
-    const regex = /^[|0-9|]+$/;
-    var regExp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    var position = $('#mob_select').val();
-    // var id = $('#id-number').val();
-    var name = $('#mob_name').val();
-    // var email = $('#email').val();
-    var phone = $('#mob_phone').val();
-    var message = $('#message').val();
-    var agree = $('#agree13').is(":checked");
-
-    // if (license != null)
-    // {
-
-    if(regex2.test(name) && name.length > 1 )
-    {
-        if(phone.substr(0, 3) == "010" && phone.length ==11 && regex.test(phone))
-        {
-
-        // if(email.match(regExp) != null)
-        // {
-           
-            // if(regex.test(id) && id.length == 2 && id >=24 && id <51)
-            // {
-            
-                if( position != null )
-                {
-              
-                    if (agree == true)
-                    {
-                        $('#mob_btn').css({transition:"1s"});
-                       $('#mob_btn').prop("disabled", false);
-                       $('#mob_btn').text("무료 상담 신청하기");
-                       $('.m_go_btn').css({transition:"1s"});
-                       $('.m_go_btn, #mob_btn').css({background:"#ac9173"});
-                       $('.m_go_btn, #mob_btn').css({cursor:"pointer"});
-                    }
-                    else
-                    {
-                        $('#mob_btn').css({transition:"1s"});
-                        $('#mob_btn').prop("disabled", true);
-                        $('#mob_btn').text("개인정보 동의를 해주세요");
-                        $('#mob_btn').css({color:"#fff"});
-                        $('.m_go_btn, #mob_btn').css({background:"#000"});
-                        $('.m_go_btn').css({cursor:"default"});     
-                    }
-                    
-                }
-                else
-                {
-                    $('#mob_btn').css({transition:"1s"});
-                    $('#mob_btn').prop("disabled", true);
-                    $('#mob_btn').text("상담 유형을 확인하세요.");
-                    $('#mob_btn').css({color:"#fff"});
-                    $('.m_go_btn, #mob_btn').css({background:"#000"});
-                    $('#mob_btn').css({cursor:"default"});     
-                }
-  
-            // }
-            // else if(id.length==0)
-            //  {
-            // $('#mob_btn').css({transition:"1s"});
-            // $('#mob_btn').prop("disabled", true);
-            // $('#mob_btn').text("나이를 입력하세요.");
-            // $('#mob_btn').css({background:"#595959"});
-            // $('#mob_btn').css({cursor:"default"});     
-            // }
-            // else 
-            // {
-            // $('#mob_btn').css({transition:"1s"});
-            // $('#mob_btn').prop("disabled", true);
-            // $('#mob_btn').text("24 ~ 50세까지 가능합니다.");
-            // $('#mob_btn').css({background:"#595959"});
-            // $('#mob_btn').css({cursor:"default"});     
-            // }
-           
-        // }
-        // else if(email.length>0)
-        // {
-        //     $('#mob_btn').css({transition:"1s"});
-        //     $('#mob_btn').prop("disabled", true);
-        //     $('#mob_btn').text("이메일 주소 입력을 확인하세요.");
-        //     $('#mob_btn').css({background:"#595959"});
-        //     $('#mob_btn').css({cursor:"default"});     
-        // }
-        // else
-        // {
-        //     $('#mob_btn').css({transition:"1s"});
-        //     $('#mob_btn').prop("disabled", true);
-        //     $('#mob_btn').text("이메일 주소를 입력하세요.");
-        //     $('#mob_btn').css({background:"#595959"});
-        //     $('#mob_btn').css({cursor:"default"});     
-        // }
-
+  // 전화번호 검증
+  if (!(phone.substr(0, 3) === '010' && phone.length === 11 && phoneRegex.test(phone))) {
+    if (phone.length === 0) {
+      setMobBtn(true, '전화번호를 입력하세요.');
+    } else {
+      setMobBtn(true, '전화번호 입력을 확인하세요.');
     }
-    else if(phone.length==0)
-     {
-        $('#mob_btn').css({transition:"1s"});
-        $('#mob_btn').prop("disabled", true);
-        $('#mob_btn').text("전화번호 입력을 확인하세요.");
-        $('#mob_btn').css({color:"#fff"});
-        $('.m_go_btn, #mob_btn').css({background:"#000"});
-        $('#mob_btn').css({cursor:"default"});    
-    }
-    else 
-    {
-        $('#mob_btn').css({transition:"1s"});
-        $('#mob_btn').prop("disabled", true);
-        $('#mob_btn').text("전화번호 입력을 확인하세요.");
-        $('#mob_btn').css({color:"#fff"});
-        $('.m_go_btn, #mob_btn').css({background:"#000"});
-        $('#mob_btn').css({cursor:"default"});     
-    }
+    return;
+  }
 
-    }
-    else if(name.length>0)
-    {
-        $('#mob_btn').css({transition:"1s"});
-        $('#mob_btn').prop("disabled", true);
-        $('#mob_btn').text("성함 입력을 확인하세요.");
-        $('#mob_btn').css({color:"#fff"});
-        $('.m_go_btn, #mob_btn').css({background:"#000"});
-        $('#mob_btn').css({cursor:"default"});     
-    }
-    else
-    {
-        $('#mob_btn').css({transition:"1s"});
-        $('#mob_btn').prop("disabled", true);
-        $('#mob_btn').text("성함을 입력하세요.");
-        $('#mob_btn').css({color:"#fff"});
-        $('.m_go_btn, #mob_btn').css({background:"#000"});
-        $('#mob_btn').css({cursor:"default"});     
-    }
-    // }
-    // else
-    // {
-    //     $('#mob_btn').css({transition:"1s"});
-    //     $('#mob_btn').prop("disabled", true);
-    //     $('#mob_btn').text("자격증 종류를 선택하세요.");
-    //     $('#mob_btn').css({background:"#595959"});
-    //     $('#mob_btn').css({cursor:"default"});        
-    // }
- }
-  
+  // 직업종류
+  if (jobType == null) {
+    setMobBtn(true, '직업 종류를 선택하세요.');
+    return;
+  }
 
-$(function(){
- $('#mob_name,#agree13,#mob_phone,#mob_select').on("keyup click change",form_check2);
-//  $('#name,#phone,#position,#id-number,#message,#license').bind("keyup click change",form_check1);
-//  $('#license').bind("keyup click change",lic_pick);
-})
+  // 담보여부
+  if (collateral == null) {
+    setMobBtn(true, '담보 여부를 선택하세요.');
+    return;
+  }
+
+  // 희망대출금액
+  if (loanAmount == null) {
+    setMobBtn(true, '희망 대출금액을 선택하세요.');
+    return;
+  }
+
+  // 대출유형
+  if (loanType == null) {
+    setMobBtn(true, '대출 유형을 선택하세요.');
+    return;
+  }
+
+  // 신용회복/연체
+  if (noDQ == null) {
+    setMobBtn(true, '신용회복/연체를 선택하세요.');
+    return;
+  }
+
+  // 최근대출유무
+  if (recentLoan == null) {
+    setMobBtn(true, '최근 대출 유무를 선택하세요.');
+    return;
+  }
+
+  // 통화가능시간
+  if (callTime == null) {
+    setMobBtn(true, '통화 가능 시간을 선택하세요.');
+    return;
+  }
+
+  // 개인정보 동의
+  if (agree === false) {
+    setMobBtn(true, '개인정보 동의를 해주세요.');
+    return;
+  }
+
+  // 모든 검증 통과
+  $('#mob_btn').css({ transition: '1s' });
+  $('#mob_btn').prop('disabled', false);
+  $('#mob_btn').text('무료 상담 신청하기');
+  $('.m_go_btn').css({ transition: '1s' });
+  $('.m_go_btn, #mob_btn').css({ background: '#ac9173', cursor: 'pointer' });
+}
+
+function setMobBtn(disabled, text) {
+  $('#mob_btn').css({ transition: '1s' });
+  $('#mob_btn').prop('disabled', disabled);
+  $('#mob_btn').text(text);
+  $('#mob_btn').css({ color: '#fff' });
+  $('.m_go_btn, #mob_btn').css({ background: '#000', cursor: 'default' });
+}
+
+
+// ── 이벤트 바인딩 ──
+$(function () {
+  $(
+    '#mob_name, #mob_phone, #mob_job_type, #mob_collateral, ' +
+    '#mob_loan_amount, #mob_select, #mob_no_disqualify, ' +
+    '#mob_recent_loan, #mob_call_time, #mob_message, #agree13'
+  ).on('keyup click change', form_check2);
+});
